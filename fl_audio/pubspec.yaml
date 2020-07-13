@@ -1,8 +1,10 @@
 name: fl_audio
-description: A new Flutter package project.
+description: A concrete implementation of audio_service package 
 version: 0.0.1
-author:
-homepage:
+repository: https://github.com/mohammadne/Flutter-Packages/tree/master/fl_audio
+issue_tracker: https://github.com/mohammadne/Flutter-Packages/issues/
+homepage: https://github.com/mohammadne/Flutter-Packages/
+documentation:
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
