@@ -1,6 +1,6 @@
 # fl_localization
 
-A new Flutter package project.
+Rich Localiation Service In Flutter
 
 ## Getting Started
 
