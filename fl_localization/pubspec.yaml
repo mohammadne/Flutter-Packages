@@ -1,13 +1,13 @@
 name: fl_localization
 description: A Rich Localiation Service In Flutter.
-version: 0.0.2
+version: 0.0.3
 repository: https://github.com/mohammadne/Flutter-Packages/tree/master/fl_localization
 issue_tracker:
 homepage:
 documentation:
 
 environment:
-  sdk: ">=2.8.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:

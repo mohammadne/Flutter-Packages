@@ -1,14 +1,21 @@
 # fl_localization
 
-Rich Localiation Service In Flutter
+Rich And Powerful Localiation Service In Flutter
 
-## Getting Started
+## How To Use fl_localization
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+This project is one of the richest and most powerful localization packages
+in Dart with support for:
+1- easily get all supported locales
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+2- easily set your prefered locale
+
+3- powerful extension methods wich you can use them like:
+'your_string_localized'.tr()
+Text('your_text_localized').tr()
+
+4- public translation:
+translate('your_string_localized')
+
+any help and contribiution is appreciated,
+if you like any feature or if you see any bug,please report an issue on [Github](https://github.com/mohammadne/Flutter-Packages/issues/),
