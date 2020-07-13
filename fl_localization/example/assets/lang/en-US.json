@@ -1,0 +1,10 @@
+{
+    "app": {
+        "name": "FL Localization example"
+    },
+    "ui": {
+        "app_bar": "App Bar Title",
+        "current_lang": "Current Language",
+        "available_locales": "Available Locales\nTap On One of Them To Change Locale"
+    }
+}

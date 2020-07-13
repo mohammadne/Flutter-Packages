@@ -35,6 +35,11 @@ class FlLocalization extends StatefulWidget {
     return state.bloc.state.locale;
   }
 
+  static List<String> supportedLocalesKey(BuildContext context) {
+    _FlLocalizationState state = context.findAncestorStateOfType();
+    return state.supportedLocalesHashMap.keys.toList();
+  }
+
   @override
   _FlLocalizationState createState() => _FlLocalizationState();
 }
@@ -42,8 +47,8 @@ class FlLocalization extends StatefulWidget {
 class _FlLocalizationState extends State<FlLocalization> {
   LangBloc bloc;
 
-  List<Locale> get supportedLocales =>
-      widget.supportedLocalesHashMap.values.toList();
+  Map<String, Locale> get supportedLocalesHashMap =>
+      widget.supportedLocalesHashMap;
 
   @override
   void initState() {
@@ -69,7 +74,7 @@ class _FlLocalizationState extends State<FlLocalization> {
           ? widget.builder(
               [
                 _FlLocalizationDelegate(
-                  supportedLocales: supportedLocales,
+                  supportedLocales: supportedLocalesHashMap.values.toList(),
                   translations: bloc.translations,
                 ),
                 GlobalMaterialLocalizations.delegate,
