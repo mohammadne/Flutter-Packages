@@ -12,11 +12,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  fl_localization: ^0.0.3
   flutter_localizations:
     sdk: flutter
   
-  fl_localization:
-    path: ../
   
   flutter_bloc: ^4.0.1
   hydrated_bloc: ^4.1.1

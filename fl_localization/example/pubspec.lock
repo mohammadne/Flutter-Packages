@@ -81,9 +81,9 @@ packages:
   fl_localization:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
+      name: fl_localization
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.0.3"
   flutter:
     dependency: "direct main"
