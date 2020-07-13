@@ -1,8 +1,8 @@
 name: fl_localization
 description: A Rich Localiation Service In Flutter.
 version: 0.0.1
-repository: https://github.com/mohammadne/fl_localization
-author: Mohammad Nasr <mohammadne@mail.ru>
+repository: https://github.com/mohammadne/packages/fl_localization
+# author: Mohammad Nasr <mohammadne@mail.ru>
 homepage:
 
 environment:
@@ -15,6 +15,12 @@ dependencies:
   # State manegment
   flutter_bloc: ^4.0.1
   hydrated_bloc: ^4.1.1
+
+  # Data Classes 
+  freezed_annotation: ^0.11.0
+
+  # Annotations
+  meta: ^1.1.8
 
   # Localization
   flutter_localizations:
