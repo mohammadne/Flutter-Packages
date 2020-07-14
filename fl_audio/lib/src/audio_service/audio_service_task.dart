@@ -1,376 +1,377 @@
-// import 'package:audio_service/audio_service.dart';
-// import 'package:fl_audio/src/audio_player/audio_player_base.dart';
+import 'package:audio_service/audio_service.dart';
 
-// class AudioServiceTask extends BackgroundAudioTask {
-//   /// This is the duration which specify how long it should save the position
-//   Duration _positionInterval = Duration(seconds: 2);
-//   AudioPlayerBase _player;
+import '../audio_player/audio_player_base.dart';
 
-//   int _audioItemIndex;
-//   List<AudioItem> _audioItems;
+class AudioServiceTask extends BackgroundAudioTask {
+  /// This is the duration which specify how long it should save the position
+  Duration _positionInterval = Duration(seconds: 2);
+  AudioPlayerBase _player;
 
-//   /// This position is used for init pos (Sec)
-//   int _initPosition;
+  int _audioItemIndex;
+  List<AudioItem> _audioItems;
 
-//   /// This field should be set from onCusttomAction
-//   AudioItemSource _audioItemSource;
+  /// This position is used for init pos (Sec)
+  int _initPosition;
 
-//   /// This field should be set from onCusttomAction AND sended from _sendIsolateEvent
-//   PlayBackOrderState _playBackOrderState;
+  /// This field should be set from onCusttomAction
+  AudioItemSource _audioItemSource;
 
-//   bool get _hasMediaItems => _audioItems.isEmpty;
-//   int get _mediaItemsLength => _audioItems.length;
-//   bool get _isFirstAudioItem => _audioItemIndex == 0;
-//   bool get _isLastAudioItem => _audioItemIndex == _mediaItemsLength - 1;
+  /// This field should be set from onCusttomAction AND sended from _sendIsolateEvent
+  PlayBackOrderState _playBackOrderState;
 
-//   MediaItem _audioItemToMediaItem(AudioItem audioItem) => MediaItem(
-//         id: audioItem.id,
-//         artUri: audioItem.artUri,
-//         title: audioItem.artist,
-//         album: audioItem.album,
-//         artist: audioItem.artist,
-//         duration: audioItem.duration,
-//       );
+  bool get _hasMediaItems => _audioItems.isEmpty;
+  int get _mediaItemsLength => _audioItems.length;
+  bool get _isFirstAudioItem => _audioItemIndex == 0;
+  bool get _isLastAudioItem => _audioItemIndex == _mediaItemsLength - 1;
 
-//   AudioItem _mediaItemToAudioItem(MediaItem mediaItem) => AudioItem(
-//         id: mediaItem.id,
-//         artUri: mediaItem.artUri,
-//         title: mediaItem.artist,
-//         album: mediaItem.album,
-//         artist: mediaItem.artist,
-//         duration: mediaItem.duration,
-//       );
+  MediaItem _audioItemToMediaItem(AudioItem audioItem) => MediaItem(
+        id: audioItem.id,
+        artUri: audioItem.artUri,
+        title: audioItem.artist,
+        album: audioItem.album,
+        artist: audioItem.artist,
+        duration: audioItem.duration,
+      );
 
-//   @override
-//   Future<void> onStart(Map<String, dynamic> params) async {
-//     _player = JustAudio();
-//     await _hiveInitial();
-//     Stream<void>.periodic(_positionInterval, (_) {
-//       print('position is on $_player.position.inSeconds');
-//       Hive.box('position').put(0, _player.position.inSeconds);
-//     });
-//     _player.playerStateStream.listen((state) {
-//       state.when(
-//         completed: () => _handlePlayerCompletion(),
-//         playing: () => _setState(
-//           isPlaying: true,
-//           processingState: _player.isBuffering
-//               ? AudioProcessingState.buffering
-//               : AudioProcessingState.ready,
-//         ),
-//         paused: () => _setState(
-//           isPlaying: false,
-//           processingState: _player.isBuffering
-//               ? AudioProcessingState.buffering
-//               : AudioProcessingState.ready,
-//         ),
-//         stopped: () => _setState(
-//           isPlaying: false,
-//           processingState: AudioProcessingState.stopped,
-//         ),
-//         connecting: () => _setState(
-//           isPlaying: false,
-//           processingState: AudioProcessingState.connecting,
-//         ),
-//         none: () => _setState(
-//           isPlaying: false,
-//           processingState: AudioProcessingState.none,
-//         ),
-//       );
-//     });
-//     await _handleInitOnStart();
-//   }
+  AudioItem _mediaItemToAudioItem(MediaItem mediaItem) => AudioItem(
+        id: mediaItem.id,
+        artUri: mediaItem.artUri,
+        title: mediaItem.artist,
+        album: mediaItem.album,
+        artist: mediaItem.artist,
+        duration: mediaItem.duration,
+      );
 
-//   _hiveInitial() async {
-//     /// Initializing application dir
-//     final appDocDir = await path_provider.getApplicationDocumentsDirectory();
+  @override
+  Future<void> onStart(Map<String, dynamic> params) async {
+    _player = JustAudio();
+    await _hiveInitial();
+    Stream<void>.periodic(_positionInterval, (_) {
+      print('position is on $_player.position.inSeconds');
+      Hive.box('position').put(0, _player.position.inSeconds);
+    });
+    _player.playerStateStream.listen((state) {
+      state.when(
+        completed: () => _handlePlayerCompletion(),
+        playing: () => _setState(
+          isPlaying: true,
+          processingState: _player.isBuffering
+              ? AudioProcessingState.buffering
+              : AudioProcessingState.ready,
+        ),
+        paused: () => _setState(
+          isPlaying: false,
+          processingState: _player.isBuffering
+              ? AudioProcessingState.buffering
+              : AudioProcessingState.ready,
+        ),
+        stopped: () => _setState(
+          isPlaying: false,
+          processingState: AudioProcessingState.stopped,
+        ),
+        connecting: () => _setState(
+          isPlaying: false,
+          processingState: AudioProcessingState.connecting,
+        ),
+        none: () => _setState(
+          isPlaying: false,
+          processingState: AudioProcessingState.none,
+        ),
+      );
+    });
+    await _handleInitOnStart();
+  }
 
-//     /// Hive initialization and registrations
-//     Hive.init(appDocDir.path);
-//     Hive.registerAdapter<PlayBackOrderState>(PlayBackOrderStateAdapter());
+  _hiveInitial() async {
+    /// Initializing application dir
+    final appDocDir = await path_provider.getApplicationDocumentsDirectory();
 
-//     /// AudioItemSource
-//     final audioItemSourceBox =
-//         await Hive.openBox<AudioItemSource>('audio_item_source');
-//     _audioItemSource = audioItemSourceBox.get(0) ?? AudioItemSource.Url;
+    /// Hive initialization and registrations
+    Hive.init(appDocDir.path);
+    Hive.registerAdapter<PlayBackOrderState>(PlayBackOrderStateAdapter());
 
-//     /// PlayBackorderState
-//     final playBackOrderBox =
-//         await Hive.openBox<PlayBackOrderState>('play_back_order_state');
-//     _playBackOrderState = playBackOrderBox.get(0) ?? PlayBackOrderState.order;
+    /// AudioItemSource
+    final audioItemSourceBox =
+        await Hive.openBox<AudioItemSource>('audio_item_source');
+    _audioItemSource = audioItemSourceBox.get(0) ?? AudioItemSource.Url;
 
-//     /// AudioItems
-//     final audioItemsBox = await Hive.openBox<List<AudioItem>>('audio_items');
-//     _audioItems = audioItemsBox.get(0) ?? [];
+    /// PlayBackorderState
+    final playBackOrderBox =
+        await Hive.openBox<PlayBackOrderState>('play_back_order_state');
+    _playBackOrderState = playBackOrderBox.get(0) ?? PlayBackOrderState.order;
 
-//     /// AudioItemIndex
-//     final audioItemIndexBox = await Hive.openBox<int>('audio_item_index');
-//     _audioItemIndex = audioItemIndexBox.get(0) ?? 0;
+    /// AudioItems
+    final audioItemsBox = await Hive.openBox<List<AudioItem>>('audio_items');
+    _audioItems = audioItemsBox.get(0) ?? [];
 
-//     /// Position
-//     final initPositionBox = await Hive.openBox<int>('position');
-//     _initPosition = initPositionBox.get(0) ?? 0;
-//   }
+    /// AudioItemIndex
+    final audioItemIndexBox = await Hive.openBox<int>('audio_item_index');
+    _audioItemIndex = audioItemIndexBox.get(0) ?? 0;
 
-//   _handlePlayerCompletion() async {
-//     switch (_playBackOrderState) {
-//       case PlayBackOrderState.order:
-//         if (_isLastAudioItem) {
-//           onPause();
-//         } else {
-//           _skip(1);
-//         }
-//         break;
-//       case PlayBackOrderState.repeatAll:
-//         if (_isLastAudioItem) {
-//           onSkipToQueueItem(_audioItems.first.id);
-//         } else {
-//           _skip(1);
-//         }
-//         break;
-//       case PlayBackOrderState.repeatOne:
-//         await onStop();
-//         onPlay();
-//         break;
-//       case PlayBackOrderState.shuffle:
-//         int random = Random().nextInt(_mediaItemsLength);
-//         onSkipToQueueItem(_audioItems[random].id);
-//         break;
-//     }
-//   }
+    /// Position
+    final initPositionBox = await Hive.openBox<int>('position');
+    _initPosition = initPositionBox.get(0) ?? 0;
+  }
 
-//   _handleInitOnStart() async {
-//     AudioServiceBackground.setQueue(_audioItems
-//         .map((AudioItem audioItem) => _audioItemToMediaItem(audioItem))
-//         .toList());
+  _handlePlayerCompletion() async {
+    switch (_playBackOrderState) {
+      case PlayBackOrderState.order:
+        if (_isLastAudioItem) {
+          onPause();
+        } else {
+          _skip(1);
+        }
+        break;
+      case PlayBackOrderState.repeatAll:
+        if (_isLastAudioItem) {
+          onSkipToQueueItem(_audioItems.first.id);
+        } else {
+          _skip(1);
+        }
+        break;
+      case PlayBackOrderState.repeatOne:
+        await onStop();
+        onPlay();
+        break;
+      case PlayBackOrderState.shuffle:
+        int random = Random().nextInt(_mediaItemsLength);
+        onSkipToQueueItem(_audioItems[random].id);
+        break;
+    }
+  }
 
-//     if (_hasMediaItems) {
-//     } else {}
-//   }
+  _handleInitOnStart() async {
+    AudioServiceBackground.setQueue(_audioItems
+        .map((AudioItem audioItem) => _audioItemToMediaItem(audioItem))
+        .toList());
 
-//   void _sendIsolateEvent(AudioPortToMain audioPortToMain) =>
-//       AudioServiceBackground.sendCustomEvent(audioPortToMain);
+    if (_hasMediaItems) {
+    } else {}
+  }
 
-//   @override
-//   Future onCustomAction(_, arguments) async {
-//     final args = new Map<String, dynamic>.from(arguments);
-//     MainPortToAudio port = MainPortToAudio.fromJson(args);
-//     _audioItemSource = port.audioItemSource ?? _audioItemSource;
-//     Hive.box('audio_item_source').put(0, _audioItemSource);
-//     _playBackOrderState = port.playBackOrderState ?? _playBackOrderState;
-//     Hive.box('play_back_order_state').put(0, _playBackOrderState);
-//   }
+  void _sendIsolateEvent(AudioPortToMain audioPortToMain) =>
+      AudioServiceBackground.sendCustomEvent(audioPortToMain);
 
-//   @override
-//   void onPlay() {
-//     _player.play();
-//   }
+  @override
+  Future onCustomAction(_, arguments) async {
+    final args = new Map<String, dynamic>.from(arguments);
+    MainPortToAudio port = MainPortToAudio.fromJson(args);
+    _audioItemSource = port.audioItemSource ?? _audioItemSource;
+    Hive.box('audio_item_source').put(0, _audioItemSource);
+    _playBackOrderState = port.playBackOrderState ?? _playBackOrderState;
+    Hive.box('play_back_order_state').put(0, _playBackOrderState);
+  }
 
-//   @override
-//   void onPause() {
-//     _player.pause();
-//   }
+  @override
+  void onPlay() {
+    _player.play();
+  }
 
-//   @override
-//   Future<void> onStop() async {
-//     await _player.stop();
-//     await super.onStop();
-//     await Hive.close();
-//   }
+  @override
+  void onPause() {
+    _player.pause();
+  }
 
-//   @override
-//   void onClose() => onStop();
+  @override
+  Future<void> onStop() async {
+    await _player.stop();
+    await super.onStop();
+    await Hive.close();
+  }
 
-//   @override
-//   void onSeekTo(Duration position) {
-//     _player.seek(position);
-//   }
+  @override
+  void onClose() => onStop();
 
-//   @override
-//   void onSkipToNext() {
-//     switch (_playBackOrderState) {
-//       case PlayBackOrderState.shuffle:
-//         int random = Random().nextInt(_mediaItemsLength);
-//         onSkipToQueueItem(_audioItems[random].id);
-//         break;
-//       default:
-//         if (_isLastAudioItem) {
-//           onSkipToQueueItem(_audioItems.first.id);
-//         } else {
-//           _skip(1);
-//         }
-//     }
-//   }
+  @override
+  void onSeekTo(Duration position) {
+    _player.seek(position);
+  }
 
-//   @override
-//   void onSkipToPrevious() {
-//     switch (_playBackOrderState) {
-//       case PlayBackOrderState.shuffle:
-//         int random = Random().nextInt(_mediaItemsLength);
-//         onSkipToQueueItem(_audioItems[random].id);
-//         break;
-//       default:
-//         if (_isFirstAudioItem) {
-//           onSkipToQueueItem(_audioItems.last.id);
-//         } else {
-//           _skip(-1);
-//         }
-//     }
-//   }
+  @override
+  void onSkipToNext() {
+    switch (_playBackOrderState) {
+      case PlayBackOrderState.shuffle:
+        int random = Random().nextInt(_mediaItemsLength);
+        onSkipToQueueItem(_audioItems[random].id);
+        break;
+      default:
+        if (_isLastAudioItem) {
+          onSkipToQueueItem(_audioItems.first.id);
+        } else {
+          _skip(1);
+        }
+    }
+  }
 
-//   @override
-//   void onSkipToQueueItem(String mediaId) {}
+  @override
+  void onSkipToPrevious() {
+    switch (_playBackOrderState) {
+      case PlayBackOrderState.shuffle:
+        int random = Random().nextInt(_mediaItemsLength);
+        onSkipToQueueItem(_audioItems[random].id);
+        break;
+      default:
+        if (_isFirstAudioItem) {
+          onSkipToQueueItem(_audioItems.last.id);
+        } else {
+          _skip(-1);
+        }
+    }
+  }
 
-//   Future<void> _skip(int offset) async {
-//     final pos = _audioItemIndex + offset;
-//     if (!(pos >= 0 && pos < _mediaItemsLength)) return;
-//     _audioItemIndex = pos;
-//     //TODO
-//     // await _player.stop();
-//     MediaItem mediaItem = _audioItemToMediaItem(_audioItems[pos]);
-//     AudioServiceBackground.setMediaItem(mediaItem);
-//     await _player.setUrl(mediaItem.id);
-//     onPlay();
-//   }
+  @override
+  void onSkipToQueueItem(String mediaId) {}
 
-//   @override
-//   Future<void> onUpdateQueue(List<MediaItem> queue) async {
-//     AudioServiceBackground.setQueue(queue);
-//     _audioItems = queue
-//         .map((MediaItem mediaItem) => _mediaItemToAudioItem(mediaItem))
-//         .toList();
-//     _skip(0);
-//   }
+  Future<void> _skip(int offset) async {
+    final pos = _audioItemIndex + offset;
+    if (!(pos >= 0 && pos < _mediaItemsLength)) return;
+    _audioItemIndex = pos;
+    //TODO
+    // await _player.stop();
+    MediaItem mediaItem = _audioItemToMediaItem(_audioItems[pos]);
+    AudioServiceBackground.setMediaItem(mediaItem);
+    await _player.setUrl(mediaItem.id);
+    onPlay();
+  }
 
-//   @override
-//   Future<void> onUpdateMediaItem(MediaItem mediaItem) async {}
+  @override
+  Future<void> onUpdateQueue(List<MediaItem> queue) async {
+    AudioServiceBackground.setQueue(queue);
+    _audioItems = queue
+        .map((MediaItem mediaItem) => _mediaItemToAudioItem(mediaItem))
+        .toList();
+    _skip(0);
+  }
 
-//   @override
-//   void onAddQueueItem(MediaItem mediaItem) {}
+  @override
+  Future<void> onUpdateMediaItem(MediaItem mediaItem) async {}
 
-//   @override
-//   void onAddQueueItemAt(MediaItem mediaItem, int index) {}
+  @override
+  void onAddQueueItem(MediaItem mediaItem) {}
 
-//   @override
-//   void onFastForward() {
-//     _seekRelative(fastForwardInterval);
-//   }
+  @override
+  void onAddQueueItemAt(MediaItem mediaItem, int index) {}
 
-//   @override
-//   void onRewind() {
-//     _seekRelative(-rewindInterval);
-//   }
+  @override
+  void onFastForward() {
+    _seekRelative(fastForwardInterval);
+  }
 
-//   Future<void> _seekRelative(Duration offset) async {
-//     final pos = _player.position + offset;
-//     final mediaItem = AudioService.currentMediaItem;
-//     if (pos < Duration.zero) _player.seek(Duration.zero);
-//     if (pos > mediaItem.duration) _player.seek(mediaItem.duration);
-//     await _player.seek(pos);
-//   }
+  @override
+  void onRewind() {
+    _seekRelative(-rewindInterval);
+  }
 
-//   @override
-//   void onAudioFocusLost(AudioInterruption interruption) {
-//     onPause();
-//   }
+  Future<void> _seekRelative(Duration offset) async {
+    final pos = _player.position + offset;
+    final mediaItem = AudioService.currentMediaItem;
+    if (pos < Duration.zero) _player.seek(Duration.zero);
+    if (pos > mediaItem.duration) _player.seek(mediaItem.duration);
+    await _player.seek(pos);
+  }
 
-//   @override
-//   void onAudioFocusGained(AudioInterruption interruption) {
-//     onPlay();
-//   }
+  @override
+  void onAudioFocusLost(AudioInterruption interruption) {
+    onPause();
+  }
 
-//   @override
-//   void onAudioBecomingNoisy() {
-//     onPause();
-//   }
+  @override
+  void onAudioFocusGained(AudioInterruption interruption) {
+    onPlay();
+  }
 
-//   @override
-//   void onPlayFromMediaId(String mediaId) {
-//     final reqIndex = AudioService.queue.indexWhere(
-//       (mediaItem) => mediaItem.id == mediaId,
-//     );
-//     _skip(reqIndex - _audioItemIndex);
-//   }
+  @override
+  void onAudioBecomingNoisy() {
+    onPause();
+  }
 
-//   @override
-//   void onSetSpeed(double speed) {
-//     _player.setSpeed(speed);
-//   }
+  @override
+  void onPlayFromMediaId(String mediaId) {
+    final reqIndex = AudioService.queue.indexWhere(
+      (mediaItem) => mediaItem.id == mediaId,
+    );
+    _skip(reqIndex - _audioItemIndex);
+  }
 
-//   @override
-//   void onClick(MediaButton button) {
-//     switch (button) {
-//       case MediaButton.next:
-//         onSkipToNext();
-//         break;
-//       case MediaButton.previous:
-//         onSkipToPrevious();
-//         break;
-//       case MediaButton.media:
-//         if (AudioServiceBackground.state.playing)
-//           onPause();
-//         else
-//           onPlay();
-//         break;
-//     }
-//   }
+  @override
+  void onSetSpeed(double speed) {
+    _player.setSpeed(speed);
+  }
 
-//   Future<void> _setState({
-//     @required bool isPlaying,
-//     AudioProcessingState processingState,
-//   }) async =>
-//       await AudioServiceBackground.setState(
-//         controls: _getControls(isPlaying),
-//         systemActions: [MediaAction.seekTo],
-//         processingState:
-//             processingState ?? AudioServiceBackground.state.processingState,
-//         playing: isPlaying,
-//         position: _player.position,
-//         bufferedPosition: _player.bufferedPosition,
-//         speed: _player.speed,
-//       );
+  @override
+  void onClick(MediaButton button) {
+    switch (button) {
+      case MediaButton.next:
+        onSkipToNext();
+        break;
+      case MediaButton.previous:
+        onSkipToPrevious();
+        break;
+      case MediaButton.media:
+        if (AudioServiceBackground.state.playing)
+          onPause();
+        else
+          onPlay();
+        break;
+    }
+  }
 
-//   List<MediaControl> _getControls(bool isPlaying) {
-//     if (isPlaying) {
-//       return [
-//         skipToPreviousControl,
-//         pauseControl,
-//         skipToNextControl,
-//         stopControl,
-//       ];
-//     } else {
-//       return [
-//         skipToPreviousControl,
-//         playControl,
-//         skipToNextControl,
-//         stopControl,
-//       ];
-//     }
-//   }
-// }
+  Future<void> _setState({
+    @required bool isPlaying,
+    AudioProcessingState processingState,
+  }) async =>
+      await AudioServiceBackground.setState(
+        controls: _getControls(isPlaying),
+        systemActions: [MediaAction.seekTo],
+        processingState:
+            processingState ?? AudioServiceBackground.state.processingState,
+        playing: isPlaying,
+        position: _player.position,
+        bufferedPosition: _player.bufferedPosition,
+        speed: _player.speed,
+      );
 
-// MediaControl playControl = MediaControl(
-//   androidIcon: 'drawable/ic_action_play_arrow',
-//   label: 'Play',
-//   action: MediaAction.play,
-// );
-// MediaControl pauseControl = MediaControl(
-//   androidIcon: 'drawable/ic_action_pause',
-//   label: 'Pause',
-//   action: MediaAction.pause,
-// );
-// MediaControl skipToNextControl = MediaControl(
-//   androidIcon: 'drawable/ic_action_skip_next',
-//   label: 'Next',
-//   action: MediaAction.skipToNext,
-// );
-// MediaControl skipToPreviousControl = MediaControl(
-//   androidIcon: 'drawable/ic_action_skip_previous',
-//   label: 'Previous',
-//   action: MediaAction.skipToPrevious,
-// );
-// MediaControl stopControl = MediaControl(
-//   androidIcon: 'drawable/ic_action_stop',
-//   label: 'Stop',
-//   action: MediaAction.stop,
-// );
+  List<MediaControl> _getControls(bool isPlaying) {
+    if (isPlaying) {
+      return [
+        skipToPreviousControl,
+        pauseControl,
+        skipToNextControl,
+        stopControl,
+      ];
+    } else {
+      return [
+        skipToPreviousControl,
+        playControl,
+        skipToNextControl,
+        stopControl,
+      ];
+    }
+  }
+}
+
+MediaControl playControl = MediaControl(
+  androidIcon: 'drawable/ic_action_play_arrow',
+  label: 'Play',
+  action: MediaAction.play,
+);
+MediaControl pauseControl = MediaControl(
+  androidIcon: 'drawable/ic_action_pause',
+  label: 'Pause',
+  action: MediaAction.pause,
+);
+MediaControl skipToNextControl = MediaControl(
+  androidIcon: 'drawable/ic_action_skip_next',
+  label: 'Next',
+  action: MediaAction.skipToNext,
+);
+MediaControl skipToPreviousControl = MediaControl(
+  androidIcon: 'drawable/ic_action_skip_previous',
+  label: 'Previous',
+  action: MediaAction.skipToPrevious,
+);
+MediaControl stopControl = MediaControl(
+  androidIcon: 'drawable/ic_action_stop',
+  label: 'Stop',
+  action: MediaAction.stop,
+);

@@ -3,6 +3,9 @@ import 'models/state/audio_player_state.dart';
 abstract class AudioPlayerBase {
   /// functions
   Future<Duration> setUrl(String uri);
+  Future<Duration> setAsset(String uri);
+  Future<Duration> setFilePath(String uri);
+  
   Future play();
   Future pause();
   Future stop();

@@ -4,11 +4,18 @@ import 'models/state/audio_player_state.dart';
 import 'audio_player_base.dart';
 
 class JustAudio implements AudioPlayerBase {
-  JustAudio() : _audioPlayer = AudioPlayer();
+  JustAudio({this.positionStreamInterval}) : _audioPlayer = AudioPlayer();
   final AudioPlayer _audioPlayer;
+  final Duration positionStreamInterval;
 
   @override
   Future<Duration> setUrl(String uri) => _audioPlayer.setUrl(uri);
+
+  @override
+  Future<Duration> setAsset(String uri) => _audioPlayer.setAsset(uri);
+
+  @override
+  Future<Duration> setFilePath(String uri) => _audioPlayer.setFilePath(uri);
 
   @override
   Future play() => _audioPlayer.play();
@@ -51,8 +58,9 @@ class JustAudio implements AudioPlayerBase {
       });
 
   @override
-  Stream<Duration> get positionStream =>
-      _audioPlayer.playbackEventStream.map((event) => event.position);
+  Stream<Duration> get positionStream => _audioPlayer.getPositionStream(
+        positionStreamInterval ?? Duration(milliseconds: 500),
+      );
 
   @override
   Stream<Duration> get bufferedPositionStream =>
