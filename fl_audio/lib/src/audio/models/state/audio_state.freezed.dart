@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
 
-part of 'audio_player_state.dart';
+part of 'audio_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-AudioPlayerState _$AudioPlayerStateFromJson(Map<String, dynamic> json) {
+AudioState _$AudioStateFromJson(Map<String, dynamic> json) {
   switch (json['runtimeType'] as String) {
     case 'none':
       return None.fromJson(json);
@@ -28,8 +28,8 @@ AudioPlayerState _$AudioPlayerStateFromJson(Map<String, dynamic> json) {
   }
 }
 
-class _$AudioPlayerStateTearOff {
-  const _$AudioPlayerStateTearOff();
+class _$AudioStateTearOff {
+  const _$AudioStateTearOff();
 
   None none() {
     return const None();
@@ -57,9 +57,9 @@ class _$AudioPlayerStateTearOff {
 }
 
 // ignore: unused_element
-const $AudioPlayerState = _$AudioPlayerStateTearOff();
+const $AudioState = _$AudioStateTearOff();
 
-mixin _$AudioPlayerState {
+mixin _$AudioState {
   @optionalTypeArgs
   Result when<Result extends Object>({
     @required Result none(),
@@ -101,19 +101,18 @@ mixin _$AudioPlayerState {
   Map<String, dynamic> toJson();
 }
 
-abstract class $AudioPlayerStateCopyWith<$Res> {
-  factory $AudioPlayerStateCopyWith(
-          AudioPlayerState value, $Res Function(AudioPlayerState) then) =
-      _$AudioPlayerStateCopyWithImpl<$Res>;
+abstract class $AudioStateCopyWith<$Res> {
+  factory $AudioStateCopyWith(
+          AudioState value, $Res Function(AudioState) then) =
+      _$AudioStateCopyWithImpl<$Res>;
 }
 
-class _$AudioPlayerStateCopyWithImpl<$Res>
-    implements $AudioPlayerStateCopyWith<$Res> {
-  _$AudioPlayerStateCopyWithImpl(this._value, this._then);
+class _$AudioStateCopyWithImpl<$Res> implements $AudioStateCopyWith<$Res> {
+  _$AudioStateCopyWithImpl(this._value, this._then);
 
-  final AudioPlayerState _value;
+  final AudioState _value;
   // ignore: unused_field
-  final $Res Function(AudioPlayerState) _then;
+  final $Res Function(AudioState) _then;
 }
 
 abstract class $NoneCopyWith<$Res> {
@@ -121,7 +120,7 @@ abstract class $NoneCopyWith<$Res> {
       _$NoneCopyWithImpl<$Res>;
 }
 
-class _$NoneCopyWithImpl<$Res> extends _$AudioPlayerStateCopyWithImpl<$Res>
+class _$NoneCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
     implements $NoneCopyWith<$Res> {
   _$NoneCopyWithImpl(None _value, $Res Function(None) _then)
       : super(_value, (v) => _then(v as None));
@@ -138,7 +137,7 @@ class _$None implements None {
 
   @override
   String toString() {
-    return 'AudioPlayerState.none()';
+    return 'AudioState.none()';
   }
 
   @override
@@ -229,7 +228,7 @@ class _$None implements None {
   }
 }
 
-abstract class None implements AudioPlayerState {
+abstract class None implements AudioState {
   const factory None() = _$None;
 
   factory None.fromJson(Map<String, dynamic> json) = _$None.fromJson;
@@ -241,8 +240,7 @@ abstract class $ConnectingCopyWith<$Res> {
       _$ConnectingCopyWithImpl<$Res>;
 }
 
-class _$ConnectingCopyWithImpl<$Res>
-    extends _$AudioPlayerStateCopyWithImpl<$Res>
+class _$ConnectingCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
     implements $ConnectingCopyWith<$Res> {
   _$ConnectingCopyWithImpl(Connecting _value, $Res Function(Connecting) _then)
       : super(_value, (v) => _then(v as Connecting));
@@ -260,7 +258,7 @@ class _$Connecting implements Connecting {
 
   @override
   String toString() {
-    return 'AudioPlayerState.connecting()';
+    return 'AudioState.connecting()';
   }
 
   @override
@@ -351,7 +349,7 @@ class _$Connecting implements Connecting {
   }
 }
 
-abstract class Connecting implements AudioPlayerState {
+abstract class Connecting implements AudioState {
   const factory Connecting() = _$Connecting;
 
   factory Connecting.fromJson(Map<String, dynamic> json) =
@@ -363,7 +361,7 @@ abstract class $PlayingCopyWith<$Res> {
       _$PlayingCopyWithImpl<$Res>;
 }
 
-class _$PlayingCopyWithImpl<$Res> extends _$AudioPlayerStateCopyWithImpl<$Res>
+class _$PlayingCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
     implements $PlayingCopyWith<$Res> {
   _$PlayingCopyWithImpl(Playing _value, $Res Function(Playing) _then)
       : super(_value, (v) => _then(v as Playing));
@@ -381,7 +379,7 @@ class _$Playing implements Playing {
 
   @override
   String toString() {
-    return 'AudioPlayerState.playing()';
+    return 'AudioState.playing()';
   }
 
   @override
@@ -472,7 +470,7 @@ class _$Playing implements Playing {
   }
 }
 
-abstract class Playing implements AudioPlayerState {
+abstract class Playing implements AudioState {
   const factory Playing() = _$Playing;
 
   factory Playing.fromJson(Map<String, dynamic> json) = _$Playing.fromJson;
@@ -483,7 +481,7 @@ abstract class $PausedCopyWith<$Res> {
       _$PausedCopyWithImpl<$Res>;
 }
 
-class _$PausedCopyWithImpl<$Res> extends _$AudioPlayerStateCopyWithImpl<$Res>
+class _$PausedCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
     implements $PausedCopyWith<$Res> {
   _$PausedCopyWithImpl(Paused _value, $Res Function(Paused) _then)
       : super(_value, (v) => _then(v as Paused));
@@ -501,7 +499,7 @@ class _$Paused implements Paused {
 
   @override
   String toString() {
-    return 'AudioPlayerState.paused()';
+    return 'AudioState.paused()';
   }
 
   @override
@@ -592,7 +590,7 @@ class _$Paused implements Paused {
   }
 }
 
-abstract class Paused implements AudioPlayerState {
+abstract class Paused implements AudioState {
   const factory Paused() = _$Paused;
 
   factory Paused.fromJson(Map<String, dynamic> json) = _$Paused.fromJson;
@@ -603,7 +601,7 @@ abstract class $CompletedCopyWith<$Res> {
       _$CompletedCopyWithImpl<$Res>;
 }
 
-class _$CompletedCopyWithImpl<$Res> extends _$AudioPlayerStateCopyWithImpl<$Res>
+class _$CompletedCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
     implements $CompletedCopyWith<$Res> {
   _$CompletedCopyWithImpl(Completed _value, $Res Function(Completed) _then)
       : super(_value, (v) => _then(v as Completed));
@@ -621,7 +619,7 @@ class _$Completed implements Completed {
 
   @override
   String toString() {
-    return 'AudioPlayerState.completed()';
+    return 'AudioState.completed()';
   }
 
   @override
@@ -712,7 +710,7 @@ class _$Completed implements Completed {
   }
 }
 
-abstract class Completed implements AudioPlayerState {
+abstract class Completed implements AudioState {
   const factory Completed() = _$Completed;
 
   factory Completed.fromJson(Map<String, dynamic> json) = _$Completed.fromJson;
@@ -723,7 +721,7 @@ abstract class $StoppedCopyWith<$Res> {
       _$StoppedCopyWithImpl<$Res>;
 }
 
-class _$StoppedCopyWithImpl<$Res> extends _$AudioPlayerStateCopyWithImpl<$Res>
+class _$StoppedCopyWithImpl<$Res> extends _$AudioStateCopyWithImpl<$Res>
     implements $StoppedCopyWith<$Res> {
   _$StoppedCopyWithImpl(Stopped _value, $Res Function(Stopped) _then)
       : super(_value, (v) => _then(v as Stopped));
@@ -741,7 +739,7 @@ class _$Stopped implements Stopped {
 
   @override
   String toString() {
-    return 'AudioPlayerState.stopped()';
+    return 'AudioState.stopped()';
   }
 
   @override
@@ -832,7 +830,7 @@ class _$Stopped implements Stopped {
   }
 }
 
-abstract class Stopped implements AudioPlayerState {
+abstract class Stopped implements AudioState {
   const factory Stopped() = _$Stopped;
 
   factory Stopped.fromJson(Map<String, dynamic> json) = _$Stopped.fromJson;

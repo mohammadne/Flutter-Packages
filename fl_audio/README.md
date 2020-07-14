@@ -1,14 +1,14 @@
 # fl_audio
 
-A new Flutter package project.
+Concrete implementation of [Audio Service](https://flutter.dev/developing-packages/)
 
-## Getting Started
+## Theory behind
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+### in isolate:
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+#### fl_audio_order : 
+##### includes: order , repeatAll , repeatOne , shuffle
+##### hive_name : '${_hivePrefix}_fl_audio_order'
+##### hive_id : 100
+
+

@@ -16,8 +16,14 @@ dependencies:
   # Reactive Stuffs
   rxdart: ^0.24.1
 
+  # DB Stuffs
+  hive: ^1.4.1+1
+  hive_flutter: ^0.3.0+2
+
   # Anotations
   freezed_annotation: ^0.11.0
+
+  path_provider: ^1.6.11
 
   # Audio Player
   audio_service: ^0.11.2

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../processing_state/fl_audio_processing_state.dart';
+import '../fl_audio_processing_state/fl_audio_processing_state.dart';
 
 part 'fl_audio_state.freezed.dart';
 part 'fl_audio_state.g.dart';

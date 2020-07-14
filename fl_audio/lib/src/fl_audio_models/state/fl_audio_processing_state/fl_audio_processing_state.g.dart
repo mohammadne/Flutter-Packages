@@ -12,13 +12,6 @@ _$_None _$_$_NoneFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_NoneToJson(_$_None instance) => <String, dynamic>{};
 
-_$_Waiting _$_$_WaitingFromJson(Map<String, dynamic> json) {
-  return _$_Waiting();
-}
-
-Map<String, dynamic> _$_$_WaitingToJson(_$_Waiting instance) =>
-    <String, dynamic>{};
-
 _$_Ready _$_$_ReadyFromJson(Map<String, dynamic> json) {
   return _$_Ready();
 }
@@ -65,3 +58,26 @@ _$_Error _$_$_ErrorFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$_$_ErrorToJson(_$_Error instance) => <String, dynamic>{};
+
+_$_Waiting _$_$_WaitingFromJson(Map<String, dynamic> json) {
+  return _$_Waiting();
+}
+
+Map<String, dynamic> _$_$_WaitingToJson(_$_Waiting instance) =>
+    <String, dynamic>{};
+
+_$_SkippingToNext _$_$_SkippingToNextFromJson(Map<String, dynamic> json) {
+  return _$_SkippingToNext();
+}
+
+Map<String, dynamic> _$_$_SkippingToNextToJson(_$_SkippingToNext instance) =>
+    <String, dynamic>{};
+
+_$_SkippingToPervious _$_$_SkippingToPerviousFromJson(
+    Map<String, dynamic> json) {
+  return _$_SkippingToPervious();
+}
+
+Map<String, dynamic> _$_$_SkippingToPerviousToJson(
+        _$_SkippingToPervious instance) =>
+    <String, dynamic>{};

@@ -1,6 +1,6 @@
-import 'models/state/audio_player_state.dart';
+import 'models/state/audio_state.dart';
 
-abstract class AudioPlayerBase {
+abstract class AudioBase {
   /// functions
   Future<Duration> setUrl(String uri);
   Future<Duration> setAsset(String uri);
@@ -15,7 +15,7 @@ abstract class AudioPlayerBase {
   Future setVolume(double volume);
 
   /// streams
-  Stream<AudioPlayerState> get playerStateStream;
+  Stream<AudioState> get playerStateStream;
   Stream<Duration> get bufferedPositionStream;
   Stream<bool> get isBufferingStream;
   Stream<Duration> get positionStream;
