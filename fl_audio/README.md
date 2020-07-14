@@ -4,11 +4,9 @@ Concrete implementation of [Audio Service](https://flutter.dev/developing-packag
 
 ## Theory behind
 
-### in isolate:
+### IN AUDIO ISOLATE:
 
 #### fl_audio_order : 
 ##### includes: order , repeatAll , repeatOne , shuffle
 ##### hive_name : '${_hivePrefix}_fl_audio_order'
 ##### hive_id : 100
-
-

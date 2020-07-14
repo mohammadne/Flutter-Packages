@@ -181,10 +181,32 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   @override
   void onClose() => onStop();
 
+  /// Seeking
+
   @override
   void onSeekTo(Duration position) {
     _player.seek(position);
   }
+
+  @override
+  void onFastForward() {
+    _seekRelative(fastForwardInterval);
+  }
+
+  @override
+  void onRewind() {
+    _seekRelative(-rewindInterval);
+  }
+
+  Future<void> _seekRelative(Duration offset) async {
+    final pos = _player.position + offset;
+    final mediaItem = AudioService.currentMediaItem;
+    if (pos < Duration.zero) _player.seek(Duration.zero);
+    if (pos > mediaItem.duration) _player.seek(mediaItem.duration);
+    await _player.seek(pos);
+  }
+
+  /// Skipping
 
   @override
   void onSkipToNext() {
@@ -229,15 +251,79 @@ class AudioServiceIsolate extends BackgroundAudioTask {
     // await _player.stop();
     MediaItem mediaItem = _mediaItems[pos];
     AudioServiceBackground.setMediaItem(mediaItem);
+    // TODO: path of downloaded files
     await _player.setUrl(mediaItem.id);
     onPlay();
   }
+
+  /// Updating
 
   @override
   Future<void> onUpdateQueue(List<MediaItem> queue) async {
     AudioServiceBackground.setQueue(queue);
     _mediaItems = queue;
     _skip(0);
+  }
+
+  @override
+  Future<void> onUpdateMediaItem(MediaItem mediaItem) async {
+    final index = _mediaItems.indexWhere((item) => item == mediaItem);
+    if (_mediaItemIndex != index) {
+      _mediaItems[index] = mediaItem;
+    } else {
+      // TODO: pause current playing + resume newly edited item
+    }
+  }
+
+  /// Adding Item to queue
+
+  @override
+  void onAddQueueItem(MediaItem mediaItem) {
+    _mediaItems.add(mediaItem);
+  }
+
+  @override
+  void onAddQueueItemAt(MediaItem mediaItem, int index) {
+    _mediaItems.insert(index, mediaItem);
+    // because the current playing item index should increment
+    if (_mediaItemIndex >= index) _mediaItemIndex++;
+  }
+
+  /// Audio Focusing
+
+  @override
+  void onAudioFocusLost(AudioInterruption interruption) {
+    onPause();
+  }
+
+  @override
+  void onAudioFocusGained(AudioInterruption interruption) {
+    onPlay();
+  }
+
+  @override
+  void onAudioBecomingNoisy() {
+    onPause();
+  }
+
+  /// Headset Controls
+
+  @override
+  void onClick(MediaButton button) {
+    switch (button) {
+      case MediaButton.next:
+        onSkipToNext();
+        break;
+      case MediaButton.previous:
+        onSkipToPrevious();
+        break;
+      case MediaButton.media:
+        if (AudioServiceBackground.state.playing)
+          onPause();
+        else
+          onPlay();
+        break;
+    }
   }
 
   List<MediaControl> _getControls(bool isPlaying) {

@@ -1,11 +1,12 @@
 import 'models/state/audio_state.dart';
 
 abstract class AudioBase {
-  /// functions
+  /// setter uri methods
   Future<Duration> setUrl(String uri);
   Future<Duration> setAsset(String uri);
   Future<Duration> setFilePath(String uri);
-  
+
+  /// audio player methods
   Future play();
   Future pause();
   Future stop();

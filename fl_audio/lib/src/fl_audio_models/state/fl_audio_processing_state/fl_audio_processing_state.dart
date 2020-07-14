@@ -13,8 +13,10 @@ abstract class FlAudioProcessingState with _$FlAudioProcessingState {
   const factory FlAudioProcessingState.completed() = _Completed;
   const factory FlAudioProcessingState.stopped() = _Stopped;
   const factory FlAudioProcessingState.error() = _Error;
-  const factory FlAudioProcessingState.waiting() = _Waiting;
+  const factory FlAudioProcessingState.connecting() = _Connecting;
   const factory FlAudioProcessingState.skippingToNext() = _SkippingToNext;
+  const factory FlAudioProcessingState.skippingToQueueItem() =
+      _SkippingToQueueItem;
   const factory FlAudioProcessingState.skippingToPervious() =
       _SkippingToPervious;
 

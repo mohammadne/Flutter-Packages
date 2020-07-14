@@ -27,10 +27,12 @@ FlAudioProcessingState _$FlAudioProcessingStateFromJson(
       return _Stopped.fromJson(json);
     case 'error':
       return _Error.fromJson(json);
-    case 'waiting':
-      return _Waiting.fromJson(json);
+    case 'connecting':
+      return _Connecting.fromJson(json);
     case 'skippingToNext':
       return _SkippingToNext.fromJson(json);
+    case 'skippingToQueueItem':
+      return _SkippingToQueueItem.fromJson(json);
     case 'skippingToPervious':
       return _SkippingToPervious.fromJson(json);
 
@@ -74,12 +76,16 @@ class _$FlAudioProcessingStateTearOff {
     return const _Error();
   }
 
-  _Waiting waiting() {
-    return const _Waiting();
+  _Connecting connecting() {
+    return const _Connecting();
   }
 
   _SkippingToNext skippingToNext() {
     return const _SkippingToNext();
+  }
+
+  _SkippingToQueueItem skippingToQueueItem() {
+    return const _SkippingToQueueItem();
   }
 
   _SkippingToPervious skippingToPervious() {
@@ -101,8 +107,9 @@ mixin _$FlAudioProcessingState {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   });
   @optionalTypeArgs
@@ -115,8 +122,9 @@ mixin _$FlAudioProcessingState {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   });
@@ -130,8 +138,9 @@ mixin _$FlAudioProcessingState {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   });
   @optionalTypeArgs
@@ -144,8 +153,9 @@ mixin _$FlAudioProcessingState {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   });
@@ -213,8 +223,9 @@ class _$_None implements _None {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -225,8 +236,9 @@ class _$_None implements _None {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return none();
   }
@@ -242,8 +254,9 @@ class _$_None implements _None {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -265,8 +278,9 @@ class _$_None implements _None {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -277,8 +291,9 @@ class _$_None implements _None {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return none(this);
   }
@@ -294,8 +309,9 @@ class _$_None implements _None {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
@@ -364,8 +380,9 @@ class _$_Ready implements _Ready {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -376,8 +393,9 @@ class _$_Ready implements _Ready {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return ready();
   }
@@ -393,8 +411,9 @@ class _$_Ready implements _Ready {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -416,8 +435,9 @@ class _$_Ready implements _Ready {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -428,8 +448,9 @@ class _$_Ready implements _Ready {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return ready(this);
   }
@@ -445,8 +466,9 @@ class _$_Ready implements _Ready {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
@@ -516,8 +538,9 @@ class _$_Buffering implements _Buffering {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -528,8 +551,9 @@ class _$_Buffering implements _Buffering {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return buffering();
   }
@@ -545,8 +569,9 @@ class _$_Buffering implements _Buffering {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -568,8 +593,9 @@ class _$_Buffering implements _Buffering {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -580,8 +606,9 @@ class _$_Buffering implements _Buffering {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return buffering(this);
   }
@@ -597,8 +624,9 @@ class _$_Buffering implements _Buffering {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
@@ -670,8 +698,9 @@ class _$_FastForwarding implements _FastForwarding {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -682,8 +711,9 @@ class _$_FastForwarding implements _FastForwarding {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return fastForwarding();
   }
@@ -699,8 +729,9 @@ class _$_FastForwarding implements _FastForwarding {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -722,8 +753,9 @@ class _$_FastForwarding implements _FastForwarding {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -734,8 +766,9 @@ class _$_FastForwarding implements _FastForwarding {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return fastForwarding(this);
   }
@@ -751,8 +784,9 @@ class _$_FastForwarding implements _FastForwarding {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
@@ -823,8 +857,9 @@ class _$_Rewinding implements _Rewinding {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -835,8 +870,9 @@ class _$_Rewinding implements _Rewinding {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return rewinding();
   }
@@ -852,8 +888,9 @@ class _$_Rewinding implements _Rewinding {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -875,8 +912,9 @@ class _$_Rewinding implements _Rewinding {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -887,8 +925,9 @@ class _$_Rewinding implements _Rewinding {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return rewinding(this);
   }
@@ -904,8 +943,9 @@ class _$_Rewinding implements _Rewinding {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
@@ -976,8 +1016,9 @@ class _$_Completed implements _Completed {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -988,8 +1029,9 @@ class _$_Completed implements _Completed {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return completed();
   }
@@ -1005,8 +1047,9 @@ class _$_Completed implements _Completed {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -1028,8 +1071,9 @@ class _$_Completed implements _Completed {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -1040,8 +1084,9 @@ class _$_Completed implements _Completed {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return completed(this);
   }
@@ -1057,8 +1102,9 @@ class _$_Completed implements _Completed {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
@@ -1128,8 +1174,9 @@ class _$_Stopped implements _Stopped {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -1140,8 +1187,9 @@ class _$_Stopped implements _Stopped {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return stopped();
   }
@@ -1157,8 +1205,9 @@ class _$_Stopped implements _Stopped {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -1180,8 +1229,9 @@ class _$_Stopped implements _Stopped {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -1192,8 +1242,9 @@ class _$_Stopped implements _Stopped {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return stopped(this);
   }
@@ -1209,8 +1260,9 @@ class _$_Stopped implements _Stopped {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
@@ -1279,8 +1331,9 @@ class _$_Error implements _Error {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -1291,8 +1344,9 @@ class _$_Error implements _Error {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return error();
   }
@@ -1308,8 +1362,9 @@ class _$_Error implements _Error {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -1331,8 +1386,9 @@ class _$_Error implements _Error {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -1343,8 +1399,9 @@ class _$_Error implements _Error {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return error(this);
   }
@@ -1360,8 +1417,9 @@ class _$_Error implements _Error {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
@@ -1384,36 +1442,38 @@ abstract class _Error implements FlAudioProcessingState {
   factory _Error.fromJson(Map<String, dynamic> json) = _$_Error.fromJson;
 }
 
-abstract class _$WaitingCopyWith<$Res> {
-  factory _$WaitingCopyWith(_Waiting value, $Res Function(_Waiting) then) =
-      __$WaitingCopyWithImpl<$Res>;
+abstract class _$ConnectingCopyWith<$Res> {
+  factory _$ConnectingCopyWith(
+          _Connecting value, $Res Function(_Connecting) then) =
+      __$ConnectingCopyWithImpl<$Res>;
 }
 
-class __$WaitingCopyWithImpl<$Res>
+class __$ConnectingCopyWithImpl<$Res>
     extends _$FlAudioProcessingStateCopyWithImpl<$Res>
-    implements _$WaitingCopyWith<$Res> {
-  __$WaitingCopyWithImpl(_Waiting _value, $Res Function(_Waiting) _then)
-      : super(_value, (v) => _then(v as _Waiting));
+    implements _$ConnectingCopyWith<$Res> {
+  __$ConnectingCopyWithImpl(
+      _Connecting _value, $Res Function(_Connecting) _then)
+      : super(_value, (v) => _then(v as _Connecting));
 
   @override
-  _Waiting get _value => super._value as _Waiting;
+  _Connecting get _value => super._value as _Connecting;
 }
 
 @JsonSerializable()
-class _$_Waiting implements _Waiting {
-  const _$_Waiting();
+class _$_Connecting implements _Connecting {
+  const _$_Connecting();
 
-  factory _$_Waiting.fromJson(Map<String, dynamic> json) =>
-      _$_$_WaitingFromJson(json);
+  factory _$_Connecting.fromJson(Map<String, dynamic> json) =>
+      _$_$_ConnectingFromJson(json);
 
   @override
   String toString() {
-    return 'FlAudioProcessingState.waiting()';
+    return 'FlAudioProcessingState.connecting()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _Waiting);
+    return identical(this, other) || (other is _Connecting);
   }
 
   @override
@@ -1430,8 +1490,9 @@ class _$_Waiting implements _Waiting {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -1442,10 +1503,11 @@ class _$_Waiting implements _Waiting {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
-    return waiting();
+    return connecting();
   }
 
   @override
@@ -1459,14 +1521,15 @@ class _$_Waiting implements _Waiting {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (waiting != null) {
-      return waiting();
+    if (connecting != null) {
+      return connecting();
     }
     return orElse();
   }
@@ -1482,8 +1545,9 @@ class _$_Waiting implements _Waiting {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -1494,10 +1558,11 @@ class _$_Waiting implements _Waiting {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
-    return waiting(this);
+    return connecting(this);
   }
 
   @override
@@ -1511,28 +1576,30 @@ class _$_Waiting implements _Waiting {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (waiting != null) {
-      return waiting(this);
+    if (connecting != null) {
+      return connecting(this);
     }
     return orElse();
   }
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_WaitingToJson(this)..['runtimeType'] = 'waiting';
+    return _$_$_ConnectingToJson(this)..['runtimeType'] = 'connecting';
   }
 }
 
-abstract class _Waiting implements FlAudioProcessingState {
-  const factory _Waiting() = _$_Waiting;
+abstract class _Connecting implements FlAudioProcessingState {
+  const factory _Connecting() = _$_Connecting;
 
-  factory _Waiting.fromJson(Map<String, dynamic> json) = _$_Waiting.fromJson;
+  factory _Connecting.fromJson(Map<String, dynamic> json) =
+      _$_Connecting.fromJson;
 }
 
 abstract class _$SkippingToNextCopyWith<$Res> {
@@ -1583,8 +1650,9 @@ class _$_SkippingToNext implements _SkippingToNext {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -1595,8 +1663,9 @@ class _$_SkippingToNext implements _SkippingToNext {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return skippingToNext();
   }
@@ -1612,8 +1681,9 @@ class _$_SkippingToNext implements _SkippingToNext {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -1635,8 +1705,9 @@ class _$_SkippingToNext implements _SkippingToNext {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -1647,8 +1718,9 @@ class _$_SkippingToNext implements _SkippingToNext {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return skippingToNext(this);
   }
@@ -1664,8 +1736,9 @@ class _$_SkippingToNext implements _SkippingToNext {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {
@@ -1687,6 +1760,167 @@ abstract class _SkippingToNext implements FlAudioProcessingState {
 
   factory _SkippingToNext.fromJson(Map<String, dynamic> json) =
       _$_SkippingToNext.fromJson;
+}
+
+abstract class _$SkippingToQueueItemCopyWith<$Res> {
+  factory _$SkippingToQueueItemCopyWith(_SkippingToQueueItem value,
+          $Res Function(_SkippingToQueueItem) then) =
+      __$SkippingToQueueItemCopyWithImpl<$Res>;
+}
+
+class __$SkippingToQueueItemCopyWithImpl<$Res>
+    extends _$FlAudioProcessingStateCopyWithImpl<$Res>
+    implements _$SkippingToQueueItemCopyWith<$Res> {
+  __$SkippingToQueueItemCopyWithImpl(
+      _SkippingToQueueItem _value, $Res Function(_SkippingToQueueItem) _then)
+      : super(_value, (v) => _then(v as _SkippingToQueueItem));
+
+  @override
+  _SkippingToQueueItem get _value => super._value as _SkippingToQueueItem;
+}
+
+@JsonSerializable()
+class _$_SkippingToQueueItem implements _SkippingToQueueItem {
+  const _$_SkippingToQueueItem();
+
+  factory _$_SkippingToQueueItem.fromJson(Map<String, dynamic> json) =>
+      _$_$_SkippingToQueueItemFromJson(json);
+
+  @override
+  String toString() {
+    return 'FlAudioProcessingState.skippingToQueueItem()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is _SkippingToQueueItem);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  Result when<Result extends Object>({
+    @required Result none(),
+    @required Result ready(),
+    @required Result buffering(),
+    @required Result fastForwarding(),
+    @required Result rewinding(),
+    @required Result completed(),
+    @required Result stopped(),
+    @required Result error(),
+    @required Result connecting(),
+    @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
+    @required Result skippingToPervious(),
+  }) {
+    assert(none != null);
+    assert(ready != null);
+    assert(buffering != null);
+    assert(fastForwarding != null);
+    assert(rewinding != null);
+    assert(completed != null);
+    assert(stopped != null);
+    assert(error != null);
+    assert(connecting != null);
+    assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
+    assert(skippingToPervious != null);
+    return skippingToQueueItem();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeWhen<Result extends Object>({
+    Result none(),
+    Result ready(),
+    Result buffering(),
+    Result fastForwarding(),
+    Result rewinding(),
+    Result completed(),
+    Result stopped(),
+    Result error(),
+    Result connecting(),
+    Result skippingToNext(),
+    Result skippingToQueueItem(),
+    Result skippingToPervious(),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (skippingToQueueItem != null) {
+      return skippingToQueueItem();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  Result map<Result extends Object>({
+    @required Result none(_None value),
+    @required Result ready(_Ready value),
+    @required Result buffering(_Buffering value),
+    @required Result fastForwarding(_FastForwarding value),
+    @required Result rewinding(_Rewinding value),
+    @required Result completed(_Completed value),
+    @required Result stopped(_Stopped value),
+    @required Result error(_Error value),
+    @required Result connecting(_Connecting value),
+    @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
+    @required Result skippingToPervious(_SkippingToPervious value),
+  }) {
+    assert(none != null);
+    assert(ready != null);
+    assert(buffering != null);
+    assert(fastForwarding != null);
+    assert(rewinding != null);
+    assert(completed != null);
+    assert(stopped != null);
+    assert(error != null);
+    assert(connecting != null);
+    assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
+    assert(skippingToPervious != null);
+    return skippingToQueueItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  Result maybeMap<Result extends Object>({
+    Result none(_None value),
+    Result ready(_Ready value),
+    Result buffering(_Buffering value),
+    Result fastForwarding(_FastForwarding value),
+    Result rewinding(_Rewinding value),
+    Result completed(_Completed value),
+    Result stopped(_Stopped value),
+    Result error(_Error value),
+    Result connecting(_Connecting value),
+    Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
+    Result skippingToPervious(_SkippingToPervious value),
+    @required Result orElse(),
+  }) {
+    assert(orElse != null);
+    if (skippingToQueueItem != null) {
+      return skippingToQueueItem(this);
+    }
+    return orElse();
+  }
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_SkippingToQueueItemToJson(this)
+      ..['runtimeType'] = 'skippingToQueueItem';
+  }
+}
+
+abstract class _SkippingToQueueItem implements FlAudioProcessingState {
+  const factory _SkippingToQueueItem() = _$_SkippingToQueueItem;
+
+  factory _SkippingToQueueItem.fromJson(Map<String, dynamic> json) =
+      _$_SkippingToQueueItem.fromJson;
 }
 
 abstract class _$SkippingToPerviousCopyWith<$Res> {
@@ -1737,8 +1971,9 @@ class _$_SkippingToPervious implements _SkippingToPervious {
     @required Result completed(),
     @required Result stopped(),
     @required Result error(),
-    @required Result waiting(),
+    @required Result connecting(),
     @required Result skippingToNext(),
+    @required Result skippingToQueueItem(),
     @required Result skippingToPervious(),
   }) {
     assert(none != null);
@@ -1749,8 +1984,9 @@ class _$_SkippingToPervious implements _SkippingToPervious {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return skippingToPervious();
   }
@@ -1766,8 +2002,9 @@ class _$_SkippingToPervious implements _SkippingToPervious {
     Result completed(),
     Result stopped(),
     Result error(),
-    Result waiting(),
+    Result connecting(),
     Result skippingToNext(),
+    Result skippingToQueueItem(),
     Result skippingToPervious(),
     @required Result orElse(),
   }) {
@@ -1789,8 +2026,9 @@ class _$_SkippingToPervious implements _SkippingToPervious {
     @required Result completed(_Completed value),
     @required Result stopped(_Stopped value),
     @required Result error(_Error value),
-    @required Result waiting(_Waiting value),
+    @required Result connecting(_Connecting value),
     @required Result skippingToNext(_SkippingToNext value),
+    @required Result skippingToQueueItem(_SkippingToQueueItem value),
     @required Result skippingToPervious(_SkippingToPervious value),
   }) {
     assert(none != null);
@@ -1801,8 +2039,9 @@ class _$_SkippingToPervious implements _SkippingToPervious {
     assert(completed != null);
     assert(stopped != null);
     assert(error != null);
-    assert(waiting != null);
+    assert(connecting != null);
     assert(skippingToNext != null);
+    assert(skippingToQueueItem != null);
     assert(skippingToPervious != null);
     return skippingToPervious(this);
   }
@@ -1818,8 +2057,9 @@ class _$_SkippingToPervious implements _SkippingToPervious {
     Result completed(_Completed value),
     Result stopped(_Stopped value),
     Result error(_Error value),
-    Result waiting(_Waiting value),
+    Result connecting(_Connecting value),
     Result skippingToNext(_SkippingToNext value),
+    Result skippingToQueueItem(_SkippingToQueueItem value),
     Result skippingToPervious(_SkippingToPervious value),
     @required Result orElse(),
   }) {

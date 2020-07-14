@@ -59,11 +59,11 @@ _$_Error _$_$_ErrorFromJson(Map<String, dynamic> json) {
 
 Map<String, dynamic> _$_$_ErrorToJson(_$_Error instance) => <String, dynamic>{};
 
-_$_Waiting _$_$_WaitingFromJson(Map<String, dynamic> json) {
-  return _$_Waiting();
+_$_Connecting _$_$_ConnectingFromJson(Map<String, dynamic> json) {
+  return _$_Connecting();
 }
 
-Map<String, dynamic> _$_$_WaitingToJson(_$_Waiting instance) =>
+Map<String, dynamic> _$_$_ConnectingToJson(_$_Connecting instance) =>
     <String, dynamic>{};
 
 _$_SkippingToNext _$_$_SkippingToNextFromJson(Map<String, dynamic> json) {
@@ -71,6 +71,15 @@ _$_SkippingToNext _$_$_SkippingToNextFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$_$_SkippingToNextToJson(_$_SkippingToNext instance) =>
+    <String, dynamic>{};
+
+_$_SkippingToQueueItem _$_$_SkippingToQueueItemFromJson(
+    Map<String, dynamic> json) {
+  return _$_SkippingToQueueItem();
+}
+
+Map<String, dynamic> _$_$_SkippingToQueueItemToJson(
+        _$_SkippingToQueueItem instance) =>
     <String, dynamic>{};
 
 _$_SkippingToPervious _$_$_SkippingToPerviousFromJson(
