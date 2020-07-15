@@ -57,8 +57,8 @@ class AudioService implements AudioServiceBase {
         /// Send this port to isolate for initialize necessary items
         FlAudio.transmitInitMainToFlAudioPort(
           InitMainToFlAudioPort(
-            flAudioOrder: flAudioOrderSubject.value.toJson(),
-            flAudioItemIndex: itemIndex ?? 0,
+            flAudioOrder: flAudioOrderSubject.value,
+            flAudioItemIndex: itemIndex,
             flAudioitems: items == null
                 ? []
                 : items.map((item) => item as Map<String, dynamic>),

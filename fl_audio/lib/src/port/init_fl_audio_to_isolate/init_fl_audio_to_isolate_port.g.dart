@@ -10,10 +10,8 @@ _$_InitFlAudioToIsolatePort _$_$_InitFlAudioToIsolatePortFromJson(
     Map<String, dynamic> json) {
   return _$_InitFlAudioToIsolatePort(
     mediaItemIndex: json['mediaItemIndex'] as int,
-    flAudioOrder: json['flAudioOrder'] as Map<String, dynamic>,
-    flAudioitems: (json['flAudioitems'] as List)
-        ?.map((e) => e as Map<String, dynamic>)
-        ?.toList(),
+    mediaItems: _fromMI(json['mediaItems'] as List),
+    flAudioOrder: _fromFA(json['flAudioOrder']),
   );
 }
 
@@ -21,6 +19,6 @@ Map<String, dynamic> _$_$_InitFlAudioToIsolatePortToJson(
         _$_InitFlAudioToIsolatePort instance) =>
     <String, dynamic>{
       'mediaItemIndex': instance.mediaItemIndex,
-      'flAudioOrder': instance.flAudioOrder,
-      'flAudioitems': instance.flAudioitems,
+      'mediaItems': _toMI(instance.mediaItems),
+      'flAudioOrder': _toFA(instance.flAudioOrder),
     };

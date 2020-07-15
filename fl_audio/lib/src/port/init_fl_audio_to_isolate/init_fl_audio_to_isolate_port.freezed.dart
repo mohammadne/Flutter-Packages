@@ -17,13 +17,17 @@ class _$InitFlAudioToIsolatePortTearOff {
   const _$InitFlAudioToIsolatePortTearOff();
 
   _InitFlAudioToIsolatePort call(
-      {@required int mediaItemIndex,
-      @required Map<String, dynamic> flAudioOrder,
-      @required List<Map<String, dynamic>> flAudioitems}) {
+      {int mediaItemIndex,
+      @required
+      @JsonKey(toJson: _toMI, fromJson: _fromMI)
+          List<MediaItem> mediaItems,
+      @required
+      @JsonKey(toJson: _toFA, fromJson: _fromFA)
+          FlAudioOrder flAudioOrder}) {
     return _InitFlAudioToIsolatePort(
       mediaItemIndex: mediaItemIndex,
+      mediaItems: mediaItems,
       flAudioOrder: flAudioOrder,
-      flAudioitems: flAudioitems,
     );
   }
 }
@@ -33,8 +37,10 @@ const $InitFlAudioToIsolatePort = _$InitFlAudioToIsolatePortTearOff();
 
 mixin _$InitFlAudioToIsolatePort {
   int get mediaItemIndex;
-  Map<String, dynamic> get flAudioOrder;
-  List<Map<String, dynamic>> get flAudioitems;
+  @JsonKey(toJson: _toMI, fromJson: _fromMI)
+  List<MediaItem> get mediaItems;
+  @JsonKey(toJson: _toFA, fromJson: _fromFA)
+  FlAudioOrder get flAudioOrder;
 
   Map<String, dynamic> toJson();
   $InitFlAudioToIsolatePortCopyWith<InitFlAudioToIsolatePort> get copyWith;
@@ -46,8 +52,10 @@ abstract class $InitFlAudioToIsolatePortCopyWith<$Res> {
       _$InitFlAudioToIsolatePortCopyWithImpl<$Res>;
   $Res call(
       {int mediaItemIndex,
-      Map<String, dynamic> flAudioOrder,
-      List<Map<String, dynamic>> flAudioitems});
+      @JsonKey(toJson: _toMI, fromJson: _fromMI) List<MediaItem> mediaItems,
+      @JsonKey(toJson: _toFA, fromJson: _fromFA) FlAudioOrder flAudioOrder});
+
+  $FlAudioOrderCopyWith<$Res> get flAudioOrder;
 }
 
 class _$InitFlAudioToIsolatePortCopyWithImpl<$Res>
@@ -61,20 +69,30 @@ class _$InitFlAudioToIsolatePortCopyWithImpl<$Res>
   @override
   $Res call({
     Object mediaItemIndex = freezed,
+    Object mediaItems = freezed,
     Object flAudioOrder = freezed,
-    Object flAudioitems = freezed,
   }) {
     return _then(_value.copyWith(
       mediaItemIndex: mediaItemIndex == freezed
           ? _value.mediaItemIndex
           : mediaItemIndex as int,
+      mediaItems: mediaItems == freezed
+          ? _value.mediaItems
+          : mediaItems as List<MediaItem>,
       flAudioOrder: flAudioOrder == freezed
           ? _value.flAudioOrder
-          : flAudioOrder as Map<String, dynamic>,
-      flAudioitems: flAudioitems == freezed
-          ? _value.flAudioitems
-          : flAudioitems as List<Map<String, dynamic>>,
+          : flAudioOrder as FlAudioOrder,
     ));
+  }
+
+  @override
+  $FlAudioOrderCopyWith<$Res> get flAudioOrder {
+    if (_value.flAudioOrder == null) {
+      return null;
+    }
+    return $FlAudioOrderCopyWith<$Res>(_value.flAudioOrder, (value) {
+      return _then(_value.copyWith(flAudioOrder: value));
+    });
   }
 }
 
@@ -86,8 +104,11 @@ abstract class _$InitFlAudioToIsolatePortCopyWith<$Res>
   @override
   $Res call(
       {int mediaItemIndex,
-      Map<String, dynamic> flAudioOrder,
-      List<Map<String, dynamic>> flAudioitems});
+      @JsonKey(toJson: _toMI, fromJson: _fromMI) List<MediaItem> mediaItems,
+      @JsonKey(toJson: _toFA, fromJson: _fromFA) FlAudioOrder flAudioOrder});
+
+  @override
+  $FlAudioOrderCopyWith<$Res> get flAudioOrder;
 }
 
 class __$InitFlAudioToIsolatePortCopyWithImpl<$Res>
@@ -104,19 +125,19 @@ class __$InitFlAudioToIsolatePortCopyWithImpl<$Res>
   @override
   $Res call({
     Object mediaItemIndex = freezed,
+    Object mediaItems = freezed,
     Object flAudioOrder = freezed,
-    Object flAudioitems = freezed,
   }) {
     return _then(_InitFlAudioToIsolatePort(
       mediaItemIndex: mediaItemIndex == freezed
           ? _value.mediaItemIndex
           : mediaItemIndex as int,
+      mediaItems: mediaItems == freezed
+          ? _value.mediaItems
+          : mediaItems as List<MediaItem>,
       flAudioOrder: flAudioOrder == freezed
           ? _value.flAudioOrder
-          : flAudioOrder as Map<String, dynamic>,
-      flAudioitems: flAudioitems == freezed
-          ? _value.flAudioitems
-          : flAudioitems as List<Map<String, dynamic>>,
+          : flAudioOrder as FlAudioOrder,
     ));
   }
 }
@@ -124,12 +145,11 @@ class __$InitFlAudioToIsolatePortCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_InitFlAudioToIsolatePort implements _InitFlAudioToIsolatePort {
   const _$_InitFlAudioToIsolatePort(
-      {@required this.mediaItemIndex,
-      @required this.flAudioOrder,
-      @required this.flAudioitems})
-      : assert(mediaItemIndex != null),
-        assert(flAudioOrder != null),
-        assert(flAudioitems != null);
+      {this.mediaItemIndex,
+      @required @JsonKey(toJson: _toMI, fromJson: _fromMI) this.mediaItems,
+      @required @JsonKey(toJson: _toFA, fromJson: _fromFA) this.flAudioOrder})
+      : assert(mediaItems != null),
+        assert(flAudioOrder != null);
 
   factory _$_InitFlAudioToIsolatePort.fromJson(Map<String, dynamic> json) =>
       _$_$_InitFlAudioToIsolatePortFromJson(json);
@@ -137,13 +157,15 @@ class _$_InitFlAudioToIsolatePort implements _InitFlAudioToIsolatePort {
   @override
   final int mediaItemIndex;
   @override
-  final Map<String, dynamic> flAudioOrder;
+  @JsonKey(toJson: _toMI, fromJson: _fromMI)
+  final List<MediaItem> mediaItems;
   @override
-  final List<Map<String, dynamic>> flAudioitems;
+  @JsonKey(toJson: _toFA, fromJson: _fromFA)
+  final FlAudioOrder flAudioOrder;
 
   @override
   String toString() {
-    return 'InitFlAudioToIsolatePort(mediaItemIndex: $mediaItemIndex, flAudioOrder: $flAudioOrder, flAudioitems: $flAudioitems)';
+    return 'InitFlAudioToIsolatePort(mediaItemIndex: $mediaItemIndex, mediaItems: $mediaItems, flAudioOrder: $flAudioOrder)';
   }
 
   @override
@@ -153,20 +175,20 @@ class _$_InitFlAudioToIsolatePort implements _InitFlAudioToIsolatePort {
             (identical(other.mediaItemIndex, mediaItemIndex) ||
                 const DeepCollectionEquality()
                     .equals(other.mediaItemIndex, mediaItemIndex)) &&
+            (identical(other.mediaItems, mediaItems) ||
+                const DeepCollectionEquality()
+                    .equals(other.mediaItems, mediaItems)) &&
             (identical(other.flAudioOrder, flAudioOrder) ||
                 const DeepCollectionEquality()
-                    .equals(other.flAudioOrder, flAudioOrder)) &&
-            (identical(other.flAudioitems, flAudioitems) ||
-                const DeepCollectionEquality()
-                    .equals(other.flAudioitems, flAudioitems)));
+                    .equals(other.flAudioOrder, flAudioOrder)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(mediaItemIndex) ^
-      const DeepCollectionEquality().hash(flAudioOrder) ^
-      const DeepCollectionEquality().hash(flAudioitems);
+      const DeepCollectionEquality().hash(mediaItems) ^
+      const DeepCollectionEquality().hash(flAudioOrder);
 
   @override
   _$InitFlAudioToIsolatePortCopyWith<_InitFlAudioToIsolatePort> get copyWith =>
@@ -181,10 +203,13 @@ class _$_InitFlAudioToIsolatePort implements _InitFlAudioToIsolatePort {
 
 abstract class _InitFlAudioToIsolatePort implements InitFlAudioToIsolatePort {
   const factory _InitFlAudioToIsolatePort(
-          {@required int mediaItemIndex,
-          @required Map<String, dynamic> flAudioOrder,
-          @required List<Map<String, dynamic>> flAudioitems}) =
-      _$_InitFlAudioToIsolatePort;
+      {int mediaItemIndex,
+      @required
+      @JsonKey(toJson: _toMI, fromJson: _fromMI)
+          List<MediaItem> mediaItems,
+      @required
+      @JsonKey(toJson: _toFA, fromJson: _fromFA)
+          FlAudioOrder flAudioOrder}) = _$_InitFlAudioToIsolatePort;
 
   factory _InitFlAudioToIsolatePort.fromJson(Map<String, dynamic> json) =
       _$_InitFlAudioToIsolatePort.fromJson;
@@ -192,9 +217,11 @@ abstract class _InitFlAudioToIsolatePort implements InitFlAudioToIsolatePort {
   @override
   int get mediaItemIndex;
   @override
-  Map<String, dynamic> get flAudioOrder;
+  @JsonKey(toJson: _toMI, fromJson: _fromMI)
+  List<MediaItem> get mediaItems;
   @override
-  List<Map<String, dynamic>> get flAudioitems;
+  @JsonKey(toJson: _toFA, fromJson: _fromFA)
+  FlAudioOrder get flAudioOrder;
   @override
   _$InitFlAudioToIsolatePortCopyWith<_InitFlAudioToIsolatePort> get copyWith;
 }

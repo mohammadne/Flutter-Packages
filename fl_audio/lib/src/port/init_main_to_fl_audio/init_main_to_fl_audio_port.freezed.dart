@@ -17,7 +17,7 @@ class _$InitMainToFlAudioPortTearOff {
   const _$InitMainToFlAudioPortTearOff();
 
   _InitMainToFlAudioPort call(
-      {@required int flAudioItemIndex,
+      {int flAudioItemIndex,
       @required FlAudioOrder flAudioOrder,
       @required List<FlAudioItem> flAudioitems}) {
     return _InitMainToFlAudioPort(
@@ -138,11 +138,10 @@ class __$InitMainToFlAudioPortCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_InitMainToFlAudioPort implements _InitMainToFlAudioPort {
   const _$_InitMainToFlAudioPort(
-      {@required this.flAudioItemIndex,
+      {this.flAudioItemIndex,
       @required this.flAudioOrder,
       @required this.flAudioitems})
-      : assert(flAudioItemIndex != null),
-        assert(flAudioOrder != null),
+      : assert(flAudioOrder != null),
         assert(flAudioitems != null);
 
   factory _$_InitMainToFlAudioPort.fromJson(Map<String, dynamic> json) =>
@@ -195,7 +194,7 @@ class _$_InitMainToFlAudioPort implements _InitMainToFlAudioPort {
 
 abstract class _InitMainToFlAudioPort implements InitMainToFlAudioPort {
   const factory _InitMainToFlAudioPort(
-      {@required int flAudioItemIndex,
+      {int flAudioItemIndex,
       @required FlAudioOrder flAudioOrder,
       @required List<FlAudioItem> flAudioitems}) = _$_InitMainToFlAudioPort;
 

@@ -58,15 +58,13 @@ abstract class FlAudio {
       );
 
   static Future<void> transmitInitMainToFlAudioPort(
-          InitMainToFlAudioPort initMainToFlAudioPort) =>
+          InitMainToFlAudioPort port) =>
       AudioService.customAction(
         'initial',
         InitFlAudioToIsolatePort(
-          mediaItemIndex: initMainToFlAudioPort.flAudioItemIndex,
-          flAudioOrder: initMainToFlAudioPort.flAudioOrder.toJson(),
-          flAudioitems: initMainToFlAudioPort.flAudioitems
-              .map((flAudioItem) => _mediaItem(flAudioItem).toJson())
-              .toList(),
+          mediaItemIndex: port.flAudioItemIndex,
+          flAudioOrder: port.flAudioOrder,
+          mediaItems: port.flAudioitems.map(_mediaItem).toList(),
         ).toJson(),
       );
 

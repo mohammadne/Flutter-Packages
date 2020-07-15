@@ -44,13 +44,15 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   @override
   Future onCustomAction(name, arguments) async {
     final args = new Map<String, dynamic>.from(arguments);
+    print(args);
+
     if (name == 'initial') {
       final port = InitFlAudioToIsolatePort.fromJson(args);
 
       /// initialization
       _mediaItemIndex = port.mediaItemIndex;
-      _mediaItems = port.flAudioitems.map((e) => MediaItem.fromJson(e));
-      _flAudioOrder = FlAudioOrder.fromJson(port.flAudioOrder);
+      _mediaItems = port.mediaItems;
+      _flAudioOrder = port.flAudioOrder;
     } else if (name == 'normal') {}
   }
 

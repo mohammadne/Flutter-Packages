@@ -7,7 +7,7 @@ part 'init_main_to_fl_audio_port.g.dart';
 @freezed
 abstract class InitMainToFlAudioPort with _$InitMainToFlAudioPort {
   const factory InitMainToFlAudioPort({
-    @required int flAudioItemIndex,
+    int flAudioItemIndex,
     @required FlAudioOrder flAudioOrder,
     @required List<FlAudioItem> flAudioitems,
   }) = _InitMainToFlAudioPort;
