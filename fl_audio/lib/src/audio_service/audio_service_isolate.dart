@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:fl_audio/fl_audio.dart';
+import 'package:fl_audio/src/port/init_fl_audio_to_isolate/init_fl_audio_to_isolate_port.dart';
 import 'package:flutter/foundation.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:audio_service/audio_service.dart';
@@ -40,37 +42,26 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   //     AudioServiceBackground.sendCustomEvent(audioPortToMain);
 
   @override
-  Future onCustomAction(_, arguments) async {}
+  Future onCustomAction(name, arguments) async {
+    final args = new Map<String, dynamic>.from(arguments);
+    if (name == 'initial') {
+      final port = InitFlAudioToIsolatePort.fromJson(args);
+
+      /// initialization
+      _mediaItemIndex = port.mediaItemIndex;
+      _mediaItems = port.flAudioitems.map((e) => MediaItem.fromJson(e));
+      _flAudioOrder = FlAudioOrder.fromJson(port.flAudioOrder);
+    } else if (name == 'normal') {}
+  }
 
   @override
   Future<void> onStart(Map<String, dynamic> params) async {
     /// Initialization
     _player = JustAudio();
-    final pos = await _hiveInitial();
 
     /// Subscriptions
     _positionSubscriber();
     _audioStateSubscriber();
-    // _transmiteAudioEventToMain();
-  }
-
-  Future<int> _hiveInitial() async {
-    /// Initializing application dir
-    final appDocDir = await path_provider.getApplicationDocumentsDirectory();
-
-    /// Hive initialization and registrations
-    Hive.init(appDocDir.path);
-
-    /// AudioItemOrder
-    final flAudioOrderBox = await Hive.openBox<Map<String, dynamic>>(
-        '${_hivePrefix}_fl_audio_order');
-    final res = flAudioOrderBox.get(0);
-    _flAudioOrder =
-        res == null ? FlAudioOrder.order() : FlAudioOrder.fromJson(res);
-
-    /// Position
-    final initPositionBox = await Hive.openBox<int>('${_hivePrefix}_position');
-    return initPositionBox.get(0) ?? 0;
   }
 
   Stream<void> _positionSubscriber() {

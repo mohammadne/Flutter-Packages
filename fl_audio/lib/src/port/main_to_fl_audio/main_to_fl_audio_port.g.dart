@@ -6,9 +6,8 @@ part of 'main_to_fl_audio_port.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_InitMainToFlAudioPort _$_$_InitMainToFlAudioPortFromJson(
-    Map<String, dynamic> json) {
-  return _$_InitMainToFlAudioPort(
+_$_MainToFlAudioPort _$_$_MainToFlAudioPortFromJson(Map<String, dynamic> json) {
+  return _$_MainToFlAudioPort(
     id: json['id'] as String,
     album: json['album'] as String,
     artist: json['artist'] as String,
@@ -20,8 +19,8 @@ _$_InitMainToFlAudioPort _$_$_InitMainToFlAudioPortFromJson(
   );
 }
 
-Map<String, dynamic> _$_$_InitMainToFlAudioPortToJson(
-        _$_InitMainToFlAudioPort instance) =>
+Map<String, dynamic> _$_$_MainToFlAudioPortToJson(
+        _$_MainToFlAudioPort instance) =>
     <String, dynamic>{
       'id': instance.id,
       'album': instance.album,

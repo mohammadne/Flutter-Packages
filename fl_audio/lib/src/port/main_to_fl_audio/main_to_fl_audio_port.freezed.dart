@@ -1,29 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
 
-part of 'init_fl_audio_to_main_port.dart';
+part of 'main_to_fl_audio_port.dart';
 
 // **************************************************************************
 // FreezedGenerator
 // **************************************************************************
 
 T _$identity<T>(T value) => value;
-InitFlAudioToMainPort _$InitFlAudioToMainPortFromJson(
-    Map<String, dynamic> json) {
-  return _InitFlAudioToMainPortate.fromJson(json);
+MainToFlAudioPort _$MainToFlAudioPortFromJson(Map<String, dynamic> json) {
+  return _MainToFlAudioPort.fromJson(json);
 }
 
-class _$InitFlAudioToMainPortTearOff {
-  const _$InitFlAudioToMainPortTearOff();
+class _$MainToFlAudioPortTearOff {
+  const _$MainToFlAudioPortTearOff();
 
-  _InitFlAudioToMainPortate call(
+  _MainToFlAudioPort call(
       {@required String id,
       @required String album,
       @required String artist,
       @required String title,
       @required String artUri,
       @required Duration duration}) {
-    return _InitFlAudioToMainPortate(
+    return _MainToFlAudioPort(
       id: id,
       album: album,
       artist: artist,
@@ -35,9 +34,9 @@ class _$InitFlAudioToMainPortTearOff {
 }
 
 // ignore: unused_element
-const $InitFlAudioToMainPort = _$InitFlAudioToMainPortTearOff();
+const $MainToFlAudioPort = _$MainToFlAudioPortTearOff();
 
-mixin _$InitFlAudioToMainPort {
+mixin _$MainToFlAudioPort {
   String get id;
   String get album;
   String get artist;
@@ -46,13 +45,13 @@ mixin _$InitFlAudioToMainPort {
   Duration get duration;
 
   Map<String, dynamic> toJson();
-  $InitFlAudioToMainPortCopyWith<InitFlAudioToMainPort> get copyWith;
+  $MainToFlAudioPortCopyWith<MainToFlAudioPort> get copyWith;
 }
 
-abstract class $InitFlAudioToMainPortCopyWith<$Res> {
-  factory $InitFlAudioToMainPortCopyWith(InitFlAudioToMainPort value,
-          $Res Function(InitFlAudioToMainPort) then) =
-      _$InitFlAudioToMainPortCopyWithImpl<$Res>;
+abstract class $MainToFlAudioPortCopyWith<$Res> {
+  factory $MainToFlAudioPortCopyWith(
+          MainToFlAudioPort value, $Res Function(MainToFlAudioPort) then) =
+      _$MainToFlAudioPortCopyWithImpl<$Res>;
   $Res call(
       {String id,
       String album,
@@ -62,13 +61,13 @@ abstract class $InitFlAudioToMainPortCopyWith<$Res> {
       Duration duration});
 }
 
-class _$InitFlAudioToMainPortCopyWithImpl<$Res>
-    implements $InitFlAudioToMainPortCopyWith<$Res> {
-  _$InitFlAudioToMainPortCopyWithImpl(this._value, this._then);
+class _$MainToFlAudioPortCopyWithImpl<$Res>
+    implements $MainToFlAudioPortCopyWith<$Res> {
+  _$MainToFlAudioPortCopyWithImpl(this._value, this._then);
 
-  final InitFlAudioToMainPort _value;
+  final MainToFlAudioPort _value;
   // ignore: unused_field
-  final $Res Function(InitFlAudioToMainPort) _then;
+  final $Res Function(MainToFlAudioPort) _then;
 
   @override
   $Res call({
@@ -90,11 +89,11 @@ class _$InitFlAudioToMainPortCopyWithImpl<$Res>
   }
 }
 
-abstract class _$InitFlAudioToMainPortateCopyWith<$Res>
-    implements $InitFlAudioToMainPortCopyWith<$Res> {
-  factory _$InitFlAudioToMainPortateCopyWith(_InitFlAudioToMainPortate value,
-          $Res Function(_InitFlAudioToMainPortate) then) =
-      __$InitFlAudioToMainPortateCopyWithImpl<$Res>;
+abstract class _$MainToFlAudioPortCopyWith<$Res>
+    implements $MainToFlAudioPortCopyWith<$Res> {
+  factory _$MainToFlAudioPortCopyWith(
+          _MainToFlAudioPort value, $Res Function(_MainToFlAudioPort) then) =
+      __$MainToFlAudioPortCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -105,16 +104,15 @@ abstract class _$InitFlAudioToMainPortateCopyWith<$Res>
       Duration duration});
 }
 
-class __$InitFlAudioToMainPortateCopyWithImpl<$Res>
-    extends _$InitFlAudioToMainPortCopyWithImpl<$Res>
-    implements _$InitFlAudioToMainPortateCopyWith<$Res> {
-  __$InitFlAudioToMainPortateCopyWithImpl(_InitFlAudioToMainPortate _value,
-      $Res Function(_InitFlAudioToMainPortate) _then)
-      : super(_value, (v) => _then(v as _InitFlAudioToMainPortate));
+class __$MainToFlAudioPortCopyWithImpl<$Res>
+    extends _$MainToFlAudioPortCopyWithImpl<$Res>
+    implements _$MainToFlAudioPortCopyWith<$Res> {
+  __$MainToFlAudioPortCopyWithImpl(
+      _MainToFlAudioPort _value, $Res Function(_MainToFlAudioPort) _then)
+      : super(_value, (v) => _then(v as _MainToFlAudioPort));
 
   @override
-  _InitFlAudioToMainPortate get _value =>
-      super._value as _InitFlAudioToMainPortate;
+  _MainToFlAudioPort get _value => super._value as _MainToFlAudioPort;
 
   @override
   $Res call({
@@ -125,7 +123,7 @@ class __$InitFlAudioToMainPortateCopyWithImpl<$Res>
     Object artUri = freezed,
     Object duration = freezed,
   }) {
-    return _then(_InitFlAudioToMainPortate(
+    return _then(_MainToFlAudioPort(
       id: id == freezed ? _value.id : id as String,
       album: album == freezed ? _value.album : album as String,
       artist: artist == freezed ? _value.artist : artist as String,
@@ -137,8 +135,8 @@ class __$InitFlAudioToMainPortateCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-class _$_InitFlAudioToMainPortate implements _InitFlAudioToMainPortate {
-  const _$_InitFlAudioToMainPortate(
+class _$_MainToFlAudioPort implements _MainToFlAudioPort {
+  const _$_MainToFlAudioPort(
       {@required this.id,
       @required this.album,
       @required this.artist,
@@ -152,8 +150,8 @@ class _$_InitFlAudioToMainPortate implements _InitFlAudioToMainPortate {
         assert(artUri != null),
         assert(duration != null);
 
-  factory _$_InitFlAudioToMainPortate.fromJson(Map<String, dynamic> json) =>
-      _$_$_InitFlAudioToMainPortateFromJson(json);
+  factory _$_MainToFlAudioPort.fromJson(Map<String, dynamic> json) =>
+      _$_$_MainToFlAudioPortFromJson(json);
 
   @override
   final String id;
@@ -170,13 +168,13 @@ class _$_InitFlAudioToMainPortate implements _InitFlAudioToMainPortate {
 
   @override
   String toString() {
-    return 'InitFlAudioToMainPort(id: $id, album: $album, artist: $artist, title: $title, artUri: $artUri, duration: $duration)';
+    return 'MainToFlAudioPort(id: $id, album: $album, artist: $artist, title: $title, artUri: $artUri, duration: $duration)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _InitFlAudioToMainPortate &&
+        (other is _MainToFlAudioPort &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.album, album) ||
@@ -203,27 +201,26 @@ class _$_InitFlAudioToMainPortate implements _InitFlAudioToMainPortate {
       const DeepCollectionEquality().hash(duration);
 
   @override
-  _$InitFlAudioToMainPortateCopyWith<_InitFlAudioToMainPortate> get copyWith =>
-      __$InitFlAudioToMainPortateCopyWithImpl<_InitFlAudioToMainPortate>(
-          this, _$identity);
+  _$MainToFlAudioPortCopyWith<_MainToFlAudioPort> get copyWith =>
+      __$MainToFlAudioPortCopyWithImpl<_MainToFlAudioPort>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$_InitFlAudioToMainPortateToJson(this);
+    return _$_$_MainToFlAudioPortToJson(this);
   }
 }
 
-abstract class _InitFlAudioToMainPortate implements InitFlAudioToMainPort {
-  const factory _InitFlAudioToMainPortate(
+abstract class _MainToFlAudioPort implements MainToFlAudioPort {
+  const factory _MainToFlAudioPort(
       {@required String id,
       @required String album,
       @required String artist,
       @required String title,
       @required String artUri,
-      @required Duration duration}) = _$_InitFlAudioToMainPortate;
+      @required Duration duration}) = _$_MainToFlAudioPort;
 
-  factory _InitFlAudioToMainPortate.fromJson(Map<String, dynamic> json) =
-      _$_InitFlAudioToMainPortate.fromJson;
+  factory _MainToFlAudioPort.fromJson(Map<String, dynamic> json) =
+      _$_MainToFlAudioPort.fromJson;
 
   @override
   String get id;
@@ -238,5 +235,5 @@ abstract class _InitFlAudioToMainPortate implements InitFlAudioToMainPort {
   @override
   Duration get duration;
   @override
-  _$InitFlAudioToMainPortateCopyWith<_InitFlAudioToMainPortate> get copyWith;
+  _$MainToFlAudioPortCopyWith<_MainToFlAudioPort> get copyWith;
 }

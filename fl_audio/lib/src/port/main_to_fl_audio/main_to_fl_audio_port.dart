@@ -12,7 +12,7 @@ abstract class MainToFlAudioPort with _$MainToFlAudioPort {
     @required String title,
     @required String artUri,
     @required Duration duration,
-  }) = _InitMainToFlAudioPort;
+  }) = _MainToFlAudioPort;
 
   factory MainToFlAudioPort.fromJson(Map<String, dynamic> json) =>
       _$MainToFlAudioPortFromJson(json);

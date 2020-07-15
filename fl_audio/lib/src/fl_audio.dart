@@ -1,10 +1,14 @@
 import 'package:audio_service/audio_service.dart';
+import 'package:fl_audio/src/port/init_fl_audio_to_isolate/init_fl_audio_to_isolate_port.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'audio_service/audio_service_isolate.dart';
 import 'fl_audio_models/item/fl_audio_item.dart';
 import 'fl_audio_models/state/fl_audio_processing_state/fl_audio_processing_state.dart';
 import 'fl_audio_models/state/fl_audio_state/fl_audio_state.dart';
+import 'port/fl_audio_to_main/fl_audio_to_main_port.dart';
+import 'port/init_main_to_fl_audio/init_main_to_fl_audio_port.dart';
+import 'port/main_to_fl_audio/main_to_fl_audio_port.dart';
 
 // flutter pub pub run build_runner watch --delete-conflicting-outputs
 // flutter packages pub run build_runner build
@@ -48,14 +52,41 @@ abstract class FlAudio {
   static Future<void> seek(Duration position) => AudioService.seekTo(position);
   static Future<void> setSpeed(double speed) => AudioService.setSpeed(speed);
 
+  static Future<void> updateQueue(List<FlAudioItem> items) =>
+      AudioService.updateQueue(
+        items.map((item) => _mediaItem(item)).toList(),
+      );
+
+  static Future<void> transmitInitMainToFlAudioPort(
+          InitMainToFlAudioPort initMainToFlAudioPort) =>
+      AudioService.customAction(
+        'initial',
+        InitFlAudioToIsolatePort(
+          mediaItemIndex: initMainToFlAudioPort.flAudioItemIndex,
+          flAudioOrder: initMainToFlAudioPort.flAudioOrder.toJson(),
+          flAudioitems: initMainToFlAudioPort.flAudioitems
+              .map((flAudioItem) => _mediaItem(flAudioItem).toJson())
+              .toList(),
+        ).toJson(),
+      );
+
+  static Future<void> transmitMainToFlAudioPort(
+          MainToFlAudioPort mainToFlAudioPort) =>
+      AudioService.customAction(
+        'normal',
+        mainToFlAudioPort.toJson(),
+      );
+
   // Streams
   static BehaviorSubject<bool> isStarted = BehaviorSubject.seeded(false);
 
-  static Stream<FlAudioState> get playerServiceStream =>
-      AudioService.playbackStateStream.map(_flAudioState);
+  static Stream<FlAudioToMainPort> get recieverAudioToMainPort =>
+      Stream.castFrom<dynamic, FlAudioToMainPort>(
+        AudioService.customEventStream,
+      );
 
-  // static Stream<AudioPortToMain> get isolateEventStream =>
-  //     Stream.castFrom<dynamic, AudioPortToMain>(AudioService.customEventStream);
+  static Stream<FlAudioState> get flAudioStateStream =>
+      AudioService.playbackStateStream.map(_flAudioState);
 
   static Stream<FlAudioItem> get flAudioItemStream =>
       AudioService.currentMediaItemStream.map(_flAudioItem);
@@ -63,20 +94,6 @@ abstract class FlAudio {
   static Stream<List<FlAudioItem>> get flAudioItemsStream =>
       AudioService.queueStream
           .map((mediaItems) => mediaItems.map(_flAudioItem).toList());
-
-  static Stream<bool> get isFirstAudioItemStream =>
-      Rx.combineLatest2<List<FlAudioItem>, FlAudioItem, bool>(
-        flAudioItemsStream,
-        flAudioItemStream,
-        (items, item) => item == items.first,
-      );
-
-  static Stream<bool> get isLastAudioItemStream =>
-      Rx.combineLatest2<List<FlAudioItem>, FlAudioItem, bool>(
-        flAudioItemsStream,
-        flAudioItemStream,
-        (items, item) => item == items.last,
-      );
 
   // Utils
   static FlAudioState _flAudioState(PlaybackState playbackState) =>

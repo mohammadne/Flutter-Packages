@@ -1,14 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'init_fl_audio_to_main_port.dart';
+part of 'isolate_to_fl_audio_port.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_InitFlAudioToMainPortate _$_$_InitFlAudioToMainPortateFromJson(
+_$_IsolateToFlAudioPort _$_$_IsolateToFlAudioPortFromJson(
     Map<String, dynamic> json) {
-  return _$_InitFlAudioToMainPortate(
+  return _$_IsolateToFlAudioPort(
     id: json['id'] as String,
     album: json['album'] as String,
     artist: json['artist'] as String,
@@ -20,8 +20,8 @@ _$_InitFlAudioToMainPortate _$_$_InitFlAudioToMainPortateFromJson(
   );
 }
 
-Map<String, dynamic> _$_$_InitFlAudioToMainPortateToJson(
-        _$_InitFlAudioToMainPortate instance) =>
+Map<String, dynamic> _$_$_IsolateToFlAudioPortToJson(
+        _$_IsolateToFlAudioPort instance) =>
     <String, dynamic>{
       'id': instance.id,
       'album': instance.album,

@@ -9,24 +9,21 @@ part of 'init_main_to_fl_audio_port.dart';
 _$_InitMainToFlAudioPort _$_$_InitMainToFlAudioPortFromJson(
     Map<String, dynamic> json) {
   return _$_InitMainToFlAudioPort(
-    id: json['id'] as String,
-    album: json['album'] as String,
-    artist: json['artist'] as String,
-    title: json['title'] as String,
-    artUri: json['artUri'] as String,
-    duration: json['duration'] == null
+    flAudioItemIndex: json['flAudioItemIndex'] as int,
+    flAudioOrder: json['flAudioOrder'] == null
         ? null
-        : Duration(microseconds: json['duration'] as int),
+        : FlAudioOrder.fromJson(json['flAudioOrder'] as Map<String, dynamic>),
+    flAudioitems: (json['flAudioitems'] as List)
+        ?.map((e) =>
+            e == null ? null : FlAudioItem.fromJson(e as Map<String, dynamic>))
+        ?.toList(),
   );
 }
 
 Map<String, dynamic> _$_$_InitMainToFlAudioPortToJson(
         _$_InitMainToFlAudioPort instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'album': instance.album,
-      'artist': instance.artist,
-      'title': instance.title,
-      'artUri': instance.artUri,
-      'duration': instance.duration?.inMicroseconds,
+      'flAudioItemIndex': instance.flAudioItemIndex,
+      'flAudioOrder': instance.flAudioOrder,
+      'flAudioitems': instance.flAudioitems,
     };
