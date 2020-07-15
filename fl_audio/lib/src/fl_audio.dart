@@ -1,14 +1,15 @@
 import 'package:audio_service/audio_service.dart';
-import 'package:fl_audio/src/port/init_fl_audio_to_isolate/init_fl_audio_to_isolate_port.dart';
 import 'package:rxdart/rxdart.dart';
 
-import 'audio_service/audio_service_isolate.dart';
-import 'fl_audio_models/item/fl_audio_item.dart';
 import 'fl_audio_models/state/fl_audio_processing_state/fl_audio_processing_state.dart';
+import 'port/fl_audio_to_isolate/fl_audio_to_isolate_port.dart';
+import 'port/init_fl_audio_to_isolate/init_fl_audio_to_isolate_port.dart';
+import 'port/init_main_to_fl_audio/init_main_to_fl_audio_port.dart';
 import 'fl_audio_models/state/fl_audio_state/fl_audio_state.dart';
 import 'port/fl_audio_to_main/fl_audio_to_main_port.dart';
-import 'port/init_main_to_fl_audio/init_main_to_fl_audio_port.dart';
 import 'port/main_to_fl_audio/main_to_fl_audio_port.dart';
+import 'audio_service/audio_service_isolate.dart';
+import 'fl_audio_models/item/fl_audio_item.dart';
 
 // flutter pub pub run build_runner watch --delete-conflicting-outputs
 // flutter packages pub run build_runner build
@@ -38,7 +39,7 @@ abstract class FlAudio {
     await AudioService.seekTo(position);
   }
 
-  static Future<void> playAudioItem(String id) =>
+  static Future<void> playFlAudioItem(String id) =>
       AudioService.playFromMediaId(id);
 
   static Future<void> pause() => AudioService.pause();
@@ -57,6 +58,12 @@ abstract class FlAudio {
         items.map((item) => _mediaItem(item)).toList(),
       );
 
+  static Future<void> addFlAudioItem(FlAudioItem item) =>
+      AudioService.addQueueItem(_mediaItem(item));
+
+  static Future<void> insertFlAudioItemAt(FlAudioItem item, int index) =>
+      AudioService.addQueueItemAt(_mediaItem(item), index);
+
   static Future<void> transmitInitMainToFlAudioPort(
           InitMainToFlAudioPort port) =>
       AudioService.customAction(
@@ -68,11 +75,12 @@ abstract class FlAudio {
         ).toJson(),
       );
 
-  static Future<void> transmitMainToFlAudioPort(
-          MainToFlAudioPort mainToFlAudioPort) =>
+  static Future<void> transmitMainToFlAudioPort(MainToFlAudioPort port) =>
       AudioService.customAction(
         'normal',
-        mainToFlAudioPort.toJson(),
+        FlAudioToIsolatePort(
+          flAudioOrder: port.flAudioOrder,
+        ).toJson(),
       );
 
   // Streams

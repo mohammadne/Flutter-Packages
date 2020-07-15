@@ -1,17 +1,14 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../fl_audio_models/order/fl_audio_order.dart';
+
 part 'main_to_fl_audio_port.freezed.dart';
 part 'main_to_fl_audio_port.g.dart';
 
 @freezed
 abstract class MainToFlAudioPort with _$MainToFlAudioPort {
   const factory MainToFlAudioPort({
-    @required String id,
-    @required String album,
-    @required String artist,
-    @required String title,
-    @required String artUri,
-    @required Duration duration,
+    @required FlAudioOrder flAudioOrder,
   }) = _MainToFlAudioPort;
 
   factory MainToFlAudioPort.fromJson(Map<String, dynamic> json) =>

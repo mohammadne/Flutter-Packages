@@ -9,12 +9,12 @@ part of 'fl_audio_to_isolate_port.dart';
 _$_FlAudioToIsolatePort _$_$_FlAudioToIsolatePortFromJson(
     Map<String, dynamic> json) {
   return _$_FlAudioToIsolatePort(
-    id: json['id'] as String,
+    flAudioOrder: _fromFA(json['flAudioOrder']),
   );
 }
 
 Map<String, dynamic> _$_$_FlAudioToIsolatePortToJson(
         _$_FlAudioToIsolatePort instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'flAudioOrder': _toFA(instance.flAudioOrder),
     };

@@ -8,24 +8,14 @@ part of 'main_to_fl_audio_port.dart';
 
 _$_MainToFlAudioPort _$_$_MainToFlAudioPortFromJson(Map<String, dynamic> json) {
   return _$_MainToFlAudioPort(
-    id: json['id'] as String,
-    album: json['album'] as String,
-    artist: json['artist'] as String,
-    title: json['title'] as String,
-    artUri: json['artUri'] as String,
-    duration: json['duration'] == null
+    flAudioOrder: json['flAudioOrder'] == null
         ? null
-        : Duration(microseconds: json['duration'] as int),
+        : FlAudioOrder.fromJson(json['flAudioOrder'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$_$_MainToFlAudioPortToJson(
         _$_MainToFlAudioPort instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'album': instance.album,
-      'artist': instance.artist,
-      'title': instance.title,
-      'artUri': instance.artUri,
-      'duration': instance.duration?.inMicroseconds,
+      'flAudioOrder': instance.flAudioOrder,
     };

@@ -6,8 +6,8 @@ part of 'fl_audio_state.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$Fl_PlayerState _$_$Fl_PlayerStateFromJson(Map<String, dynamic> json) {
-  return _$Fl_PlayerState(
+_$_FlAudioState _$_$_FlAudioStateFromJson(Map<String, dynamic> json) {
+  return _$_FlAudioState(
     processingState: json['processingState'] == null
         ? null
         : FlAudioProcessingState.fromJson(
@@ -26,7 +26,7 @@ _$Fl_PlayerState _$_$Fl_PlayerStateFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$Fl_PlayerStateToJson(_$Fl_PlayerState instance) =>
+Map<String, dynamic> _$_$_FlAudioStateToJson(_$_FlAudioState instance) =>
     <String, dynamic>{
       'processingState': instance.processingState,
       'playing': instance.playing,

@@ -2,8 +2,9 @@ import 'package:fl_audio/fl_audio.dart';
 import 'package:hive/hive.dart';
 import 'dart:async';
 
-import 'package:example/audio/audio_service_base.dart';
 import 'package:rxdart/rxdart.dart';
+
+import 'audio_service_base.dart';
 
 class AudioService implements AudioServiceBase {
   bool _isServiceInitialized = false;
@@ -76,10 +77,40 @@ class AudioService implements AudioServiceBase {
   }
 
   /// Methods
-  static void start() => FlAudio.start();
+  static Future<bool> start() => FlAudio.start();
+
+  static Future<void> play() => FlAudio.play();
+  static Future<void> playFlAudioItem(String id) => FlAudio.playFlAudioItem(id);
+  static Future<void> playWithInitialSeek(Duration duration) =>
+      FlAudio.playWithInitialSeek(duration);
+
+  static Future<void> skipToNext() => FlAudio.skipToNext();
+  static Future<void> skipToPrevious() => FlAudio.skipToPrevious();
+
+  static Future<void> seek(Duration duration) => FlAudio.seek(duration);
+  static Future<void> setSpeed(double speed) => FlAudio.setSpeed(speed);
+
+  static Future<void> pause() => FlAudio.pause();
+
+  static Future<void> setFlAudioItems(List<FlAudioItem> items) =>
+      FlAudio.updateQueue(items);
+
+  static Future<void> addFlAudioItem(FlAudioItem item) =>
+      FlAudio.addFlAudioItem(item);
+
+  static Future<void> insertFlAudioItemAt(FlAudioItem item, int index) =>
+      FlAudio.insertFlAudioItemAt(item, index);
 
   static void stop() {
+    FlAudio.stop();
     flAudioOrderSubject.close();
+  }
+
+  static void changeFlAudioOrder(FlAudioOrder order) {
+    if (flAudioOrderSubject.value != order)
+      FlAudio.transmitMainToFlAudioPort(
+        MainToFlAudioPort(flAudioOrder: order),
+      );
   }
 
   /// Streams
@@ -101,4 +132,12 @@ class AudioService implements AudioServiceBase {
         FlAudio.flAudioItemStream,
         (items, item) => item == items.last,
       );
+
+  static Stream<FlAudioState> get flAudioStateStream =>
+      FlAudio.flAudioStateStream;
+
+  static Stream<FlAudioItem> get flAudioItemStream => FlAudio.flAudioItemStream;
+
+  static Stream<List<FlAudioItem>> get flAudioItemsStream =>
+      FlAudio.flAudioItemsStream;
 }

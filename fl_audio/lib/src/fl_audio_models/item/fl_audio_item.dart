@@ -12,7 +12,7 @@ abstract class FlAudioItem with _$FlAudioItem {
     @required String title,
     @required String artUri,
     @required Duration duration,
-  }) = Fl_PlayerState;
+  }) = _FlAudioItem;
 
   factory FlAudioItem.fromJson(Map<String, dynamic> json) =>
       _$FlAudioItemFromJson(json);

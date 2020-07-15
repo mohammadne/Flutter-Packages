@@ -9,20 +9,20 @@ part of 'fl_audio_item.dart';
 
 T _$identity<T>(T value) => value;
 FlAudioItem _$FlAudioItemFromJson(Map<String, dynamic> json) {
-  return Fl_PlayerState.fromJson(json);
+  return _FlAudioItem.fromJson(json);
 }
 
 class _$FlAudioItemTearOff {
   const _$FlAudioItemTearOff();
 
-  Fl_PlayerState call(
+  _FlAudioItem call(
       {@required String id,
       @required String album,
       @required String artist,
       @required String title,
       @required String artUri,
       @required Duration duration}) {
-    return Fl_PlayerState(
+    return _FlAudioItem(
       id: id,
       album: album,
       artist: artist,
@@ -88,11 +88,11 @@ class _$FlAudioItemCopyWithImpl<$Res> implements $FlAudioItemCopyWith<$Res> {
   }
 }
 
-abstract class $Fl_PlayerStateCopyWith<$Res>
+abstract class _$FlAudioItemCopyWith<$Res>
     implements $FlAudioItemCopyWith<$Res> {
-  factory $Fl_PlayerStateCopyWith(
-          Fl_PlayerState value, $Res Function(Fl_PlayerState) then) =
-      _$Fl_PlayerStateCopyWithImpl<$Res>;
+  factory _$FlAudioItemCopyWith(
+          _FlAudioItem value, $Res Function(_FlAudioItem) then) =
+      __$FlAudioItemCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -103,14 +103,14 @@ abstract class $Fl_PlayerStateCopyWith<$Res>
       Duration duration});
 }
 
-class _$Fl_PlayerStateCopyWithImpl<$Res> extends _$FlAudioItemCopyWithImpl<$Res>
-    implements $Fl_PlayerStateCopyWith<$Res> {
-  _$Fl_PlayerStateCopyWithImpl(
-      Fl_PlayerState _value, $Res Function(Fl_PlayerState) _then)
-      : super(_value, (v) => _then(v as Fl_PlayerState));
+class __$FlAudioItemCopyWithImpl<$Res> extends _$FlAudioItemCopyWithImpl<$Res>
+    implements _$FlAudioItemCopyWith<$Res> {
+  __$FlAudioItemCopyWithImpl(
+      _FlAudioItem _value, $Res Function(_FlAudioItem) _then)
+      : super(_value, (v) => _then(v as _FlAudioItem));
 
   @override
-  Fl_PlayerState get _value => super._value as Fl_PlayerState;
+  _FlAudioItem get _value => super._value as _FlAudioItem;
 
   @override
   $Res call({
@@ -121,7 +121,7 @@ class _$Fl_PlayerStateCopyWithImpl<$Res> extends _$FlAudioItemCopyWithImpl<$Res>
     Object artUri = freezed,
     Object duration = freezed,
   }) {
-    return _then(Fl_PlayerState(
+    return _then(_FlAudioItem(
       id: id == freezed ? _value.id : id as String,
       album: album == freezed ? _value.album : album as String,
       artist: artist == freezed ? _value.artist : artist as String,
@@ -133,8 +133,8 @@ class _$Fl_PlayerStateCopyWithImpl<$Res> extends _$FlAudioItemCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-class _$Fl_PlayerState implements Fl_PlayerState {
-  const _$Fl_PlayerState(
+class _$_FlAudioItem implements _FlAudioItem {
+  const _$_FlAudioItem(
       {@required this.id,
       @required this.album,
       @required this.artist,
@@ -148,8 +148,8 @@ class _$Fl_PlayerState implements Fl_PlayerState {
         assert(artUri != null),
         assert(duration != null);
 
-  factory _$Fl_PlayerState.fromJson(Map<String, dynamic> json) =>
-      _$_$Fl_PlayerStateFromJson(json);
+  factory _$_FlAudioItem.fromJson(Map<String, dynamic> json) =>
+      _$_$_FlAudioItemFromJson(json);
 
   @override
   final String id;
@@ -172,7 +172,7 @@ class _$Fl_PlayerState implements Fl_PlayerState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is Fl_PlayerState &&
+        (other is _FlAudioItem &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.album, album) ||
@@ -199,26 +199,26 @@ class _$Fl_PlayerState implements Fl_PlayerState {
       const DeepCollectionEquality().hash(duration);
 
   @override
-  $Fl_PlayerStateCopyWith<Fl_PlayerState> get copyWith =>
-      _$Fl_PlayerStateCopyWithImpl<Fl_PlayerState>(this, _$identity);
+  _$FlAudioItemCopyWith<_FlAudioItem> get copyWith =>
+      __$FlAudioItemCopyWithImpl<_FlAudioItem>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$Fl_PlayerStateToJson(this);
+    return _$_$_FlAudioItemToJson(this);
   }
 }
 
-abstract class Fl_PlayerState implements FlAudioItem {
-  const factory Fl_PlayerState(
+abstract class _FlAudioItem implements FlAudioItem {
+  const factory _FlAudioItem(
       {@required String id,
       @required String album,
       @required String artist,
       @required String title,
       @required String artUri,
-      @required Duration duration}) = _$Fl_PlayerState;
+      @required Duration duration}) = _$_FlAudioItem;
 
-  factory Fl_PlayerState.fromJson(Map<String, dynamic> json) =
-      _$Fl_PlayerState.fromJson;
+  factory _FlAudioItem.fromJson(Map<String, dynamic> json) =
+      _$_FlAudioItem.fromJson;
 
   @override
   String get id;
@@ -233,5 +233,5 @@ abstract class Fl_PlayerState implements FlAudioItem {
   @override
   Duration get duration;
   @override
-  $Fl_PlayerStateCopyWith<Fl_PlayerState> get copyWith;
+  _$FlAudioItemCopyWith<_FlAudioItem> get copyWith;
 }

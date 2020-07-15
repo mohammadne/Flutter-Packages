@@ -15,9 +15,12 @@ FlAudioToIsolatePort _$FlAudioToIsolatePortFromJson(Map<String, dynamic> json) {
 class _$FlAudioToIsolatePortTearOff {
   const _$FlAudioToIsolatePortTearOff();
 
-  _FlAudioToIsolatePort call({@required String id}) {
+  _FlAudioToIsolatePort call(
+      {@required
+      @JsonKey(toJson: _toFA, fromJson: _fromFA)
+          FlAudioOrder flAudioOrder}) {
     return _FlAudioToIsolatePort(
-      id: id,
+      flAudioOrder: flAudioOrder,
     );
   }
 }
@@ -26,7 +29,8 @@ class _$FlAudioToIsolatePortTearOff {
 const $FlAudioToIsolatePort = _$FlAudioToIsolatePortTearOff();
 
 mixin _$FlAudioToIsolatePort {
-  String get id;
+  @JsonKey(toJson: _toFA, fromJson: _fromFA)
+  FlAudioOrder get flAudioOrder;
 
   Map<String, dynamic> toJson();
   $FlAudioToIsolatePortCopyWith<FlAudioToIsolatePort> get copyWith;
@@ -36,7 +40,10 @@ abstract class $FlAudioToIsolatePortCopyWith<$Res> {
   factory $FlAudioToIsolatePortCopyWith(FlAudioToIsolatePort value,
           $Res Function(FlAudioToIsolatePort) then) =
       _$FlAudioToIsolatePortCopyWithImpl<$Res>;
-  $Res call({String id});
+  $Res call(
+      {@JsonKey(toJson: _toFA, fromJson: _fromFA) FlAudioOrder flAudioOrder});
+
+  $FlAudioOrderCopyWith<$Res> get flAudioOrder;
 }
 
 class _$FlAudioToIsolatePortCopyWithImpl<$Res>
@@ -49,11 +56,23 @@ class _$FlAudioToIsolatePortCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object id = freezed,
+    Object flAudioOrder = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed ? _value.id : id as String,
+      flAudioOrder: flAudioOrder == freezed
+          ? _value.flAudioOrder
+          : flAudioOrder as FlAudioOrder,
     ));
+  }
+
+  @override
+  $FlAudioOrderCopyWith<$Res> get flAudioOrder {
+    if (_value.flAudioOrder == null) {
+      return null;
+    }
+    return $FlAudioOrderCopyWith<$Res>(_value.flAudioOrder, (value) {
+      return _then(_value.copyWith(flAudioOrder: value));
+    });
   }
 }
 
@@ -63,7 +82,11 @@ abstract class _$FlAudioToIsolatePortCopyWith<$Res>
           $Res Function(_FlAudioToIsolatePort) then) =
       __$FlAudioToIsolatePortCopyWithImpl<$Res>;
   @override
-  $Res call({String id});
+  $Res call(
+      {@JsonKey(toJson: _toFA, fromJson: _fromFA) FlAudioOrder flAudioOrder});
+
+  @override
+  $FlAudioOrderCopyWith<$Res> get flAudioOrder;
 }
 
 class __$FlAudioToIsolatePortCopyWithImpl<$Res>
@@ -78,40 +101,46 @@ class __$FlAudioToIsolatePortCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object id = freezed,
+    Object flAudioOrder = freezed,
   }) {
     return _then(_FlAudioToIsolatePort(
-      id: id == freezed ? _value.id : id as String,
+      flAudioOrder: flAudioOrder == freezed
+          ? _value.flAudioOrder
+          : flAudioOrder as FlAudioOrder,
     ));
   }
 }
 
 @JsonSerializable()
 class _$_FlAudioToIsolatePort implements _FlAudioToIsolatePort {
-  const _$_FlAudioToIsolatePort({@required this.id}) : assert(id != null);
+  const _$_FlAudioToIsolatePort(
+      {@required @JsonKey(toJson: _toFA, fromJson: _fromFA) this.flAudioOrder})
+      : assert(flAudioOrder != null);
 
   factory _$_FlAudioToIsolatePort.fromJson(Map<String, dynamic> json) =>
       _$_$_FlAudioToIsolatePortFromJson(json);
 
   @override
-  final String id;
+  @JsonKey(toJson: _toFA, fromJson: _fromFA)
+  final FlAudioOrder flAudioOrder;
 
   @override
   String toString() {
-    return 'FlAudioToIsolatePort(id: $id)';
+    return 'FlAudioToIsolatePort(flAudioOrder: $flAudioOrder)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _FlAudioToIsolatePort &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)));
+            (identical(other.flAudioOrder, flAudioOrder) ||
+                const DeepCollectionEquality()
+                    .equals(other.flAudioOrder, flAudioOrder)));
   }
 
   @override
   int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(id);
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(flAudioOrder);
 
   @override
   _$FlAudioToIsolatePortCopyWith<_FlAudioToIsolatePort> get copyWith =>
@@ -125,14 +154,17 @@ class _$_FlAudioToIsolatePort implements _FlAudioToIsolatePort {
 }
 
 abstract class _FlAudioToIsolatePort implements FlAudioToIsolatePort {
-  const factory _FlAudioToIsolatePort({@required String id}) =
-      _$_FlAudioToIsolatePort;
+  const factory _FlAudioToIsolatePort(
+      {@required
+      @JsonKey(toJson: _toFA, fromJson: _fromFA)
+          FlAudioOrder flAudioOrder}) = _$_FlAudioToIsolatePort;
 
   factory _FlAudioToIsolatePort.fromJson(Map<String, dynamic> json) =
       _$_FlAudioToIsolatePort.fromJson;
 
   @override
-  String get id;
+  @JsonKey(toJson: _toFA, fromJson: _fromFA)
+  FlAudioOrder get flAudioOrder;
   @override
   _$FlAudioToIsolatePortCopyWith<_FlAudioToIsolatePort> get copyWith;
 }

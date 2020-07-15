@@ -6,8 +6,8 @@ part of 'fl_audio_item.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$Fl_PlayerState _$_$Fl_PlayerStateFromJson(Map<String, dynamic> json) {
-  return _$Fl_PlayerState(
+_$_FlAudioItem _$_$_FlAudioItemFromJson(Map<String, dynamic> json) {
+  return _$_FlAudioItem(
     id: json['id'] as String,
     album: json['album'] as String,
     artist: json['artist'] as String,
@@ -19,7 +19,7 @@ _$Fl_PlayerState _$_$Fl_PlayerStateFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$_$Fl_PlayerStateToJson(_$Fl_PlayerState instance) =>
+Map<String, dynamic> _$_$_FlAudioItemToJson(_$_FlAudioItem instance) =>
     <String, dynamic>{
       'id': instance.id,
       'album': instance.album,

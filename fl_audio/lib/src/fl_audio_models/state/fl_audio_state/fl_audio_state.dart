@@ -14,7 +14,7 @@ abstract class FlAudioState with _$FlAudioState {
     @required Duration position,
     @required Duration updateTime,
     @required Duration bufferedPosition,
-  }) = Fl_PlayerState;
+  }) = _FlAudioState;
 
   factory FlAudioState.fromJson(Map<String, dynamic> json) =>
       _$FlAudioStateFromJson(json);

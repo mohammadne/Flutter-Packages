@@ -9,20 +9,20 @@ part of 'fl_audio_state.dart';
 
 T _$identity<T>(T value) => value;
 FlAudioState _$FlAudioStateFromJson(Map<String, dynamic> json) {
-  return Fl_PlayerState.fromJson(json);
+  return _FlAudioState.fromJson(json);
 }
 
 class _$FlAudioStateTearOff {
   const _$FlAudioStateTearOff();
 
-  Fl_PlayerState call(
+  _FlAudioState call(
       {@required FlAudioProcessingState processingState,
       @required bool playing,
       @required double speed,
       @required Duration position,
       @required Duration updateTime,
       @required Duration bufferedPosition}) {
-    return Fl_PlayerState(
+    return _FlAudioState(
       processingState: processingState,
       playing: playing,
       speed: speed,
@@ -106,11 +106,11 @@ class _$FlAudioStateCopyWithImpl<$Res> implements $FlAudioStateCopyWith<$Res> {
   }
 }
 
-abstract class $Fl_PlayerStateCopyWith<$Res>
+abstract class _$FlAudioStateCopyWith<$Res>
     implements $FlAudioStateCopyWith<$Res> {
-  factory $Fl_PlayerStateCopyWith(
-          Fl_PlayerState value, $Res Function(Fl_PlayerState) then) =
-      _$Fl_PlayerStateCopyWithImpl<$Res>;
+  factory _$FlAudioStateCopyWith(
+          _FlAudioState value, $Res Function(_FlAudioState) then) =
+      __$FlAudioStateCopyWithImpl<$Res>;
   @override
   $Res call(
       {FlAudioProcessingState processingState,
@@ -124,15 +124,14 @@ abstract class $Fl_PlayerStateCopyWith<$Res>
   $FlAudioProcessingStateCopyWith<$Res> get processingState;
 }
 
-class _$Fl_PlayerStateCopyWithImpl<$Res>
-    extends _$FlAudioStateCopyWithImpl<$Res>
-    implements $Fl_PlayerStateCopyWith<$Res> {
-  _$Fl_PlayerStateCopyWithImpl(
-      Fl_PlayerState _value, $Res Function(Fl_PlayerState) _then)
-      : super(_value, (v) => _then(v as Fl_PlayerState));
+class __$FlAudioStateCopyWithImpl<$Res> extends _$FlAudioStateCopyWithImpl<$Res>
+    implements _$FlAudioStateCopyWith<$Res> {
+  __$FlAudioStateCopyWithImpl(
+      _FlAudioState _value, $Res Function(_FlAudioState) _then)
+      : super(_value, (v) => _then(v as _FlAudioState));
 
   @override
-  Fl_PlayerState get _value => super._value as Fl_PlayerState;
+  _FlAudioState get _value => super._value as _FlAudioState;
 
   @override
   $Res call({
@@ -143,7 +142,7 @@ class _$Fl_PlayerStateCopyWithImpl<$Res>
     Object updateTime = freezed,
     Object bufferedPosition = freezed,
   }) {
-    return _then(Fl_PlayerState(
+    return _then(_FlAudioState(
       processingState: processingState == freezed
           ? _value.processingState
           : processingState as FlAudioProcessingState,
@@ -160,8 +159,8 @@ class _$Fl_PlayerStateCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-class _$Fl_PlayerState implements Fl_PlayerState {
-  const _$Fl_PlayerState(
+class _$_FlAudioState implements _FlAudioState {
+  const _$_FlAudioState(
       {@required this.processingState,
       @required this.playing,
       @required this.speed,
@@ -175,8 +174,8 @@ class _$Fl_PlayerState implements Fl_PlayerState {
         assert(updateTime != null),
         assert(bufferedPosition != null);
 
-  factory _$Fl_PlayerState.fromJson(Map<String, dynamic> json) =>
-      _$_$Fl_PlayerStateFromJson(json);
+  factory _$_FlAudioState.fromJson(Map<String, dynamic> json) =>
+      _$_$_FlAudioStateFromJson(json);
 
   @override
   final FlAudioProcessingState processingState;
@@ -199,7 +198,7 @@ class _$Fl_PlayerState implements Fl_PlayerState {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is Fl_PlayerState &&
+        (other is _FlAudioState &&
             (identical(other.processingState, processingState) ||
                 const DeepCollectionEquality()
                     .equals(other.processingState, processingState)) &&
@@ -230,26 +229,26 @@ class _$Fl_PlayerState implements Fl_PlayerState {
       const DeepCollectionEquality().hash(bufferedPosition);
 
   @override
-  $Fl_PlayerStateCopyWith<Fl_PlayerState> get copyWith =>
-      _$Fl_PlayerStateCopyWithImpl<Fl_PlayerState>(this, _$identity);
+  _$FlAudioStateCopyWith<_FlAudioState> get copyWith =>
+      __$FlAudioStateCopyWithImpl<_FlAudioState>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$_$Fl_PlayerStateToJson(this);
+    return _$_$_FlAudioStateToJson(this);
   }
 }
 
-abstract class Fl_PlayerState implements FlAudioState {
-  const factory Fl_PlayerState(
+abstract class _FlAudioState implements FlAudioState {
+  const factory _FlAudioState(
       {@required FlAudioProcessingState processingState,
       @required bool playing,
       @required double speed,
       @required Duration position,
       @required Duration updateTime,
-      @required Duration bufferedPosition}) = _$Fl_PlayerState;
+      @required Duration bufferedPosition}) = _$_FlAudioState;
 
-  factory Fl_PlayerState.fromJson(Map<String, dynamic> json) =
-      _$Fl_PlayerState.fromJson;
+  factory _FlAudioState.fromJson(Map<String, dynamic> json) =
+      _$_FlAudioState.fromJson;
 
   @override
   FlAudioProcessingState get processingState;
@@ -264,5 +263,5 @@ abstract class Fl_PlayerState implements FlAudioState {
   @override
   Duration get bufferedPosition;
   @override
-  $Fl_PlayerStateCopyWith<Fl_PlayerState> get copyWith;
+  _$FlAudioStateCopyWith<_FlAudioState> get copyWith;
 }

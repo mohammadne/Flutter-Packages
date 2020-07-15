@@ -1,25 +1,20 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:fl_audio/fl_audio.dart';
-import 'package:fl_audio/src/port/init_fl_audio_to_isolate/init_fl_audio_to_isolate_port.dart';
-import 'package:flutter/foundation.dart';
-import 'package:path_provider/path_provider.dart' as path_provider;
 import 'package:audio_service/audio_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
+import 'package:fl_audio/src/port/init_fl_audio_to_isolate/init_fl_audio_to_isolate_port.dart';
 import 'package:fl_audio/src/fl_audio_models/order/fl_audio_order.dart';
 import 'package:fl_audio/src/audio/models/state/audio_state.dart';
 import 'package:fl_audio/src/audio/audio_base.dart';
 import 'package:fl_audio/src/audio/just_audio.dart';
+import 'package:fl_audio/fl_audio.dart';
+
+import '../port/fl_audio_to_isolate/fl_audio_to_isolate_port.dart';
 
 class AudioServiceIsolate extends BackgroundAudioTask {
-  /// The prefix of hive items
-  final _hivePrefix = 'audio_service_isolate';
-
-  /// This duration specify in which interval should save position
-  Duration _positionInterval = Duration(seconds: 2);
-
   /// The Player instance
   AudioBase _player;
 
@@ -44,35 +39,24 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   @override
   Future onCustomAction(name, arguments) async {
     final args = new Map<String, dynamic>.from(arguments);
-    print(args);
-
     if (name == 'initial') {
       final port = InitFlAudioToIsolatePort.fromJson(args);
-
-      /// initialization
       _mediaItemIndex = port.mediaItemIndex;
       _mediaItems = port.mediaItems;
       _flAudioOrder = port.flAudioOrder;
-    } else if (name == 'normal') {}
+    } else if (name == 'normal') {
+      final port = FlAudioToIsolatePort.fromJson(args);
+      _flAudioOrder = port.flAudioOrder;
+    }
   }
 
   @override
   Future<void> onStart(Map<String, dynamic> params) async {
-    /// Initialization
     _player = JustAudio();
-
-    /// Subscriptions
-    _positionSubscriber();
     _audioStateSubscriber();
   }
 
-  Stream<void> _positionSubscriber() {
-    return Stream<void>.periodic(_positionInterval, (_) {
-      print('position is on $_player.position.inSeconds');
-      Hive.box('${_hivePrefix}_position').put(0, _player.position.inSeconds);
-    });
-  }
-
+  /// Subscriber for diffrent player States
   StreamSubscription<AudioState> _audioStateSubscriber() {
     return _player.playerStateStream.listen((state) {
       state.when(
