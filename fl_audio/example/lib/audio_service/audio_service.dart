@@ -55,6 +55,9 @@ class AudioService implements AudioServiceBase {
           order == null ? FlAudioOrder.order() : FlAudioOrder.fromJson(order),
         );
 
+        /// Seeding dragPositionSubject
+        dragPositionSubject = BehaviorSubject.seeded(null);
+
         /// Send this port to isolate for initialize necessary items
         FlAudio.transmitInitMainToFlAudioPort(
           InitMainToFlAudioPort(
@@ -92,7 +95,7 @@ class AudioService implements AudioServiceBase {
 
   static Future<void> pause() => FlAudio.pause();
 
-  static Future<void> setFlAudioItems(List<FlAudioItem> items) =>
+  static Future<void> updateFlAudioItems(List<FlAudioItem> items) =>
       FlAudio.updateQueue(items);
 
   static Future<void> addFlAudioItem(FlAudioItem item) =>
@@ -103,6 +106,7 @@ class AudioService implements AudioServiceBase {
 
   static void stop() {
     FlAudio.stop();
+    dragPositionSubject.close();
     flAudioOrderSubject.close();
   }
 
@@ -118,6 +122,9 @@ class AudioService implements AudioServiceBase {
   static Stream<bool> get isIsolateStarted => FlAudio.isStarted;
 
   static BehaviorSubject<FlAudioOrder> flAudioOrderSubject;
+
+  /// Tracks the position while the user drags the seek bar.
+  static BehaviorSubject<double> dragPositionSubject;
 
   static Stream<bool> get isFirstAudioItemStream =>
       Rx.combineLatest2<List<FlAudioItem>, FlAudioItem, bool>(

@@ -17,6 +17,8 @@ dependencies:
   hive: ^1.4.1+1
   hive_flutter: ^0.3.0+2
 
+  flutter_bloc: ^4.0.1
+
   path_provider: ^1.6.11
   
   fl_audio:
