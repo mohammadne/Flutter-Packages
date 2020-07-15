@@ -60,12 +60,13 @@ class AudioServiceIsolate extends BackgroundAudioTask {
 
     /// Hive initialization and registrations
     Hive.init(appDocDir.path);
-    Hive.registerAdapter<FlAudioOrder>(FlAudioOrderAdapter());
 
     /// AudioItemOrder
-    final flAudioOrderBox =
-        await Hive.openBox<FlAudioOrder>('${_hivePrefix}_fl_audio_order');
-    _flAudioOrder = flAudioOrderBox.get(0) ?? FlAudioOrder.order;
+    final flAudioOrderBox = await Hive.openBox<Map<String, dynamic>>(
+        '${_hivePrefix}_fl_audio_order');
+    final res = flAudioOrderBox.get(0);
+    _flAudioOrder =
+        res == null ? FlAudioOrder.order() : FlAudioOrder.fromJson(res);
 
     /// Position
     final initPositionBox = await Hive.openBox<int>('${_hivePrefix}_position');
@@ -112,30 +113,30 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   }
 
   void _handlePlayerCompletion() async {
-    switch (_flAudioOrder) {
-      case FlAudioOrder.order:
+    _flAudioOrder.when(
+      order: () {
         if (_isLastMediaItem) {
           onPause();
         } else {
           _skip(1);
         }
-        break;
-      case FlAudioOrder.repeatAll:
+      },
+      repeatAll: () {
         if (_isLastMediaItem) {
           onSkipToQueueItem(_mediaItems.first.id);
         } else {
           _skip(1);
         }
-        break;
-      case FlAudioOrder.repeatOne:
+      },
+      repeatOne: () async {
         await onStop();
         onPlay();
-        break;
-      case FlAudioOrder.shuffle:
+      },
+      shuffle: () {
         int random = Random().nextInt(_mediaItemsLength);
         onSkipToQueueItem(_mediaItems[random].id);
-        break;
-    }
+      },
+    );
   }
 
   Future<void> _setState({
@@ -210,34 +211,36 @@ class AudioServiceIsolate extends BackgroundAudioTask {
 
   @override
   void onSkipToNext() {
-    switch (_flAudioOrder) {
-      case FlAudioOrder.shuffle:
+    _flAudioOrder.maybeWhen(
+      shuffle: () {
         int random = Random().nextInt(_mediaItemsLength);
         onSkipToQueueItem(_mediaItems[random].id);
-        break;
-      default:
+      },
+      orElse: () {
         if (_isLastMediaItem) {
           onSkipToQueueItem(_mediaItems.first.id);
         } else {
           _skip(1);
         }
-    }
+      },
+    );
   }
 
   @override
   void onSkipToPrevious() {
-    switch (_flAudioOrder) {
-      case FlAudioOrder.shuffle:
+    _flAudioOrder.maybeWhen(
+      shuffle: () {
         int random = Random().nextInt(_mediaItemsLength);
         onSkipToQueueItem(_mediaItems[random].id);
-        break;
-      default:
+      },
+      orElse: () {
         if (_isFirstMediaItem) {
           onSkipToQueueItem(_mediaItems.last.id);
         } else {
           _skip(-1);
         }
-    }
+      },
+    );
   }
 
   @override

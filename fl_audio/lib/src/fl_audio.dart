@@ -15,13 +15,18 @@ void _runAudioServiceIsolate() async {
 
 abstract class FlAudio {
   // Methods
-  static Future<bool> start() => AudioService.start(
-        backgroundTaskEntrypoint: _runAudioServiceIsolate,
-        androidNotificationChannelName: 'FlAudio',
-        androidNotificationColor: 0xFF2196f3,
-        androidNotificationIcon: 'mipmap/ic_launcher',
-        androidEnableQueue: true,
-      );
+
+  static Future<bool> start() async {
+    final started = await AudioService.start(
+      backgroundTaskEntrypoint: _runAudioServiceIsolate,
+      androidNotificationChannelName: 'FlAudio',
+      androidNotificationColor: 0xFF2196f3,
+      androidNotificationIcon: 'mipmap/ic_launcher',
+      androidEnableQueue: true,
+    );
+    isStarted.add(started);
+    return started;
+  }
 
   static Future<void> play() => AudioService.play();
   static Future<void> playWithInitialSeek(Duration position) async {
@@ -33,13 +38,19 @@ abstract class FlAudio {
       AudioService.playFromMediaId(id);
 
   static Future<void> pause() => AudioService.pause();
-  static Future<void> stop() => AudioService.stop();
+  static Future<void> stop() async {
+    await AudioService.stop();
+    isStarted.add(false);
+  }
+
   static Future<void> skipToNext() => AudioService.skipToNext();
   static Future<void> skipToPrevious() => AudioService.skipToPrevious();
   static Future<void> seek(Duration position) => AudioService.seekTo(position);
   static Future<void> setSpeed(double speed) => AudioService.setSpeed(speed);
 
   // Streams
+  static BehaviorSubject<bool> isStarted = BehaviorSubject.seeded(false);
+
   static Stream<FlAudioState> get playerServiceStream =>
       AudioService.playbackStateStream.map(_flAudioState);
 

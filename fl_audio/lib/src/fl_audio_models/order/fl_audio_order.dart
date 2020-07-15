@@ -1,15 +1,15 @@
-import 'package:hive/hive.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
+part 'fl_audio_order.freezed.dart';
 part 'fl_audio_order.g.dart';
 
-@HiveType(typeId: 100)
-enum FlAudioOrder {
-  @HiveField(0)
-  order,
-  @HiveField(1)
-  repeatAll,
-  @HiveField(2)
-  repeatOne,
-  @HiveField(3)
-  shuffle,
+@freezed
+abstract class FlAudioOrder with _$FlAudioOrder {
+  const factory FlAudioOrder.order() = _Order;
+  const factory FlAudioOrder.repeatAll() = _RepeatAll;
+  const factory FlAudioOrder.repeatOne() = _RepeatOne;
+  const factory FlAudioOrder.shuffle() = _Shuffle;
+
+  factory FlAudioOrder.fromJson(Map<String, dynamic> json) =>
+      _$FlAudioOrderFromJson(json);
 }
