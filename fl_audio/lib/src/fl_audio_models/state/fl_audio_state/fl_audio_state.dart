@@ -9,6 +9,7 @@ part 'fl_audio_state.g.dart';
 abstract class FlAudioState with _$FlAudioState {
   const factory FlAudioState({
     @required FlAudioProcessingState processingState,
+    Duration duration,
     @required bool playing,
     @required double speed,
     @required Duration position,

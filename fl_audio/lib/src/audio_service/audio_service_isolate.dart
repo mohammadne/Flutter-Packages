@@ -54,7 +54,6 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   Future<void> onStart(Map<String, dynamic> params) async {
     _player = JustAudio();
     _audioStateSubscriber();
-    _setState(isPlaying: false, processingState: AudioProcessingState.none);
   }
 
   /// Subscriber for diffrent player States

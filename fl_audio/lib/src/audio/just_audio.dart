@@ -1,4 +1,5 @@
 import 'package:just_audio/just_audio.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'models/state/audio_state.dart';
 import 'audio_base.dart';
@@ -40,27 +41,40 @@ class JustAudio implements AudioBase {
 
   @override
   Stream<AudioState> get playerStateStream =>
-      _audioPlayer.playbackStateStream.map((state) {
-        switch (state) {
-          case AudioPlaybackState.stopped:
-            return AudioState.stopped();
-          case AudioPlaybackState.paused:
-            return AudioState.paused();
-          case AudioPlaybackState.playing:
-            return AudioState.playing();
-          case AudioPlaybackState.connecting:
-            return AudioState.connecting();
-          case AudioPlaybackState.completed:
-            return AudioState.completed();
-          default:
-            return AudioState.none();
-        }
-      });
+      Rx.combineLatest2<Duration, AudioState, AudioState>(
+        Stream.periodic(const Duration(milliseconds: 200)),
+        _audioPlayer.playbackStateStream.map((state) {
+          switch (state) {
+            case AudioPlaybackState.stopped:
+              return AudioState.stopped();
+            case AudioPlaybackState.paused:
+              return AudioState.paused();
+            case AudioPlaybackState.playing:
+              return AudioState.playing();
+            case AudioPlaybackState.connecting:
+              return AudioState.connecting();
+            case AudioPlaybackState.completed:
+              return AudioState.completed();
+            default:
+              return AudioState.none();
+          }
+        }),
+        (_, state) => state,
+      );
+
+/*
+  Stream<Duration> getPositionStream(
+          [final Duration period = const Duration(milliseconds: 200)]) =>
+      Rx.combineLatest2<AudioPlaybackEvent, void, Duration>(
+          playbackEventStream,
+          // TODO: emit periodically only in playing state.
+          Stream.periodic(period),
+          (state, _) => state.position).distinct();
+
+*/
 
   @override
-  Stream<Duration> get positionStream => _audioPlayer.getPositionStream(
-        positionStreamInterval ?? Duration(milliseconds: 500),
-      );
+  Stream<Duration> get positionStream => _audioPlayer.getPositionStream();
 
   @override
   Stream<Duration> get bufferedPositionStream =>

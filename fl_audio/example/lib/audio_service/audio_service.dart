@@ -1,4 +1,5 @@
 import 'package:fl_audio/fl_audio.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'dart:async';
 
@@ -62,7 +63,7 @@ class AudioService implements AudioServiceBase {
         FlAudio.transmitInitMainToFlAudioPort(
           InitMainToFlAudioPort(
             flAudioOrder: flAudioOrderSubject.value,
-            flAudioItemIndex: itemIndex,
+            flAudioItemIndex: itemIndex ?? 0,
             flAudioitems: items == null
                 ? []
                 : items.map((item) => item as Map<String, dynamic>),
@@ -140,6 +141,20 @@ class AudioService implements AudioServiceBase {
         (items, item) => item == items.last,
       );
 
+  static Stream<PositionIndicator> get positionIndicatorStream =>
+      Rx.combineLatest4<FlAudioState, FlAudioItem, double, double,
+          PositionIndicator>(
+        FlAudio.flAudioStateStream,
+        FlAudio.flAudioItemStream,
+        dragPositionSubject.stream,
+        Stream.periodic(Duration(milliseconds: 200)),
+        (flAudioState, flAudioItem, dragPosition, _) => PositionIndicator(
+          position:
+              dragPosition ?? flAudioState.position.inMilliseconds.toDouble(),
+          duration: flAudioItem?.duration?.inMilliseconds?.toDouble() ?? -1,
+        ),
+      );
+
   static Stream<FlAudioState> get flAudioStateStream =>
       FlAudio.flAudioStateStream;
 
@@ -147,4 +162,10 @@ class AudioService implements AudioServiceBase {
 
   static Stream<List<FlAudioItem>> get flAudioItemsStream =>
       FlAudio.flAudioItemsStream;
+}
+
+class PositionIndicator {
+  PositionIndicator({@required this.position, @required this.duration});
+  final double position;
+  final double duration;
 }

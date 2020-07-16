@@ -12,6 +12,9 @@ _$_FlAudioState _$_$_FlAudioStateFromJson(Map<String, dynamic> json) {
         ? null
         : FlAudioProcessingState.fromJson(
             json['processingState'] as Map<String, dynamic>),
+    duration: json['duration'] == null
+        ? null
+        : Duration(microseconds: json['duration'] as int),
     playing: json['playing'] as bool,
     speed: (json['speed'] as num)?.toDouble(),
     position: json['position'] == null
@@ -29,6 +32,7 @@ _$_FlAudioState _$_$_FlAudioStateFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$_$_FlAudioStateToJson(_$_FlAudioState instance) =>
     <String, dynamic>{
       'processingState': instance.processingState,
+      'duration': instance.duration?.inMicroseconds,
       'playing': instance.playing,
       'speed': instance.speed,
       'position': instance.position?.inMicroseconds,

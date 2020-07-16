@@ -17,6 +17,7 @@ class _$FlAudioStateTearOff {
 
   _FlAudioState call(
       {@required FlAudioProcessingState processingState,
+      Duration duration,
       @required bool playing,
       @required double speed,
       @required Duration position,
@@ -24,6 +25,7 @@ class _$FlAudioStateTearOff {
       @required Duration bufferedPosition}) {
     return _FlAudioState(
       processingState: processingState,
+      duration: duration,
       playing: playing,
       speed: speed,
       position: position,
@@ -38,6 +40,7 @@ const $FlAudioState = _$FlAudioStateTearOff();
 
 mixin _$FlAudioState {
   FlAudioProcessingState get processingState;
+  Duration get duration;
   bool get playing;
   double get speed;
   Duration get position;
@@ -54,6 +57,7 @@ abstract class $FlAudioStateCopyWith<$Res> {
       _$FlAudioStateCopyWithImpl<$Res>;
   $Res call(
       {FlAudioProcessingState processingState,
+      Duration duration,
       bool playing,
       double speed,
       Duration position,
@@ -73,6 +77,7 @@ class _$FlAudioStateCopyWithImpl<$Res> implements $FlAudioStateCopyWith<$Res> {
   @override
   $Res call({
     Object processingState = freezed,
+    Object duration = freezed,
     Object playing = freezed,
     Object speed = freezed,
     Object position = freezed,
@@ -83,6 +88,7 @@ class _$FlAudioStateCopyWithImpl<$Res> implements $FlAudioStateCopyWith<$Res> {
       processingState: processingState == freezed
           ? _value.processingState
           : processingState as FlAudioProcessingState,
+      duration: duration == freezed ? _value.duration : duration as Duration,
       playing: playing == freezed ? _value.playing : playing as bool,
       speed: speed == freezed ? _value.speed : speed as double,
       position: position == freezed ? _value.position : position as Duration,
@@ -114,6 +120,7 @@ abstract class _$FlAudioStateCopyWith<$Res>
   @override
   $Res call(
       {FlAudioProcessingState processingState,
+      Duration duration,
       bool playing,
       double speed,
       Duration position,
@@ -136,6 +143,7 @@ class __$FlAudioStateCopyWithImpl<$Res> extends _$FlAudioStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object processingState = freezed,
+    Object duration = freezed,
     Object playing = freezed,
     Object speed = freezed,
     Object position = freezed,
@@ -146,6 +154,7 @@ class __$FlAudioStateCopyWithImpl<$Res> extends _$FlAudioStateCopyWithImpl<$Res>
       processingState: processingState == freezed
           ? _value.processingState
           : processingState as FlAudioProcessingState,
+      duration: duration == freezed ? _value.duration : duration as Duration,
       playing: playing == freezed ? _value.playing : playing as bool,
       speed: speed == freezed ? _value.speed : speed as double,
       position: position == freezed ? _value.position : position as Duration,
@@ -162,6 +171,7 @@ class __$FlAudioStateCopyWithImpl<$Res> extends _$FlAudioStateCopyWithImpl<$Res>
 class _$_FlAudioState implements _FlAudioState {
   const _$_FlAudioState(
       {@required this.processingState,
+      this.duration,
       @required this.playing,
       @required this.speed,
       @required this.position,
@@ -180,6 +190,8 @@ class _$_FlAudioState implements _FlAudioState {
   @override
   final FlAudioProcessingState processingState;
   @override
+  final Duration duration;
+  @override
   final bool playing;
   @override
   final double speed;
@@ -192,7 +204,7 @@ class _$_FlAudioState implements _FlAudioState {
 
   @override
   String toString() {
-    return 'FlAudioState(processingState: $processingState, playing: $playing, speed: $speed, position: $position, updateTime: $updateTime, bufferedPosition: $bufferedPosition)';
+    return 'FlAudioState(processingState: $processingState, duration: $duration, playing: $playing, speed: $speed, position: $position, updateTime: $updateTime, bufferedPosition: $bufferedPosition)';
   }
 
   @override
@@ -202,6 +214,9 @@ class _$_FlAudioState implements _FlAudioState {
             (identical(other.processingState, processingState) ||
                 const DeepCollectionEquality()
                     .equals(other.processingState, processingState)) &&
+            (identical(other.duration, duration) ||
+                const DeepCollectionEquality()
+                    .equals(other.duration, duration)) &&
             (identical(other.playing, playing) ||
                 const DeepCollectionEquality()
                     .equals(other.playing, playing)) &&
@@ -222,6 +237,7 @@ class _$_FlAudioState implements _FlAudioState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(processingState) ^
+      const DeepCollectionEquality().hash(duration) ^
       const DeepCollectionEquality().hash(playing) ^
       const DeepCollectionEquality().hash(speed) ^
       const DeepCollectionEquality().hash(position) ^
@@ -241,6 +257,7 @@ class _$_FlAudioState implements _FlAudioState {
 abstract class _FlAudioState implements FlAudioState {
   const factory _FlAudioState(
       {@required FlAudioProcessingState processingState,
+      Duration duration,
       @required bool playing,
       @required double speed,
       @required Duration position,
@@ -252,6 +269,8 @@ abstract class _FlAudioState implements FlAudioState {
 
   @override
   FlAudioProcessingState get processingState;
+  @override
+  Duration get duration;
   @override
   bool get playing;
   @override
