@@ -12,16 +12,16 @@ class PlayerUI extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: AudioService.updateFlAudioItems(items),
-      builder: (_, snapUpdateFlAudioItems) {
-        final waiting =
-            snapUpdateFlAudioItems.connectionState != ConnectionState.done;
+    return StreamBuilder<bool>(
+      initialData: true,
+      stream: AudioService.isWaitingStream,
+      builder: (_, isWaitingSnap) {
+        final waiting = isWaitingSnap.data ?? false;
         return Column(
           children: [
-            if (waiting) ...[
+            if (waiting)
               Center(child: CircularProgressIndicator())
-            ] else ...[
+            else
               Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +115,6 @@ class PlayerUI extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
             IgnorePointer(
               ignoring: waiting,
               child: StreamBuilder<List<FlAudioItem>>(

@@ -63,7 +63,11 @@ class UI extends StatelessWidget {
                   onPressed: FlAudio.start,
                 ),
               )
-            : BlocBuilder<ApiBloc, ApiState>(
+            : BlocConsumer<ApiBloc, ApiState>(
+                listener: (_, state) {
+                  if (state is ApiLoaded)
+                    AudioService.updateFlAudioItems(state.items);
+                },
                 builder: (_, state) {
                   if (state is ApiLoading)
                     return CircularProgressIndicator();
@@ -75,15 +79,7 @@ class UI extends StatelessWidget {
                         Text('Api Error'),
                       ],
                     );
-                  else if (state is ApiInitial)
-                    return Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: <Widget>[
-                        getItems,
-                        Text('Api Initial'),
-                      ],
-                    );
-                  else if (state is ApiLoaded) {
+                  else if (state is ApiLoaded)
                     return Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: <Widget>[
@@ -91,7 +87,13 @@ class UI extends StatelessWidget {
                         PlayerUI(state.items),
                       ],
                     );
-                  }
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      getItems,
+                      Text('Api Initial'),
+                    ],
+                  );
                 },
               ),
       ),

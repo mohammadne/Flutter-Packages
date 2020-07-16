@@ -141,6 +141,16 @@ class AudioService implements AudioServiceBase {
         (items, item) => item == items.last,
       );
 
+  static Stream<bool> get isWaitingStream => FlAudio.flAudioStateStream.map(
+        (state) => state.processingState.maybeWhen(
+          connecting: () => true,
+          skippingToNext: () => true,
+          skippingToQueueItem: () => true,
+          skippingToPervious: () => true,
+          orElse: () => false,
+        ),
+      );
+
   static Stream<PositionIndicator> get positionIndicatorStream =>
       Rx.combineLatest4<FlAudioState, FlAudioItem, double, double,
           PositionIndicator>(
@@ -151,7 +161,7 @@ class AudioService implements AudioServiceBase {
         (flAudioState, flAudioItem, dragPosition, _) => PositionIndicator(
           position:
               dragPosition ?? flAudioState.position.inMilliseconds.toDouble(),
-          duration: flAudioItem?.duration?.inMilliseconds?.toDouble() ?? -1,
+          duration: flAudioItem.duration?.inMilliseconds?.toDouble() ?? -1,
         ),
       );
 
