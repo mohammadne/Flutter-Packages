@@ -58,6 +58,9 @@ class AudioServiceIsolate extends BackgroundAudioTask {
 
   /// Subscriber for diffrent player States
   StreamSubscription<AudioState> _audioStateSubscriber() {
+    /// With the change to add stream preiodic to emit playerStateStream
+    /// now this listener will trigger at that period and so is not needed
+    /// to use PlayBackEvent from AudioService
     return _player.playerStateStream.listen((state) {
       state.when(
         completed: () => _handlePlayerCompletion(),
