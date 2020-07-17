@@ -63,8 +63,8 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   /// now this listener will trigger at that period and so is not needed
   /// to use PlayBackEvent from AudioService
   StreamSubscription<AudioState> _audioStateSubscriber() =>
-      _player.audioStateStream.listen((state) {
-        state.when(
+      _player.audioStateStream.listen(
+        (state) => state.when(
           completed: () => _handlePlayerCompletion(),
           playing: () => _setState(
             isPlaying: true,
@@ -90,8 +90,8 @@ class AudioServiceIsolate extends BackgroundAudioTask {
             isPlaying: false,
             processingState: AudioProcessingState.none,
           ),
-        );
-      });
+        ),
+      );
 
   void _handlePlayerCompletion() async {
     _flAudioOrder.when(
