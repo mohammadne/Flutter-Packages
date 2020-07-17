@@ -10,6 +10,7 @@ import 'package:fl_audio/src/audio/models/state/audio_state.dart';
 import 'package:fl_audio/src/audio/audio_base.dart';
 import 'package:fl_audio/src/audio/just_audio.dart';
 import 'package:fl_audio/fl_audio.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../port/fl_audio_to_isolate/fl_audio_to_isolate_port.dart';
 
@@ -337,11 +338,40 @@ class AudioServiceIsolate extends BackgroundAudioTask {
         onSkipToPrevious();
         break;
       case MediaButton.media:
-        if (AudioServiceBackground.state.playing)
-          onPause();
-        else
-          onPlay();
+        _handleMediaActionPressed();
         break;
+    }
+  }
+
+  /// Handle headset multitime pressing mediaButton
+  Timer _timer;
+  BehaviorSubject<int> _tappedMediaActionNumber;
+
+  void _handleMediaActionPressed() {
+    if (_timer == null) {
+      /// Feeding Streams with 600 milSec rest
+      _tappedMediaActionNumber = BehaviorSubject.seeded(1);
+      _timer = Timer(Duration(milliseconds: 600), () {
+        /// handle what to do with mediaaction
+        final tappedNumber = _tappedMediaActionNumber.value;
+        if (tappedNumber == 1) {
+          if (AudioServiceBackground.state.playing)
+            onPause();
+          else
+            onPlay();
+        } else if (tappedNumber == 2) {
+          onSkipToNext();
+        } else {
+          onSkipToPrevious();
+        }
+
+        /// Unfeeding streams
+        _tappedMediaActionNumber.close();
+        _timer.cancel();
+        _timer = null;
+      });
+    } else {
+      _tappedMediaActionNumber.add(_tappedMediaActionNumber.value + 1);
     }
   }
 
