@@ -92,25 +92,29 @@ abstract class FlAudio {
       );
 
   static Stream<FlAudioState> get flAudioStateStream =>
-      AudioService.playbackStateStream.map(_flAudioState ?? null);
+      AudioService.playbackStateStream.map(
+        (val) => val == null ? null : _flAudioState(val),
+      );
 
   static Stream<FlAudioItem> get flAudioItemStream =>
-      AudioService.currentMediaItemStream.map(_flAudioItem);
+      AudioService.currentMediaItemStream.map(
+        (val) => val == null ? null : _flAudioItem(val),
+      );
 
   static Stream<List<FlAudioItem>> get flAudioItemsStream =>
-      AudioService.queueStream
-          .map((mediaItems) => mediaItems.map(_flAudioItem).toList());
+      AudioService.queueStream.map((mediaItems) => mediaItems
+          .map((val) => val == null ? null : _flAudioItem(val))
+          .toList());
 
   // Utils
   static FlAudioState _flAudioState(PlaybackState playbackState) =>
       FlAudioState(
-        processingState:
-            _flAudioProcessingState(playbackState?.processingState),
-        playing: playbackState.playing,
-        speed: playbackState.speed,
+        processingState: _flAudioProcessingState(playbackState.processingState),
+        bufferedPosition: playbackState.bufferedPosition,
         position: playbackState.currentPosition,
         updateTime: playbackState.updateTime,
-        bufferedPosition: playbackState.bufferedPosition,
+        playing: playbackState.playing,
+        speed: playbackState.speed,
       );
 
   static FlAudioItem _flAudioItem(MediaItem mediaItem) => FlAudioItem(

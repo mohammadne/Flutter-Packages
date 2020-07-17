@@ -344,8 +344,8 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   }
 
   /// Handle headset multitime pressing mediaButton
-  Timer _timer;
   BehaviorSubject<int> _tappedMediaActionNumber;
+  Timer _timer;
 
   void _handleMediaActionPressed() {
     if (_timer == null) {
@@ -371,7 +371,8 @@ class AudioServiceIsolate extends BackgroundAudioTask {
         _timer = null;
       });
     } else {
-      _tappedMediaActionNumber.add(_tappedMediaActionNumber.value + 1);
+      final current = _tappedMediaActionNumber.value;
+      _tappedMediaActionNumber.add(current + 1);
     }
   }
 

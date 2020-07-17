@@ -73,8 +73,8 @@ class AudioService implements AudioServiceBase {
     });
 
     /// Subscriber to save current position in hive
-    FlAudio.flAudioStateStream.map((state) => state.position).listen((pos) {
-      _flAudioStatePositionBox.put(0, pos.inSeconds);
+    FlAudio.flAudioStateStream.map((state) => state?.position).listen((pos) {
+      if (pos != null) _flAudioStatePositionBox.put(0, pos.inSeconds);
     });
 
     _isServiceInitialized = true;
@@ -96,8 +96,12 @@ class AudioService implements AudioServiceBase {
 
   static Future<void> pause() => FlAudio.pause();
 
-  static Future<void> updateFlAudioItems(List<FlAudioItem> items) =>
-      FlAudio.updateQueue(items);
+  static Future<void> updateFlAudioItems(List<FlAudioItem> items) async {
+    if (!isIsolateStarted.value) {
+      await FlAudio.start();
+    }
+    return FlAudio.updateQueue(items);
+  }
 
   static Future<void> addFlAudioItem(FlAudioItem item) =>
       FlAudio.addFlAudioItem(item);
@@ -120,7 +124,7 @@ class AudioService implements AudioServiceBase {
 
   /// Streams
 
-  static Stream<bool> get isIsolateStarted => FlAudio.isStarted;
+  static ValueStream<bool> get isIsolateStarted => FlAudio.isStarted;
 
   static BehaviorSubject<FlAudioOrder> flAudioOrderSubject;
 
@@ -139,6 +143,14 @@ class AudioService implements AudioServiceBase {
         FlAudio.flAudioItemsStream,
         FlAudio.flAudioItemStream,
         (items, item) => item == items?.last ?? true,
+      );
+
+  static Stream<bool> get showMediaPlayerContentStream =>
+      FlAudio.flAudioStateStream.map(
+        (state) =>
+            state?.processingState
+                ?.maybeWhen(none: () => false, orElse: () => true) ??
+            false,
       );
 
   static Stream<bool> get isWaitingStream => FlAudio.flAudioStateStream.map(
