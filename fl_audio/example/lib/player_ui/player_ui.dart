@@ -5,6 +5,7 @@ import 'package:example/player_ui/play_list.dart';
 import 'package:flutter/material.dart';
 
 import '../audio_service/audio_service.dart';
+import 'media_order.dart';
 
 class PlayerUI extends StatelessWidget {
   @override
@@ -27,7 +28,7 @@ class PlayerUI extends StatelessWidget {
                   MediaPlayPause(),
                   MediaSeekBar(),
                   //MediaSpeedBar()
-                  //MediaOrder()
+                  MediaOrder(),
                 ],
               ),
             Divider(),
