@@ -131,24 +131,26 @@ class AudioService implements AudioServiceBase {
       Rx.combineLatest2<List<FlAudioItem>, FlAudioItem, bool>(
         FlAudio.flAudioItemsStream,
         FlAudio.flAudioItemStream,
-        (items, item) => item == items.first ?? false,
+        (items, item) => item == items?.first ?? true,
       );
 
   static Stream<bool> get isLastAudioItemStream =>
       Rx.combineLatest2<List<FlAudioItem>, FlAudioItem, bool>(
         FlAudio.flAudioItemsStream,
         FlAudio.flAudioItemStream,
-        (items, item) => item == items.last ?? false,
+        (items, item) => item == items?.last ?? true,
       );
 
   static Stream<bool> get isWaitingStream => FlAudio.flAudioStateStream.map(
-        (state) => state.processingState.maybeWhen(
-          connecting: () => true,
-          skippingToNext: () => true,
-          skippingToQueueItem: () => true,
-          skippingToPervious: () => true,
-          orElse: () => false,
-        ),
+        (state) =>
+            state?.processingState?.maybeWhen(
+              connecting: () => true,
+              skippingToNext: () => true,
+              skippingToQueueItem: () => true,
+              skippingToPervious: () => true,
+              orElse: () => false,
+            ) ??
+            true,
       );
 
   static Stream<PositionIndicator> get positionIndicatorStream =>

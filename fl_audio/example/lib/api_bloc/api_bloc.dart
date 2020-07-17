@@ -17,7 +17,7 @@ class ApiBloc extends Bloc<ApiEvent, ApiState> {
     await Future.delayed(Duration(seconds: 2));
     if (event is ApiPlayPlayList1) {
       yield ApiLoaded(list1);
-    } else if (event is ApiPlayPlayList1) {
+    } else if (event is ApiPlayPlayList2) {
       yield ApiLoaded(list2);
     }
   }

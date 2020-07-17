@@ -92,7 +92,7 @@ abstract class FlAudio {
       );
 
   static Stream<FlAudioState> get flAudioStateStream =>
-      AudioService.playbackStateStream.map(_flAudioState);
+      AudioService.playbackStateStream.map(_flAudioState ?? null);
 
   static Stream<FlAudioItem> get flAudioItemStream =>
       AudioService.currentMediaItemStream.map(_flAudioItem);
@@ -104,7 +104,8 @@ abstract class FlAudio {
   // Utils
   static FlAudioState _flAudioState(PlaybackState playbackState) =>
       FlAudioState(
-        processingState: _flAudioProcessingState(playbackState.processingState),
+        processingState:
+            _flAudioProcessingState(playbackState?.processingState),
         playing: playbackState.playing,
         speed: playbackState.speed,
         position: playbackState.currentPosition,

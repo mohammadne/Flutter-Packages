@@ -34,8 +34,9 @@ class PlayerUI extends StatelessWidget {
                         builder: (_, isFirst) => IconButton(
                           icon: Icon(Icons.skip_previous),
                           iconSize: 64.0,
-                          onPressed:
-                              isFirst.data ? null : AudioService.skipToPrevious,
+                          onPressed: isFirst?.data ?? true
+                              ? null
+                              : AudioService.skipToPrevious,
                         ),
                       ),
                       StreamBuilder<bool>(
@@ -44,8 +45,9 @@ class PlayerUI extends StatelessWidget {
                         builder: (_, isLast) => IconButton(
                           icon: Icon(Icons.skip_next),
                           iconSize: 64.0,
-                          onPressed:
-                              isLast.data ? null : AudioService.skipToNext,
+                          onPressed: isLast?.data ?? true
+                              ? null
+                              : AudioService.skipToNext,
                         ),
                       ),
                     ],
@@ -93,7 +95,10 @@ class PlayerUI extends StatelessWidget {
                                   children: [
                                     Container(
                                       height: 1,
-                                      width: MediaQuery.of(context).size.width *
+                                      width: (MediaQuery.of(context)
+                                                  .size
+                                                  .width -
+                                              48) *
                                           (positionIndicator.bufferedPosition /
                                               positionIndicator.duration),
                                       color: Colors.red,
@@ -122,21 +127,22 @@ class PlayerUI extends StatelessWidget {
                                   seekPos = value;
                                   Future.delayed(
                                     Duration(milliseconds: 200),
-                                    () {
-                                      // Due to a delay in platform channel communication, there is
-                                      // a brief moment after releasing the Slider thumb before the
-                                      // new position is broadcast from the platform side. This
-                                      // hack is to hold onto seekPos until the next state update
-                                      // comes through.
-                                      return AudioService.dragPositionSubject
-                                          .add(null);
-                                    },
+                                    // Due to a delay in platform channel communication, there is
+                                    // a brief moment after releasing the Slider thumb before the
+                                    // new position is broadcast from the platform side. This
+                                    // hack is to hold onto seekPos until the next state update
+                                    // comes through.
+                                    () => AudioService.dragPositionSubject
+                                        .add(null),
                                   );
                                 },
                               ),
                             ],
                           ),
                           Text("position: ${positionIndicator.position}"),
+                          Text(
+                            "buffered_position: ${positionIndicator.bufferedPosition}",
+                          ),
                           Text("duration: ${positionIndicator.duration}"),
                         ],
                       );
