@@ -3,7 +3,6 @@ import 'dart:math';
 
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hive/hive.dart';
 
 import 'package:fl_audio/src/port/init_fl_audio_to_isolate/init_fl_audio_to_isolate_port.dart';
 import 'package:fl_audio/src/fl_audio_models/order/fl_audio_order.dart';
@@ -27,7 +26,6 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   /// This List is current media items in queue
   List<MediaItem> _mediaItems;
 
-  bool get _hasMediaItems => _mediaItems.isEmpty;
   int get _mediaItemsLength => _mediaItems.length;
   bool get _isFirstMediaItem => _mediaItemIndex == 0;
   bool get _isLastMediaItem => _mediaItemIndex == _mediaItemsLength - 1;
@@ -153,7 +151,6 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   Future<void> onStop() async {
     await _player.stop();
     await super.onStop();
-    await Hive.close();
   }
 
   @override
@@ -224,24 +221,40 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   void onSkipToQueueItem(String mediaId) => onPlayFromMediaId(mediaId);
 
   Future<void> _skip(int offset) async {
+    /// calculate newPos and if it can skip on to it
     final pos = _mediaItemIndex + offset;
     if (!(pos >= 0 && pos < _mediaItemsLength)) return;
     _mediaItemIndex = pos;
-    // TODO: stop current audio
-    // await _player.stop();
+
+    /// we should stop the audio instantly in response to user
+    if (AudioServiceBackground.state.playing) await _player.stop();
+
+    /// set newly choosen mediaItem and set it's url
     MediaItem mediaItem = _mediaItems[pos];
     AudioServiceBackground.setMediaItem(mediaItem);
-    // TODO: path of downloaded files
-    await _player.setUrl(mediaItem.id);
+
+    /// set path of audio and play it
+    await _setUrlWithSource(mediaItem);
     onPlay();
+  }
+
+  Future<void> _setUrlWithSource(MediaItem item) async {
+    // TODO: path of downloaded files
+    await _player.setUrl(item.id);
   }
 
   /// Updating
 
   @override
   Future<void> onUpdateQueue(List<MediaItem> queue) async {
-    AudioServiceBackground.setQueue(queue);
+    /// we should stop the audio instantly in response to user
+    if (AudioServiceBackground.state.playing) await _player.stop();
+
+    /// set newly queue
+    await AudioServiceBackground.setQueue(queue);
     _mediaItems = queue;
+    _mediaItemIndex = 0;
+
     _skip(0);
   }
 

@@ -83,7 +83,6 @@ class PlayerUI extends StatelessWidget {
                       if (snap.data == null || snap.data.duration == -1)
                         return CircularProgressIndicator();
                       final positionIndicator = snap.data;
-                      double seekPos;
                       return Column(
                         children: <Widget>[
                           Stack(
@@ -124,7 +123,6 @@ class PlayerUI extends StatelessWidget {
                                   await AudioService.seek(
                                     Duration(milliseconds: value.toInt()),
                                   );
-                                  seekPos = value;
                                   Future.delayed(
                                     Duration(milliseconds: 200),
                                     // Due to a delay in platform channel communication, there is
@@ -150,29 +148,34 @@ class PlayerUI extends StatelessWidget {
                   ),
                 ],
               ),
-            IgnorePointer(
-              ignoring: waiting,
-              child: StreamBuilder<List<FlAudioItem>>(
-                initialData: items,
-                stream: AudioService.flAudioItemsStream,
-                builder: (_, snap) {
-                  final List<FlAudioItem> flAudioItems = snap.data ?? items;
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: flAudioItems.length,
-                    itemBuilder: (_, index) {
-                      return InkWell(
-                        onTap: () => AudioService.playFlAudioItem(
-                          flAudioItems[index].id,
-                        ),
-                        child: Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Text(flAudioItems[index].id),
-                        ),
-                      );
-                    },
-                  );
-                },
+            Container(
+              height: 300,
+              color: Colors.black12,
+              child: IgnorePointer(
+                ignoring: waiting,
+                child: StreamBuilder<List<FlAudioItem>>(
+                  initialData: items,
+                  stream: AudioService.flAudioItemsStream,
+                  builder: (_, snap) {
+                    final List<FlAudioItem> flAudioItems = snap.data ?? items;
+                    return ListView.builder(
+                      padding: EdgeInsets.zero,
+                      shrinkWrap: true,
+                      itemCount: flAudioItems.length,
+                      itemBuilder: (_, index) {
+                        return InkWell(
+                          onTap: () => AudioService.playFlAudioItem(
+                            flAudioItems[index].id,
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(16),
+                            child: Text(flAudioItems[index].id),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                ),
               ),
             ),
           ],
