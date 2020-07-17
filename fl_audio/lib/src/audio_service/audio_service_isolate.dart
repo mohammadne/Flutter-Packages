@@ -32,13 +32,11 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   bool get _isFirstMediaItem => _mediaItemIndex == 0;
   bool get _isLastMediaItem => _mediaItemIndex == _mediaItemsLength - 1;
 
-  /// Transmitter
-  // void _transmiteAudioEventToMain(AudioPortToMain audioPortToMain) =>
-  //     AudioServiceBackground.sendCustomEvent(audioPortToMain);
-
   @override
   Future onCustomAction(name, arguments) async {
     final args = new Map<String, dynamic>.from(arguments);
+
+    /// Call for initialization of audio service isolate
     if (name == 'initial') {
       final port = InitFlAudioToIsolatePort.fromJson(args);
       _mediaItemIndex = port.mediaItemIndex;
@@ -52,45 +50,44 @@ class AudioServiceIsolate extends BackgroundAudioTask {
 
   @override
   Future<void> onStart(Map<String, dynamic> params) async {
-    _player = JustAudio();
+    _player = JustAudio(positionStreamInterval: Duration(milliseconds: 200));
     _audioStateSubscriber();
   }
 
   /// Subscriber for diffrent player States
-  StreamSubscription<AudioState> _audioStateSubscriber() {
-    /// With the change to add stream preiodic to emit playerStateStream
-    /// now this listener will trigger at that period and so is not needed
-    /// to use PlayBackEvent from AudioService
-    return _player.playerStateStream.listen((state) {
-      state.when(
-        completed: () => _handlePlayerCompletion(),
-        playing: () => _setState(
-          isPlaying: true,
-          processingState: _player.isBuffering
-              ? AudioProcessingState.buffering
-              : AudioProcessingState.ready,
-        ),
-        paused: () => _setState(
-          isPlaying: false,
-          processingState: _player.isBuffering
-              ? AudioProcessingState.buffering
-              : AudioProcessingState.ready,
-        ),
-        stopped: () => _setState(
-          isPlaying: false,
-          processingState: AudioProcessingState.stopped,
-        ),
-        connecting: () => _setState(
-          isPlaying: false,
-          processingState: AudioProcessingState.connecting,
-        ),
-        none: () => _setState(
-          isPlaying: false,
-          processingState: AudioProcessingState.none,
-        ),
-      );
-    });
-  }
+  /// With the change to add stream preiodic to emit playerStateStream
+  /// now this listener will trigger at that period and so is not needed
+  /// to use PlayBackEvent from AudioService
+  StreamSubscription<AudioState> _audioStateSubscriber() =>
+      _player.audioStateStream.listen((state) {
+        state.when(
+          completed: () => _handlePlayerCompletion(),
+          playing: () => _setState(
+            isPlaying: true,
+            processingState: _player.isBuffering
+                ? AudioProcessingState.buffering
+                : AudioProcessingState.ready,
+          ),
+          paused: () => _setState(
+            isPlaying: false,
+            processingState: _player.isBuffering
+                ? AudioProcessingState.buffering
+                : AudioProcessingState.ready,
+          ),
+          stopped: () => _setState(
+            isPlaying: false,
+            processingState: AudioProcessingState.stopped,
+          ),
+          connecting: () => _setState(
+            isPlaying: false,
+            processingState: AudioProcessingState.connecting,
+          ),
+          none: () => _setState(
+            isPlaying: false,
+            processingState: AudioProcessingState.none,
+          ),
+        );
+      });
 
   void _handlePlayerCompletion() async {
     _flAudioOrder.when(
@@ -130,7 +127,7 @@ class AudioServiceIsolate extends BackgroundAudioTask {
             processingState ?? AudioServiceBackground.state.processingState,
         playing: isPlaying,
         position: _player.position,
-        bufferedPosition: _player.bufferedPosition,
+        bufferedPosition: _player.bufferedPosition ?? _player.position,
         speed: _player.speed,
       );
 

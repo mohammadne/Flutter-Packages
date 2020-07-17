@@ -1,6 +1,5 @@
 import 'dart:math' as math;
 
-import 'package:example/audio_service/audio_service_base.dart';
 import 'package:fl_audio/fl_audio.dart';
 import 'package:flutter/material.dart';
 
@@ -85,27 +84,57 @@ class PlayerUI extends StatelessWidget {
                       double seekPos;
                       return Column(
                         children: <Widget>[
-                          Slider(
-                            min: 0.0,
-                            max: positionIndicator.duration,
-                            value: seekPos ??
-                                math.max(
+                          Stack(
+                            alignment: Alignment.centerLeft,
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 24),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      height: 1,
+                                      width: MediaQuery.of(context).size.width *
+                                          (positionIndicator.bufferedPosition /
+                                              positionIndicator.duration),
+                                      color: Colors.red,
+                                    ),
+                                    Expanded(child: SizedBox())
+                                  ],
+                                ),
+                              ),
+                              Slider(
+                                min: 0.0,
+                                max: positionIndicator.duration,
+                                value: math.max(
                                   0.0,
                                   math.min(
                                     positionIndicator.position,
                                     positionIndicator.duration,
                                   ),
                                 ),
-                            onChanged: (value) {
-                              AudioService.dragPositionSubject.add(value);
-                            },
-                            onChangeEnd: (value) {
-                              AudioService.seek(
-                                Duration(milliseconds: value.toInt()),
-                              );
-                              seekPos = value;
-                              AudioService.dragPositionSubject.add(null);
-                            },
+                                onChanged: (value) {
+                                  AudioService.dragPositionSubject.add(value);
+                                },
+                                onChangeEnd: (value) async {
+                                  await AudioService.seek(
+                                    Duration(milliseconds: value.toInt()),
+                                  );
+                                  seekPos = value;
+                                  Future.delayed(
+                                    Duration(milliseconds: 200),
+                                    () {
+                                      // Due to a delay in platform channel communication, there is
+                                      // a brief moment after releasing the Slider thumb before the
+                                      // new position is broadcast from the platform side. This
+                                      // hack is to hold onto seekPos until the next state update
+                                      // comes through.
+                                      return AudioService.dragPositionSubject
+                                          .add(null);
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                           Text("position: ${positionIndicator.position}"),
                           Text("duration: ${positionIndicator.duration}"),

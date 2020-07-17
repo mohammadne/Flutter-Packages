@@ -16,7 +16,7 @@ abstract class AudioBase {
   Future setVolume(double volume);
 
   /// streams
-  Stream<AudioState> get playerStateStream;
+  Stream<AudioState> get audioStateStream;
   Stream<Duration> get bufferedPositionStream;
   Stream<bool> get isBufferingStream;
   Stream<Duration> get positionStream;

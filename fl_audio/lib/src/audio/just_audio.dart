@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -5,7 +6,9 @@ import 'models/state/audio_state.dart';
 import 'audio_base.dart';
 
 class JustAudio implements AudioBase {
-  JustAudio({this.positionStreamInterval}) : _audioPlayer = AudioPlayer();
+  JustAudio({@required this.positionStreamInterval})
+      : _audioPlayer = AudioPlayer(),
+        assert(positionStreamInterval != null);
   final AudioPlayer _audioPlayer;
   final Duration positionStreamInterval;
 
@@ -40,9 +43,9 @@ class JustAudio implements AudioBase {
   Future dispose() => _audioPlayer.dispose();
 
   @override
-  Stream<AudioState> get playerStateStream =>
+  Stream<AudioState> get audioStateStream =>
       Rx.combineLatest2<Duration, AudioState, AudioState>(
-        Stream.periodic(const Duration(milliseconds: 200)),
+        positionStream,
         _audioPlayer.playbackStateStream.map((state) {
           switch (state) {
             case AudioPlaybackState.stopped:
@@ -62,19 +65,9 @@ class JustAudio implements AudioBase {
         (_, state) => state,
       );
 
-/*
-  Stream<Duration> getPositionStream(
-          [final Duration period = const Duration(milliseconds: 200)]) =>
-      Rx.combineLatest2<AudioPlaybackEvent, void, Duration>(
-          playbackEventStream,
-          // TODO: emit periodically only in playing state.
-          Stream.periodic(period),
-          (state, _) => state.position).distinct();
-
-*/
-
   @override
-  Stream<Duration> get positionStream => _audioPlayer.getPositionStream();
+  Stream<Duration> get positionStream =>
+      _audioPlayer.getPositionStream(positionStreamInterval);
 
   @override
   Stream<Duration> get bufferedPositionStream =>

@@ -85,13 +85,13 @@ class AudioService implements AudioServiceBase {
 
   static Future<void> play() => FlAudio.play();
   static Future<void> playFlAudioItem(String id) => FlAudio.playFlAudioItem(id);
-  static Future<void> playWithInitialSeek(Duration duration) =>
-      FlAudio.playWithInitialSeek(duration);
+  static Future<void> playWithInitialSeek(Duration pos) =>
+      FlAudio.playWithInitialSeek(pos);
 
   static Future<void> skipToNext() => FlAudio.skipToNext();
   static Future<void> skipToPrevious() => FlAudio.skipToPrevious();
 
-  static Future<void> seek(Duration duration) => FlAudio.seek(duration);
+  static Future<void> seek(Duration pos) => FlAudio.seek(pos);
   static Future<void> setSpeed(double speed) => FlAudio.setSpeed(speed);
 
   static Future<void> pause() => FlAudio.pause();
@@ -131,14 +131,14 @@ class AudioService implements AudioServiceBase {
       Rx.combineLatest2<List<FlAudioItem>, FlAudioItem, bool>(
         FlAudio.flAudioItemsStream,
         FlAudio.flAudioItemStream,
-        (items, item) => item == items.first,
+        (items, item) => item == items.first ?? false,
       );
 
   static Stream<bool> get isLastAudioItemStream =>
       Rx.combineLatest2<List<FlAudioItem>, FlAudioItem, bool>(
         FlAudio.flAudioItemsStream,
         FlAudio.flAudioItemStream,
-        (items, item) => item == items.last,
+        (items, item) => item == items.last ?? false,
       );
 
   static Stream<bool> get isWaitingStream => FlAudio.flAudioStateStream.map(
@@ -152,13 +152,13 @@ class AudioService implements AudioServiceBase {
       );
 
   static Stream<PositionIndicator> get positionIndicatorStream =>
-      Rx.combineLatest4<FlAudioState, FlAudioItem, double, double,
-          PositionIndicator>(
+      Rx.combineLatest3<FlAudioState, FlAudioItem, double, PositionIndicator>(
         FlAudio.flAudioStateStream,
         FlAudio.flAudioItemStream,
         dragPositionSubject.stream,
-        Stream.periodic(Duration(milliseconds: 200)),
-        (flAudioState, flAudioItem, dragPosition, _) => PositionIndicator(
+        (flAudioState, flAudioItem, dragPosition) => PositionIndicator(
+          bufferedPosition:
+              flAudioState.bufferedPosition.inMilliseconds.toDouble(),
           position:
               dragPosition ?? flAudioState.position.inMilliseconds.toDouble(),
           duration: flAudioItem.duration?.inMilliseconds?.toDouble() ?? -1,
@@ -175,7 +175,22 @@ class AudioService implements AudioServiceBase {
 }
 
 class PositionIndicator {
-  PositionIndicator({@required this.position, @required this.duration});
+  PositionIndicator({
+    @required this.bufferedPosition,
+    @required this.position,
+    @required this.duration,
+  });
+  final double bufferedPosition;
   final double position;
   final double duration;
+
+  @override
+  int get hashCode => position.hashCode;
+
+  @override
+  bool operator ==(dynamic other) =>
+      other is PositionIndicator &&
+      other.bufferedPosition == bufferedPosition &&
+      other.position == position &&
+      other.duration == duration;
 }
