@@ -92,6 +92,9 @@ class AudioService implements AudioServiceBase {
   static Future<void> skipToNext() => FlAudio.skipToNext();
   static Future<void> skipToPrevious() => FlAudio.skipToPrevious();
 
+  static Future<void> fastForward() => FlAudio.fastForward();
+  static Future<void> fastRewind() => FlAudio.fastRewind();
+
   static Future<void> seek(Duration pos) => FlAudio.seek(pos);
   static Future<void> setSpeed(double speed) => FlAudio.setSpeed(speed);
 
@@ -121,7 +124,7 @@ class AudioService implements AudioServiceBase {
     if (flAudioOrderSubject.value != order)
       FlAudio.transmitMainToFlAudioPort(
         MainToFlAudioPort(flAudioOrder: order),
-      );
+      ).then((_) => flAudioOrderSubject.add(order));
   }
 
   /// Streams

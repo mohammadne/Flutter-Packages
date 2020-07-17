@@ -10,9 +10,10 @@ class PlayList extends StatelessWidget {
       builder: (_, snap) {
         final List<FlAudioItem> flAudioItems = snap.data ?? [];
         return ListView.builder(
+          physics: NeverScrollableScrollPhysics(),
+          itemCount: flAudioItems.length,
           padding: EdgeInsets.zero,
           shrinkWrap: true,
-          itemCount: flAudioItems.length,
           itemBuilder: (_, index) {
             return InkWell(
               onTap: () => AudioService.playFlAudioItem(

@@ -5,6 +5,7 @@ import 'package:example/player_ui/play_list.dart';
 import 'package:flutter/material.dart';
 
 import '../audio_service/audio_service.dart';
+import 'audio_item.dart';
 import 'media_order.dart';
 import 'media_speed_bar.dart';
 
@@ -16,33 +17,41 @@ class PlayerUI extends StatelessWidget {
       stream: AudioService.isWaitingStream,
       builder: (_, isWaitingSnap) {
         final waiting = isWaitingSnap.data ?? false;
-        return Column(
+        if (waiting) return Center(child: CircularProgressIndicator());
+        return ListView(
+          shrinkWrap: true,
           children: [
-            if (waiting)
-              Center(child: CircularProgressIndicator())
-            else
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  MediaSkipper(),
-                  MediaPlayPause(),
-                  MediaSeekBar(),
-                  MediaSpeedBar(),
-                  MediaOrder(),
-                ],
-              ),
-            Divider(),
+            MediaSkipper(),
+            _CustomDivider(),
+            MediaPlayPause(),
+            _CustomDivider(),
+            MediaSeekBar(),
+            _CustomDivider(),
+            MediaSpeedBar(),
+            _CustomDivider(),
+            MediaOrder(),
+            _CustomDivider(),
+            AudioItem(),
+            _CustomDivider(),
             IgnorePointer(
               ignoring: waiting,
-              child: Container(
-                height: 300,
-                child: PlayList(),
-              ),
+              child: PlayList(),
             ),
           ],
         );
       },
+    );
+  }
+}
+
+class _CustomDivider extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 24),
+      height: 2,
+      width: double.infinity,
+      color: Colors.red,
     );
   }
 }

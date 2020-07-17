@@ -11,39 +11,48 @@ class MediaOrder extends StatelessWidget {
           child: StreamBuilder<FlAudioOrder>(
             stream: AudioService.flAudioOrderSubject.stream,
             builder: (_, snap) => Text(
-              snap.data.when<String>(
-                order: () => 'Ordre',
-                repeatAll: () => 'repeatAll',
-                repeatOne: () => 'repeatOne',
-                shuffle: () => 'shuffle',
-              ),
+              snap.data?.when<String>(
+                    order: () => 'Order',
+                    repeatAll: () => 'Repeat All',
+                    repeatOne: () => 'Repeat One',
+                    shuffle: () => 'Shuffle',
+                  ) ??
+                  '',
             ),
           ),
         ),
         Row(
           children: [
-            RaisedButton(
-              child: Text('order'),
-              onPressed: () => AudioService.changeFlAudioOrder(
-                FlAudioOrder.order(),
+            Expanded(
+              child: RaisedButton(
+                child: Text('order'),
+                onPressed: () => AudioService.changeFlAudioOrder(
+                  FlAudioOrder.order(),
+                ),
               ),
             ),
-            RaisedButton(
-              child: Text('repeatAll'),
-              onPressed: () => AudioService.changeFlAudioOrder(
-                FlAudioOrder.repeatAll(),
+            Expanded(
+              child: RaisedButton(
+                child: Text('repeat All'),
+                onPressed: () => AudioService.changeFlAudioOrder(
+                  FlAudioOrder.repeatAll(),
+                ),
               ),
             ),
-            RaisedButton(
-              child: Text('repeatOne'),
-              onPressed: () => AudioService.changeFlAudioOrder(
-                FlAudioOrder.repeatOne(),
+            Expanded(
+              child: RaisedButton(
+                child: Text('repeat One'),
+                onPressed: () => AudioService.changeFlAudioOrder(
+                  FlAudioOrder.repeatOne(),
+                ),
               ),
             ),
-            RaisedButton(
-              child: Text('shuffle'),
-              onPressed: () => AudioService.changeFlAudioOrder(
-                FlAudioOrder.shuffle(),
+            Expanded(
+              child: RaisedButton(
+                child: Text('shuffle'),
+                onPressed: () => AudioService.changeFlAudioOrder(
+                  FlAudioOrder.shuffle(),
+                ),
               ),
             ),
           ],

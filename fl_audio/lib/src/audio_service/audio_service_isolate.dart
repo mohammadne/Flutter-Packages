@@ -32,6 +32,7 @@ class AudioServiceIsolate extends BackgroundAudioTask {
 
   int get _mediaItemsLength => _mediaItems.length;
   bool get _isFirstMediaItem => _mediaItemIndex == 0;
+  MediaItem get _currentMediaItem => _mediaItems[_mediaItemIndex];
   bool get _isLastMediaItem => _mediaItemIndex == _mediaItemsLength - 1;
 
   @override
@@ -180,10 +181,15 @@ class AudioServiceIsolate extends BackgroundAudioTask {
 
   Future<void> _seekRelative(Duration offset) async {
     final pos = _player.position + offset;
-    final mediaItem = AudioService.currentMediaItem;
     if (pos < Duration.zero) _player.seek(Duration.zero);
-    if (pos > mediaItem.duration) _player.seek(mediaItem.duration);
+    if (pos > _currentMediaItem.duration)
+      _player.seek(_currentMediaItem.duration);
     await _player.seek(pos);
+  }
+
+  @override
+  void onSetSpeed(double speed) {
+    _player.setSpeed(speed);
   }
 
   /// Skipping
@@ -245,7 +251,15 @@ class AudioServiceIsolate extends BackgroundAudioTask {
 
   Future<void> _setUrlWithSource(MediaItem item) async {
     // TODO: path of downloaded files
-    await _player.setUrl(item.id);
+    try {
+      await _player.setUrl(item.id);
+    } catch (e) {
+      print(e);
+      _setState(
+        isPlaying: false,
+        processingState: AudioProcessingState.error,
+      );
+    }
   }
 
   /// Updating

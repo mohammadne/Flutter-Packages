@@ -7,6 +7,11 @@ class MediaSkipper extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
+        IconButton(
+          icon: Icon(Icons.fast_rewind),
+          iconSize: 64.0,
+          onPressed: AudioService.fastRewind,
+        ),
         StreamBuilder<bool>(
           initialData: true,
           stream: AudioService.isFirstAudioItemStream,
@@ -25,6 +30,11 @@ class MediaSkipper extends StatelessWidget {
             iconSize: 64.0,
             onPressed: isLast?.data ?? true ? null : AudioService.skipToNext,
           ),
+        ),
+        IconButton(
+          icon: Icon(Icons.fast_forward),
+          iconSize: 64.0,
+          onPressed: AudioService.fastForward,
         ),
       ],
     );

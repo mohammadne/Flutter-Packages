@@ -9,28 +9,18 @@ class MediaSpeedBar extends StatelessWidget {
     return StreamBuilder<double>(
       stream: AudioService.speedStream,
       builder: (_, snap) {
-        return Slider(
-          min: 0.0,
-          max: 1.0,
-          value: math.max(
-            0.0,
-            math.min(AudioService.dragSpeedSubject.value ?? snap.data, 1.0),
-          ),
-          onChanged: (value) {
-            AudioService.dragSpeedSubject.add(value);
-          },
-          onChangeEnd: (value) async {
-            await AudioService.setSpeed(value);
-            Future.delayed(
-              Duration(milliseconds: 200),
-              // Due to a delay in platform channel communication, there is
-              // a brief moment after releasing the Slider thumb before the
-              // new position is broadcast from the platform side. This
-              // hack is to hold onto seekPos until the next state update
-              // comes through.
-              () => AudioService.dragSpeedSubject.add(null),
-            );
-          },
+        final val = math.max(0.0, math.min(snap.data ?? 1.0, 2.0));
+        return Column(
+          children: [
+            Slider(
+              min: 0.5,
+              max: 1.5,
+              divisions: 4,
+              value: val,
+              onChanged: (value) => AudioService.setSpeed(value),
+            ),
+            Text('current speed: $val')
+          ],
         );
       },
     );

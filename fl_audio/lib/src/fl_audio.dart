@@ -51,6 +51,8 @@ abstract class FlAudio {
   static Future<void> skipToNext() => AudioService.skipToNext();
   static Future<void> skipToPrevious() => AudioService.skipToPrevious();
   static Future<void> seek(Duration position) => AudioService.seekTo(position);
+  static Future<void> fastForward() => AudioService.fastForward();
+  static Future<void> fastRewind() => AudioService.rewind();
   static Future<void> setSpeed(double speed) => AudioService.setSpeed(speed);
 
   static Future<void> updateQueue(List<FlAudioItem> items) =>

@@ -31,19 +31,6 @@ class Application extends StatelessWidget {
 class UI extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final playItems = Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        RaisedButton(
-          child: Text('Play playlist 1'),
-          onPressed: () => AudioService.updateFlAudioItems(list1),
-        ),
-        RaisedButton(
-          child: Text('Play playlist 2'),
-          onPressed: () => AudioService.updateFlAudioItems(list2),
-        ),
-      ],
-    );
     return Scaffold(
       backgroundColor: Colors.white,
       body: StreamBuilder<bool>(
@@ -59,12 +46,25 @@ class UI extends StatelessWidget {
             : Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  playItems,
-                  Divider(),
+                  SizedBox(height: 50),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      RaisedButton(
+                        child: Text('Play playlist 1'),
+                        onPressed: () => AudioService.updateFlAudioItems(list1),
+                      ),
+                      RaisedButton(
+                        child: Text('Play playlist 2'),
+                        onPressed: () => AudioService.updateFlAudioItems(list2),
+                      ),
+                    ],
+                  ),
+                  Divider(thickness: 5),
                   StreamBuilder<bool>(
                     stream: AudioService.showMediaPlayerContentStream,
                     builder: (_, snap) => snap.data == true
-                        ? PlayerUI()
+                        ? Expanded(child: PlayerUI())
                         : Container() ?? Container(),
                   ),
                 ],
