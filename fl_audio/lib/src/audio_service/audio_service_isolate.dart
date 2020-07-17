@@ -51,6 +51,7 @@ class AudioServiceIsolate extends BackgroundAudioTask {
 
   @override
   Future<void> onStart(Map<String, dynamic> params) async {
+    /// The interval updates of position is choosen for 200 milSec
     _player = JustAudio(positionStreamInterval: Duration(milliseconds: 200));
     _audioStateSubscriber();
   }
