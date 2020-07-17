@@ -26,6 +26,9 @@ class AudioServiceIsolate extends BackgroundAudioTask {
   /// This List is current media items in queue
   List<MediaItem> _mediaItems;
 
+  /// This fiekd is use when audio focusing has been changed to handle interruptions
+  bool _isInterrupted = false;
+
   int get _mediaItemsLength => _mediaItems.length;
   bool get _isFirstMediaItem => _mediaItemIndex == 0;
   bool get _isLastMediaItem => _mediaItemIndex == _mediaItemsLength - 1;
@@ -286,12 +289,34 @@ class AudioServiceIsolate extends BackgroundAudioTask {
 
   @override
   void onAudioFocusLost(AudioInterruption interruption) {
-    onPause();
+    final playing = AudioServiceBackground.state.playing;
+    if (playing) _isInterrupted = true;
+    switch (interruption) {
+      case AudioInterruption.pause:
+      case AudioInterruption.temporaryPause:
+      case AudioInterruption.unknownPause:
+        onPause();
+        break;
+      case AudioInterruption.temporaryDuck:
+        _player.setVolume(0.5);
+        break;
+    }
   }
 
   @override
   void onAudioFocusGained(AudioInterruption interruption) {
-    onPlay();
+    final playing = AudioServiceBackground.state.playing;
+    switch (interruption) {
+      case AudioInterruption.temporaryPause:
+        if (!playing && _isInterrupted) onPlay();
+        break;
+      case AudioInterruption.temporaryDuck:
+        _player.setVolume(1.0);
+        break;
+      default:
+        break;
+    }
+    _isInterrupted = false;
   }
 
   @override
