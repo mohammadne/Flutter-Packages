@@ -24,18 +24,13 @@ class LangBloc extends HydratedBloc<LangEvent, LangState> {
     @required this.initialLang,
     @required this.assetPrefix,
     @required this.supportedLocalesHashMap,
-  });
-
-  @override
-  LangState get initialState =>
-      super.initialState ??
-      LangState(
-        initialLang.when(
-          firstItem: () => supportedLocalesHashMap.keys.toList().first,
-          preferedLocale: (locale) => locale,
-        ),
-        false,
-      );
+  }) : super(LangState(
+          initialLang.when(
+            firstItem: () => supportedLocalesHashMap.keys.toList().first,
+            preferedLocale: (locale) => locale,
+          ),
+          false,
+        ));
 
   @override
   LangState fromJson(Map<String, dynamic> json) {

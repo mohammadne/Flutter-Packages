@@ -14,23 +14,25 @@ dependencies:
     sdk: flutter
 
   # State manegment
-  flutter_bloc: ^4.0.1
-  hydrated_bloc: ^4.1.1
+  flutter_bloc: ^6.0.1
+
+  # State Persistance
+  hydrated_bloc: ^6.0.1
 
   # Data Classes 
-  freezed_annotation: ^0.11.0
+  freezed_annotation: ^0.11.0+1
 
   # Annotations
-  meta: ^1.1.8
+  meta: ^1.2.2
 
   # Localization
   flutter_localizations:
     sdk: flutter
 
 dev_dependencies:
-  json_serializable: ^3.3.0
-  build_runner: ^1.10.0
-  freezed: ^0.11.2
+  json_serializable: ^3.4.0
+  build_runner: ^1.10.2
+  freezed: ^0.11.5
   flutter_test:
     sdk: flutter
 

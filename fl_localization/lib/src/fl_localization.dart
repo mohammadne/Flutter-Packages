@@ -69,7 +69,7 @@ class _FlLocalizationState extends State<FlLocalization> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<LangBloc, LangState>(
-      bloc: bloc,
+      cubit: bloc,
       builder: (_, state) => state.isLoaded
           ? widget.builder(
               [
