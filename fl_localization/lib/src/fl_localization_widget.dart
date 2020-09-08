@@ -1,8 +1,8 @@
-import 'package:fl_localization/src2/fl_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'initial/initial_lang.dart';
+import 'fl_localization.dart';
+import 'initial_lang.dart';
 import 'localization_delegate.dart';
 
 /// 1- strings should be in en_US format
@@ -16,13 +16,13 @@ typedef BuilderType = Widget Function(
   Locale currentLocale,
 );
 
-class LangWidget extends StatelessWidget {
+class FlLocalizationWidget extends StatelessWidget {
   final InitialLang initialLang;
   final BuilderType builder;
 
   final IFlLocalization flLocalization;
 
-  LangWidget({
+  FlLocalizationWidget({
     @required this.flLocalization,
     @required this.builder,
     this.initialLang,

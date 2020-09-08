@@ -1,143 +1,116 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io';
 
-import 'bloc/lang_bloc.dart';
-import 'initial/initial_lang.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:hive/hive.dart';
+import 'package:rxdart/rxdart.dart';
 
-typedef BuilderType = Widget Function(
-  Iterable<LocalizationsDelegate> localizationsDelegates,
-  List<Locale> supportedLocales,
-  Locale currentLocale,
-);
+import 'initial_lang.dart';
 
-class FlLocalization extends StatefulWidget {
-  /// note that the string value is used for accessing and setting locales
-  final Map<String, Locale> supportedLocalesHashMap;
+//! String locales should be in form of
+//! LANGUAGECODE_COUNTRYCODE
 
-  final InitialLang initialLang;
-  final BuilderType builder;
-  final String assetPrefix;
+abstract class IFlLocalization {
+  Future<void> initialize();
+
+  String get locale;
+  set locale(String locale);
+
+  String languageCode(String locale);
+  String countryCode(String locale);
+
+  Stream<String> get localeStream;
+
+  List<String> get supportedLocales;
+
+  Map<String, dynamic> translations;
+}
+
+class FlLocalization implements IFlLocalization {
   FlLocalization({
-    @required this.supportedLocalesHashMap,
+    @required this.supportedLocales,
     @required this.assetPrefix,
-    @required this.builder,
     this.initialLang,
-  });
-
-  static void setLocale(BuildContext context, String locale) {
-    _FlLocalizationState state = context.findAncestorStateOfType();
-    state.bloc.add(LangEvent.setLocale(locale));
+  })  : assert(supportedLocales != null),
+        assert(supportedLocales.isNotEmpty) {
+    _langSubj.listen(_loadTranslation);
   }
 
-  static String currentLocale(BuildContext context) {
-    _FlLocalizationState state = context.findAncestorStateOfType();
-    return state.bloc.state.locale;
-  }
+  final List<String> supportedLocales;
+  final InitialLang initialLang;
+  final String assetPrefix;
 
-  static List<String> supportedLocalesKey(BuildContext context) {
-    _FlLocalizationState state = context.findAncestorStateOfType();
-    return state.supportedLocalesHashMap.keys.toList();
-  }
+  Completer<void> _initCompleter;
+
+  static const String _langBoxKey = 'lange_locale_key';
+  static const int _langBoxIndex = 0;
+  Box<String> _langBox;
+
+  BehaviorSubject<String> _langSubj = BehaviorSubject.seeded(null);
+
+  Map<String, dynamic> translations;
 
   @override
-  _FlLocalizationState createState() => _FlLocalizationState();
-}
-
-class _FlLocalizationState extends State<FlLocalization> {
-  LangBloc bloc;
-
-  Map<String, Locale> get supportedLocalesHashMap =>
-      widget.supportedLocalesHashMap;
+  String get locale => _langSubj.value;
 
   @override
-  void initState() {
-    super.initState();
-    bloc = LangBloc(
-      assetPrefix: widget.assetPrefix,
-      supportedLocalesHashMap: widget.supportedLocalesHashMap,
-      initialLang: widget.initialLang ?? InitialLang.firstItem(),
-    )..add(LangEvent.loadTranslations());
+  set locale(String locale) {
+    if (locale == this.locale) return;
+    _langSubj.add(locale);
   }
 
-  @override
-  void dispose() {
-    bloc.close();
-    super.dispose();
-  }
+  String languageCode(String locale) => locale.split('_').first;
+
+  String countryCode(String locale) => locale.split('_').last;
 
   @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<LangBloc, LangState>(
-      cubit: bloc,
-      builder: (_, state) => state.isLoaded
-          ? widget.builder(
-              [
-                _FlLocalizationDelegate(
-                  supportedLocales: supportedLocalesHashMap.values.toList(),
-                  translations: bloc.translations,
-                ),
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              widget.supportedLocalesHashMap.values.toList(),
-              widget.supportedLocalesHashMap[state.locale],
-            )
-          : Container(),
+  Stream<String> get localeStream => _langSubj.stream;
+
+  @override
+  Future<void> initialize() async {
+    if (_initCompleter != null) return _initCompleter.future;
+    _initCompleter = Completer();
+
+    Hive.openBox<String>(_langBoxKey)
+        .then((box) => _langBox = box)
+        .then((_) {
+          final isEmptyBox = _langBox.isEmpty;
+          if (!isEmptyBox) return _langBox.getAt(_langBoxIndex);
+
+          if (initialLang == null) return supportedLocales.first;
+          return initialLang.when(
+            preferedLocale: (pref) => pref,
+            system: () {
+              final _deviceLocale = Platform.localeName;
+              if (supportedLocales.contains(_deviceLocale))
+                return _deviceLocale;
+              return supportedLocales.first;
+            },
+          );
+        })
+        .then((lang) => _langSubj.add(lang))
+        .then((_) => _initCompleter.complete());
+
+    return _initCompleter.future;
+  }
+
+  Future<void> _loadTranslation(String locale) async {
+    if (locale == null) return;
+
+    final lCode = languageCode(locale);
+    final cCode = countryCode(locale);
+
+    String jsonString = await rootBundle.loadString(
+      '$assetPrefix/$lCode-$cCode.json',
     );
-  }
-}
 
-class Localization {
-  Map<String, dynamic> _translations;
-
-  set translations(val) => _translations = val;
-
-  static Localization _instance;
-  static Localization get instance => _instance ?? (_instance = Localization());
-  static Localization of(BuildContext context) =>
-      Localizations.of<Localization>(context, Localization);
-
-  static bool load(Map<String, dynamic> translations) {
-    instance._translations = translations;
-    return translations == null ? false : true;
+    Map<String, dynamic> jsonMap = json.decode(jsonString);
+    translations = jsonMap.map((key, value) => MapEntry(key, value));
   }
 
-  String tr(String key) {
-    final keys = key.split('.');
-    final kHead = keys.first;
-
-    var value = _translations[kHead];
-
-    for (var i = 1; i < keys.length; i++) {
-      if (value is Map<String, dynamic>) value = value[keys[i]];
-    }
-
-    return value ?? key;
+  void close() {
+    _langSubj.close();
   }
-}
-
-class _FlLocalizationDelegate extends LocalizationsDelegate<Localization> {
-  final Iterable<Locale> supportedLocales;
-  final Map<String, dynamic> translations;
-
-  ///  * use only the lang code to generate i18n file path like en.json or ar.json
-  // final bool useOnlyLangCode;
-
-  _FlLocalizationDelegate({this.translations, this.supportedLocales}) {
-    Localization.instance.translations = translations;
-  }
-
-  @override
-  bool isSupported(Locale locale) => supportedLocales.contains(locale);
-
-  @override
-  Future<Localization> load(Locale value) {
-    Localization.load(translations);
-    return Future.value(Localization.instance);
-  }
-
-  @override
-  bool shouldReload(LocalizationsDelegate<Localization> old) => false;
 }

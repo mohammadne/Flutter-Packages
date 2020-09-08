@@ -1,33 +1,35 @@
-import 'package:flutter/material.dart';
 import 'package:fl_localization/fl_localization.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:flutter/material.dart';
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  HydratedBloc.storage = await HydratedStorage.build();
-  runApp(MyApp());
+FlLocalization flLocalization;
+
+void main() async {
+  flLocalization = FlLocalization(
+    supportedLocales: ['en_US', 'fa_IR'],
+    initialLang: InitialLang.system(),
+    assetPrefix: 'assets/lang',
+  );
+
+  flLocalization.initialize();
+
+  runApp(App());
 }
 
-class MyApp extends StatelessWidget {
+class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return FlLocalization(
-      assetPrefix: 'assets/lang',
-      supportedLocalesHashMap: <String, Locale>{
-        'english': Locale('en', 'US'),
-        'persian': Locale('fa', 'IR'),
-      },
-      initialLang: InitialLang.firstItem(),
-      builder: (localizationsDelegates, supportedLocales, currentLocale) {
-        return MaterialApp(
-          locale: currentLocale,
-          supportedLocales: supportedLocales,
-          title: 'app.name'.tr(),
-          localizationsDelegates: localizationsDelegates,
-          home: UI(),
-        );
-      },
+    return FlLocalizationWidget(
+      flLocalization: flLocalization,
+      builder: (delegates, locales, currentLocale) => MaterialApp(
+        title: 'app.name'.tr(),
+
+        /// Localization Part
+        locale: currentLocale,
+        supportedLocales: locales,
+        localizationsDelegates: delegates,
+
+        home: UI(),
+      ),
     );
   }
 }
@@ -55,7 +57,7 @@ class _UIState extends State<UI> {
                 children: [
                   Text(translate('ui.current_lang')),
                   Text(' : '),
-                  Text(FlLocalization.currentLocale(context)),
+                  // Text(FlLocalization.currentLocale(context)),
                 ],
               ),
             ),
@@ -66,16 +68,15 @@ class _UIState extends State<UI> {
             ).tr(),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: FlLocalization.supportedLocalesKey(context).length,
+              itemCount: flLocalization.supportedLocales.length,
               itemBuilder: (_, index) => ListTile(
                 title: Text(
-                  '${index + 1} : ' +
-                      FlLocalization.supportedLocalesKey(context)[index],
+                  '${index + 1} : ' + flLocalization.supportedLocales[index],
                 ),
                 onTap: () {
-                  final locale =
-                      FlLocalization.supportedLocalesKey(context)[index];
-                  FlLocalization.setLocale(context, locale);
+                  // final locale =
+                  //     FlLocalization.supportedLocalesKey(context)[index];
+                  // FlLocalization.setLocale(context, locale);
                 },
               ),
             ),
