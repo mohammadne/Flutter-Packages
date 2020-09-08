@@ -39,8 +39,8 @@ class FlLocalizationWidget extends StatelessWidget {
         translations: translations,
       );
 
-  String _getLanguageCode(String locale) => locale.split('_').first;
-  String _getCountryCode(String locale) => locale.split('_').last;
+  String _getLanguageCode(String locale) => flLocalization.languageCode(locale);
+  String _getCountryCode(String locale) => flLocalization.countryCode(locale);
   Locale _getLocale(String locale) =>
       Locale(_getLanguageCode(locale), _getCountryCode(locale));
 

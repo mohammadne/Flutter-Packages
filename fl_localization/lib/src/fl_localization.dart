@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'initial_lang.dart';
@@ -73,25 +74,27 @@ class FlLocalization implements IFlLocalization {
     if (_initCompleter != null) return _initCompleter.future;
     _initCompleter = Completer();
 
-    Hive.openBox<String>(_langBoxKey)
-        .then((box) => _langBox = box)
-        .then((_) {
-          final isEmptyBox = _langBox.isEmpty;
-          if (!isEmptyBox) return _langBox.getAt(_langBoxIndex);
+    Hive.initFlutter().then(
+      (_) => Hive.openBox<String>(_langBoxKey)
+          .then((box) => _langBox = box)
+          .then((_) {
+            final isEmptyBox = _langBox.isEmpty;
+            if (!isEmptyBox) return _langBox.getAt(_langBoxIndex);
 
-          if (initialLang == null) return supportedLocales.first;
-          return initialLang.when(
-            preferedLocale: (pref) => pref,
-            system: () {
-              final _deviceLocale = Platform.localeName;
-              if (supportedLocales.contains(_deviceLocale))
-                return _deviceLocale;
-              return supportedLocales.first;
-            },
-          );
-        })
-        .then((lang) => _langSubj.add(lang))
-        .then((_) => _initCompleter.complete());
+            if (initialLang == null) return supportedLocales.first;
+            return initialLang.when(
+              preferedLocale: (pref) => pref,
+              system: () {
+                final _deviceLocale = Platform.localeName;
+                if (supportedLocales.contains(_deviceLocale))
+                  return _deviceLocale;
+                return supportedLocales.first;
+              },
+            );
+          })
+          .then((lang) => _langSubj.add(lang))
+          .then((_) => _initCompleter.complete()),
+    );
 
     return _initCompleter.future;
   }

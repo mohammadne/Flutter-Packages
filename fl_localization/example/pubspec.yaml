@@ -15,6 +15,9 @@ dependencies:
   flutter_localizations:
     sdk: flutter
 
+  hive_flutter: ^0.3.1
+  hive: ^1.4.4
+
   fl_localization: 
     path: ../
   

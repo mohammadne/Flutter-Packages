@@ -1,6 +1,7 @@
 import 'package:fl_localization/fl_localization.dart';
 import 'package:flutter/material.dart';
 
+/// this in
 FlLocalization flLocalization;
 
 void main() async {
@@ -10,7 +11,7 @@ void main() async {
     assetPrefix: 'assets/lang',
   );
 
-  flLocalization.initialize();
+  await flLocalization.initialize();
 
   runApp(App());
 }
@@ -57,7 +58,7 @@ class _UIState extends State<UI> {
                 children: [
                   Text(translate('ui.current_lang')),
                   Text(' : '),
-                  // Text(FlLocalization.currentLocale(context)),
+                  Text(flLocalization.locale),
                 ],
               ),
             ),
@@ -74,9 +75,8 @@ class _UIState extends State<UI> {
                   '${index + 1} : ' + flLocalization.supportedLocales[index],
                 ),
                 onTap: () {
-                  // final locale =
-                  //     FlLocalization.supportedLocalesKey(context)[index];
-                  // FlLocalization.setLocale(context, locale);
+                  flLocalization.locale =
+                      flLocalization.supportedLocales[index];
                 },
               ),
             ),
