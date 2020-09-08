@@ -7,32 +7,29 @@ homepage: https://github.com/mohammadne/Flutter-Packages/
 documentation:
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.8.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  # State manegment
-  flutter_bloc: ^6.0.1
-
-  # State Persistance
-  hydrated_bloc: ^6.0.1
-
   # Data Classes 
   freezed_annotation: ^0.11.0+1
 
-  # Annotations
-  meta: ^1.2.2
+  rxdart: ^0.24.1
+
+  # DB and Persistant
+  hive_flutter: ^0.3.1
+  hive: ^1.4.4
 
   # Localization
   flutter_localizations:
     sdk: flutter
 
 dev_dependencies:
-  json_serializable: ^3.4.0
-  build_runner: ^1.10.2
-  freezed: ^0.11.5
+  json_serializable: ^3.4.1
+  build_runner: ^1.10.1
+  freezed: ^0.11.6
   flutter_test:
     sdk: flutter
 
