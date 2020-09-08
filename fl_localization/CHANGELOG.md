@@ -13,3 +13,9 @@
 ## [0.0.4] - Friday, Aug 21, 2020
 
 * update package dependencies and update readmi.
+
+## [0.1.0] - Tuesday, September 8, 2020
+
+* redesign package 
+* remove dependency to bloc and hydratedbloc and hive
+* better performance

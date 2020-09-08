@@ -1,7 +1,6 @@
 import 'package:fl_localization/fl_localization.dart';
 import 'package:flutter/material.dart';
 
-/// this in
 FlLocalization flLocalization;
 
 void main() async {
