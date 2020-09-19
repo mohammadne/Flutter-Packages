@@ -5,51 +5,70 @@ class LineSwitch extends StatelessWidget {
   const LineSwitch({
     @required this.value,
     @required this.onTap,
-    this.activeColor = const Color(0xff787),
-    this.inActiveColor = const Color(0xff787),
+    this.duration = const Duration(milliseconds: 270),
+    this.curve = Curves.linear,
+    this.activeColor = const Color(0xff00cc00),
+    this.inActiveColor = const Color(0xffC0C0C0),
+    this.size = 25,
   });
 
   final bool value;
 
   final ValueChanged<bool> onTap;
 
+  final Duration duration;
+  final Curve curve;
+
   final Color activeColor;
   final Color inActiveColor;
 
+  final double size;
+
   @override
   Widget build(BuildContext context) {
-    final duration = 200;
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 8),
-      child: GestureDetector(
-        onTap: () => onTap(!value),
-        child: Container(
-          width: 40,
-          height: 12,
-          child: Stack(
-            alignment: Alignment.center,
-            children: <Widget>[
-              AnimatedContainer(
-                duration: Duration(milliseconds: duration),
-                color: value ? activeColor : inActiveColor,
-                height: 1,
-                width: 30,
-              ),
-              AnimatedAlign(
-                duration: Duration(milliseconds: duration),
+    final height = size;
+    final width = size * 2;
+
+    final lineHeight = size * 0.05;
+
+    final circleSize = size * 0.5;
+
+    return GestureDetector(
+      onTap: () => onTap(!value),
+      child: Container(
+        height: height,
+        width: width,
+        color: Colors.transparent,
+        margin: EdgeInsets.symmetric(vertical: 60),
+        child: Stack(
+          alignment: Alignment.center,
+          children: <Widget>[
+            AnimatedContainer(
+              duration: duration,
+              curve: curve,
+              color: value ? activeColor : inActiveColor,
+              height: lineHeight,
+              width: width,
+            ),
+            Container(
+              width: width + circleSize,
+              child: AnimatedAlign(
+                duration: duration,
+                curve: curve,
                 alignment: value ? Alignment.centerRight : Alignment.centerLeft,
                 child: AnimatedContainer(
-                  duration: Duration(milliseconds: duration),
+                  duration: duration,
+                  curve: curve,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: value ? activeColor : inActiveColor,
                   ),
-                  height: 12,
-                  width: 12,
+                  height: circleSize,
+                  width: circleSize,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
