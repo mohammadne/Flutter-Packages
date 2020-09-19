@@ -1,5 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named
+// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
 part of 'initial_lang.dart';
 
@@ -12,12 +12,14 @@ T _$identity<T>(T value) => value;
 class _$InitialLangTearOff {
   const _$InitialLangTearOff();
 
-  FirstItem firstItem() {
-    return const FirstItem();
+// ignore: unused_element
+  _System system() {
+    return const _System();
   }
 
-  PreferedLocale preferedLocale(String locale) {
-    return PreferedLocale(
+// ignore: unused_element
+  _PreferedLocale preferedLocale(String locale) {
+    return _PreferedLocale(
       locale,
     );
   }
@@ -29,24 +31,24 @@ const $InitialLang = _$InitialLangTearOff();
 mixin _$InitialLang {
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result firstItem(),
+    @required Result system(),
     @required Result preferedLocale(String locale),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result firstItem(),
+    Result system(),
     Result preferedLocale(String locale),
     @required Result orElse(),
   });
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result firstItem(FirstItem value),
-    @required Result preferedLocale(PreferedLocale value),
+    @required Result system(_System value),
+    @required Result preferedLocale(_PreferedLocale value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result firstItem(FirstItem value),
-    Result preferedLocale(PreferedLocale value),
+    Result system(_System value),
+    Result preferedLocale(_PreferedLocale value),
     @required Result orElse(),
   });
 }
@@ -65,31 +67,31 @@ class _$InitialLangCopyWithImpl<$Res> implements $InitialLangCopyWith<$Res> {
   final $Res Function(InitialLang) _then;
 }
 
-abstract class $FirstItemCopyWith<$Res> {
-  factory $FirstItemCopyWith(FirstItem value, $Res Function(FirstItem) then) =
-      _$FirstItemCopyWithImpl<$Res>;
+abstract class _$SystemCopyWith<$Res> {
+  factory _$SystemCopyWith(_System value, $Res Function(_System) then) =
+      __$SystemCopyWithImpl<$Res>;
 }
 
-class _$FirstItemCopyWithImpl<$Res> extends _$InitialLangCopyWithImpl<$Res>
-    implements $FirstItemCopyWith<$Res> {
-  _$FirstItemCopyWithImpl(FirstItem _value, $Res Function(FirstItem) _then)
-      : super(_value, (v) => _then(v as FirstItem));
+class __$SystemCopyWithImpl<$Res> extends _$InitialLangCopyWithImpl<$Res>
+    implements _$SystemCopyWith<$Res> {
+  __$SystemCopyWithImpl(_System _value, $Res Function(_System) _then)
+      : super(_value, (v) => _then(v as _System));
 
   @override
-  FirstItem get _value => super._value as FirstItem;
+  _System get _value => super._value as _System;
 }
 
-class _$FirstItem implements FirstItem {
-  const _$FirstItem();
+class _$_System implements _System {
+  const _$_System();
 
   @override
   String toString() {
-    return 'InitialLang.firstItem()';
+    return 'InitialLang.system()';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is FirstItem);
+    return identical(this, other) || (other is _System);
   }
 
   @override
@@ -98,24 +100,24 @@ class _$FirstItem implements FirstItem {
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result firstItem(),
+    @required Result system(),
     @required Result preferedLocale(String locale),
   }) {
-    assert(firstItem != null);
+    assert(system != null);
     assert(preferedLocale != null);
-    return firstItem();
+    return system();
   }
 
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result firstItem(),
+    Result system(),
     Result preferedLocale(String locale),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (firstItem != null) {
-      return firstItem();
+    if (system != null) {
+      return system();
     }
     return orElse();
   }
@@ -123,61 +125,62 @@ class _$FirstItem implements FirstItem {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result firstItem(FirstItem value),
-    @required Result preferedLocale(PreferedLocale value),
+    @required Result system(_System value),
+    @required Result preferedLocale(_PreferedLocale value),
   }) {
-    assert(firstItem != null);
+    assert(system != null);
     assert(preferedLocale != null);
-    return firstItem(this);
+    return system(this);
   }
 
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result firstItem(FirstItem value),
-    Result preferedLocale(PreferedLocale value),
+    Result system(_System value),
+    Result preferedLocale(_PreferedLocale value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
-    if (firstItem != null) {
-      return firstItem(this);
+    if (system != null) {
+      return system(this);
     }
     return orElse();
   }
 }
 
-abstract class FirstItem implements InitialLang {
-  const factory FirstItem() = _$FirstItem;
+abstract class _System implements InitialLang {
+  const factory _System() = _$_System;
 }
 
-abstract class $PreferedLocaleCopyWith<$Res> {
-  factory $PreferedLocaleCopyWith(
-          PreferedLocale value, $Res Function(PreferedLocale) then) =
-      _$PreferedLocaleCopyWithImpl<$Res>;
+abstract class _$PreferedLocaleCopyWith<$Res> {
+  factory _$PreferedLocaleCopyWith(
+          _PreferedLocale value, $Res Function(_PreferedLocale) then) =
+      __$PreferedLocaleCopyWithImpl<$Res>;
   $Res call({String locale});
 }
 
-class _$PreferedLocaleCopyWithImpl<$Res> extends _$InitialLangCopyWithImpl<$Res>
-    implements $PreferedLocaleCopyWith<$Res> {
-  _$PreferedLocaleCopyWithImpl(
-      PreferedLocale _value, $Res Function(PreferedLocale) _then)
-      : super(_value, (v) => _then(v as PreferedLocale));
+class __$PreferedLocaleCopyWithImpl<$Res>
+    extends _$InitialLangCopyWithImpl<$Res>
+    implements _$PreferedLocaleCopyWith<$Res> {
+  __$PreferedLocaleCopyWithImpl(
+      _PreferedLocale _value, $Res Function(_PreferedLocale) _then)
+      : super(_value, (v) => _then(v as _PreferedLocale));
 
   @override
-  PreferedLocale get _value => super._value as PreferedLocale;
+  _PreferedLocale get _value => super._value as _PreferedLocale;
 
   @override
   $Res call({
     Object locale = freezed,
   }) {
-    return _then(PreferedLocale(
+    return _then(_PreferedLocale(
       locale == freezed ? _value.locale : locale as String,
     ));
   }
 }
 
-class _$PreferedLocale implements PreferedLocale {
-  const _$PreferedLocale(this.locale) : assert(locale != null);
+class _$_PreferedLocale implements _PreferedLocale {
+  const _$_PreferedLocale(this.locale) : assert(locale != null);
 
   @override
   final String locale;
@@ -190,7 +193,7 @@ class _$PreferedLocale implements PreferedLocale {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is PreferedLocale &&
+        (other is _PreferedLocale &&
             (identical(other.locale, locale) ||
                 const DeepCollectionEquality().equals(other.locale, locale)));
   }
@@ -200,16 +203,16 @@ class _$PreferedLocale implements PreferedLocale {
       runtimeType.hashCode ^ const DeepCollectionEquality().hash(locale);
 
   @override
-  $PreferedLocaleCopyWith<PreferedLocale> get copyWith =>
-      _$PreferedLocaleCopyWithImpl<PreferedLocale>(this, _$identity);
+  _$PreferedLocaleCopyWith<_PreferedLocale> get copyWith =>
+      __$PreferedLocaleCopyWithImpl<_PreferedLocale>(this, _$identity);
 
   @override
   @optionalTypeArgs
   Result when<Result extends Object>({
-    @required Result firstItem(),
+    @required Result system(),
     @required Result preferedLocale(String locale),
   }) {
-    assert(firstItem != null);
+    assert(system != null);
     assert(preferedLocale != null);
     return preferedLocale(locale);
   }
@@ -217,7 +220,7 @@ class _$PreferedLocale implements PreferedLocale {
   @override
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
-    Result firstItem(),
+    Result system(),
     Result preferedLocale(String locale),
     @required Result orElse(),
   }) {
@@ -231,10 +234,10 @@ class _$PreferedLocale implements PreferedLocale {
   @override
   @optionalTypeArgs
   Result map<Result extends Object>({
-    @required Result firstItem(FirstItem value),
-    @required Result preferedLocale(PreferedLocale value),
+    @required Result system(_System value),
+    @required Result preferedLocale(_PreferedLocale value),
   }) {
-    assert(firstItem != null);
+    assert(system != null);
     assert(preferedLocale != null);
     return preferedLocale(this);
   }
@@ -242,8 +245,8 @@ class _$PreferedLocale implements PreferedLocale {
   @override
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
-    Result firstItem(FirstItem value),
-    Result preferedLocale(PreferedLocale value),
+    Result system(_System value),
+    Result preferedLocale(_PreferedLocale value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -254,9 +257,9 @@ class _$PreferedLocale implements PreferedLocale {
   }
 }
 
-abstract class PreferedLocale implements InitialLang {
-  const factory PreferedLocale(String locale) = _$PreferedLocale;
+abstract class _PreferedLocale implements InitialLang {
+  const factory _PreferedLocale(String locale) = _$_PreferedLocale;
 
   String get locale;
-  $PreferedLocaleCopyWith<PreferedLocale> get copyWith;
+  _$PreferedLocaleCopyWith<_PreferedLocale> get copyWith;
 }

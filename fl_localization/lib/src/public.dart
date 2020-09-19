@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'fl_localization.dart';
+import 'localization.dart';
 
 String translate(String key, {BuildContext context}) {
   return context == null

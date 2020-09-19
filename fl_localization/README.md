@@ -25,4 +25,4 @@ translate('your_string_localized')
 if you like any feature or if you see any bug,please report an issue on [Github](https://github.com/mohammadne/Flutter-Packages/issues/),
 
 ### TODO's
-  - [ ] remove dependency of [flutter_bloc](https://pub.dev/packages/bloc) 
+  - [ ] simpler access to fl_localization object
