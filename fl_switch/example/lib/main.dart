@@ -17,17 +17,29 @@ class MyApp extends StatelessWidget {
           SizedBox(height: 30),
           ValueListenableBuilder(
             valueListenable: _lineValueNotifier,
-            builder: (_, value, __) => FlSwitch.line(
-              value: value,
-              onTap: (val) => _lineValueNotifier.value = val,
+            builder: (_, value, __) => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlSwitch.line(
+                  value: value,
+                  onTap: (val) => _lineValueNotifier.value = val,
+                ),
+                Text(value.toString()),
+              ],
             ),
           ),
           SizedBox(height: 30),
           ValueListenableBuilder(
             valueListenable: _stretchy1ValueNotifier,
-            builder: (_, value, __) => FlSwitch.stretchy1(
-              value: value,
-              onTap: (val) => _lineValueNotifier.value = val,
+            builder: (_, value, __) => Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlSwitch.stretchy1(
+                  value: value,
+                  onTap: (val) => _stretchy1ValueNotifier.value = val,
+                ),
+                Text(value.toString()),
+              ],
             ),
           ),
         ],

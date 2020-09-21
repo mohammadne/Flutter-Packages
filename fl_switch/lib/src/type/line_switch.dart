@@ -33,44 +33,49 @@ class LineSwitch extends StatelessWidget {
 
     final circleSize = size * 0.5;
 
-    return GestureDetector(
-      onTap: () => onTap(!value),
-      child: Container(
-        height: height,
-        width: width,
-        color: Colors.transparent,
-        margin: EdgeInsets.symmetric(vertical: 60),
-        child: Stack(
-          alignment: Alignment.center,
-          children: <Widget>[
-            AnimatedContainer(
-              duration: duration,
-              curve: curve,
-              color: value ? activeColor : inActiveColor,
-              height: lineHeight,
-              width: width,
-            ),
-            Container(
-              width: width + circleSize,
-              child: AnimatedAlign(
-                duration: duration,
-                curve: curve,
-                alignment: value ? Alignment.centerRight : Alignment.centerLeft,
-                child: AnimatedContainer(
+    return Row(
+      children: [
+        GestureDetector(
+          onTap: () => onTap(!value),
+          child: Container(
+            height: height,
+            width: width,
+            color: Colors.transparent,
+            margin: EdgeInsets.symmetric(vertical: 60),
+            child: Stack(
+              alignment: Alignment.center,
+              children: <Widget>[
+                AnimatedContainer(
                   duration: duration,
                   curve: curve,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: value ? activeColor : inActiveColor,
-                  ),
-                  height: circleSize,
-                  width: circleSize,
+                  color: value ? activeColor : inActiveColor,
+                  height: lineHeight,
+                  width: width,
                 ),
-              ),
+                Container(
+                  width: width + circleSize,
+                  child: AnimatedAlign(
+                    duration: duration,
+                    curve: curve,
+                    alignment:
+                        value ? Alignment.centerRight : Alignment.centerLeft,
+                    child: AnimatedContainer(
+                      duration: duration,
+                      curve: curve,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: value ? activeColor : inActiveColor,
+                      ),
+                      height: circleSize,
+                      width: circleSize,
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }
