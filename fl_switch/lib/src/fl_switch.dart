@@ -1,8 +1,9 @@
-import 'package:fl_switch/src/type/line/line_switch.dart';
+import 'package:fl_switch/src/type/line/line1.dart';
 import 'package:fl_switch/src/type/stretchy/stretchy1.dart';
 import 'package:fl_switch/src/type/stretchy/stretchy2.dart';
 import 'package:flutter/material.dart';
 
+import 'type/curve/curve1.dart';
 import 'type/stretchy/stretchy3.dart';
 
 class FlSwitch {
@@ -14,7 +15,7 @@ class FlSwitch {
   bool value;
   ValueChanged<bool> onTap;
 
-  Widget line() => LineSwitch(
+  Widget line() => Line1(
         value: value,
         onTap: onTap,
       );
@@ -31,6 +32,11 @@ class FlSwitch {
 
   Widget stretchy3() => Stretchy3(
         value: value,
+        onTap: onTap,
+      );
+
+  Widget curve1() => Curve1(
+        initValue: value,
         onTap: onTap,
       );
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-class LineSwitch extends StatelessWidget {
-  const LineSwitch({
+class Line1 extends StatelessWidget {
+  const Line1({
     @required this.value,
     @required this.onTap,
     this.duration = const Duration(milliseconds: 270),
