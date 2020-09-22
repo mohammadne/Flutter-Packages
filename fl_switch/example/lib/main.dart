@@ -45,18 +45,18 @@ class MyApp extends StatelessWidget {
             ],
           ),
           SizedBox(height: 30),
-          ValueListenableBuilder(
-            valueListenable: _stretchy2ValueNotifier,
-            builder: (_, value, __) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FlSwitch(
-                  value: value,
-                  onTap: (val) => _stretchy2ValueNotifier.value = val,
-                ).stretchy2(),
-                Text(value.toString()),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FlSwitch(
+                value: _stretchy2ValueNotifier.value,
+                onTap: (val) => _stretchy2ValueNotifier.value = val,
+              ).stretchy2(),
+              ValueListenableBuilder(
+                valueListenable: _stretchy2ValueNotifier,
+                builder: (_, value, __) => Text(value.toString()),
+              ),
+            ],
           ),
           SizedBox(height: 30),
           ValueListenableBuilder(

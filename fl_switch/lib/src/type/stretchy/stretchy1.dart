@@ -7,7 +7,7 @@ class Stretchy1 extends StatefulWidget {
   const Stretchy1({
     @required this.initValue,
     @required this.onTap,
-    this.duration = const Duration(milliseconds: 300),
+    this.duration = const Duration(milliseconds: 400),
     this.curve = Curves.linear,
     this.activeColor = const Color(0xffFFFFFF),
     this.inActiveColor = const Color(0xff000000),

@@ -4,9 +4,9 @@ class RoundedContainer extends StatelessWidget {
   const RoundedContainer({
     Key key,
     @required this.color,
-    @required this.margin,
     @required this.width,
     @required this.height,
+    this.margin = 0,
     this.circleChild,
   }) : super(key: key);
 
