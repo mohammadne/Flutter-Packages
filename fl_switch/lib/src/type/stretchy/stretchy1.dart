@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
+import '../common/rounded_animated_circle.dart';
+
 class Stretchy1 extends StatelessWidget {
   const Stretchy1({
     @required this.value,
@@ -39,7 +41,6 @@ class Stretchy1 extends StatelessWidget {
             height: height,
             width: width,
             decoration: BoxDecoration(
-              color: Colors.black,
               borderRadius: BorderRadius.circular(size * 10),
             ),
             child: Stack(
@@ -47,7 +48,7 @@ class Stretchy1 extends StatelessWidget {
                 /// ACTIVE
                 Align(
                   alignment: Alignment.centerRight,
-                  child: _RoundedAnimatedCircle(
+                  child: RoundedAnimatedCircle(
                     curve: curve,
                     duration: duration,
                     size: size,
@@ -60,7 +61,7 @@ class Stretchy1 extends StatelessWidget {
                 /// INACTIVE
                 Align(
                   alignment: Alignment.centerLeft,
-                  child: _RoundedAnimatedCircle(
+                  child: RoundedAnimatedCircle(
                     curve: curve,
                     duration: duration,
                     size: size,
@@ -89,47 +90,6 @@ class Stretchy1 extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-class _RoundedAnimatedCircle extends StatelessWidget {
-  const _RoundedAnimatedCircle({
-    Key key,
-    @required this.color,
-    @required this.margin,
-    @required this.size,
-    @required this.factor,
-    @required this.duration,
-    @required this.curve,
-  }) : super(key: key);
-
-  final Color color;
-  final double margin;
-  final double size;
-  final double factor;
-  final Duration duration;
-  final Curve curve;
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedPadding(
-      duration: duration,
-      curve: curve,
-      padding: EdgeInsets.symmetric(
-        horizontal: margin * 1.5,
-        vertical: margin,
-      ),
-      child: AnimatedContainer(
-        duration: duration,
-        curve: curve,
-        height: size,
-        width: size * factor - (factor == 1 ? margin * 2 : 0),
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(1000),
-        ),
-      ),
     );
   }
 }
