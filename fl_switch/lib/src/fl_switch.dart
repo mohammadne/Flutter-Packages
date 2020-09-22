@@ -7,13 +7,13 @@ import 'type/curve/curve1.dart';
 import 'type/stretchy/stretchy3.dart';
 
 class FlSwitch {
-  FlSwitch({
+  const FlSwitch({
     @required this.value,
     @required this.onTap,
   });
 
-  bool value;
-  ValueChanged<bool> onTap;
+  final bool value;
+  final ValueChanged<bool> onTap;
 
   Widget line() => Line1(
         value: value,
@@ -21,7 +21,7 @@ class FlSwitch {
       );
 
   Widget stretchy1() => Stretchy1(
-        value: value,
+        initValue: value,
         onTap: onTap,
       );
 

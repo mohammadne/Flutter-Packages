@@ -31,18 +31,18 @@ class MyApp extends StatelessWidget {
             ),
           ),
           SizedBox(height: 30),
-          ValueListenableBuilder(
-            valueListenable: _stretchy1ValueNotifier,
-            builder: (_, value, __) => Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FlSwitch(
-                  value: value,
-                  onTap: (val) => _stretchy1ValueNotifier.value = val,
-                ).stretchy1(),
-                Text(value.toString()),
-              ],
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              FlSwitch(
+                value: _stretchy1ValueNotifier.value,
+                onTap: (val) => _stretchy1ValueNotifier.value = val,
+              ).stretchy1(),
+              ValueListenableBuilder(
+                valueListenable: _stretchy1ValueNotifier,
+                builder: (_, val, __) => Text(val.toString()),
+              ),
+            ],
           ),
           SizedBox(height: 30),
           ValueListenableBuilder(

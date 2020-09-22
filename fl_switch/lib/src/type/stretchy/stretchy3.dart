@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import '../common/rounded_animated_circle.dart';
+import '../common/animated_circle_container.dart';
 
 class Stretchy3 extends StatelessWidget {
   const Stretchy3({
