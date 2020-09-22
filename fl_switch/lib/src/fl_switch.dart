@@ -31,7 +31,7 @@ class FlSwitch {
       );
 
   Widget stretchy3() => Stretchy3(
-        value: value,
+        initValue: value,
         onTap: onTap,
       );
 
