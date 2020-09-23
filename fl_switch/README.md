@@ -6,7 +6,7 @@ A library to draw fantastic Switches with nice animations in Flutter
 
 |Stretchy	|Curve		|
 |:------------:|:------------:|
-|	[![](https://github.com/imaNNeoFighT/fl_chart/raw/master/repo_files/images/line_chart/line_chart_sample_1_anim.gif)](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/line_chart.md#sample-1-source-code)   |	[![](https://github.com/imaNNeoFighT/fl_chart/raw/master/repo_files/images/line_chart/line_chart_sample_2_anim.gif)](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/line_chart.md#sample-2-source-code) |
+|	![](https://giphy.com/embed/jhuGAVVurNw0W5n3DF)   |	![](https://giphy.com/embed/dkHWBAeLp6o4E90yNJ) |
 
 
 
