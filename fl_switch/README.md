@@ -17,7 +17,7 @@ A library to draw fantastic Switches with nice animations in Flutter
 
 ```yml
 dependencies:
-  fl_switch: ^0.1.0
+  fl_switch: ^0.1.1
 ```
 
 
