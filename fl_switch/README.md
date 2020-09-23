@@ -1,14 +1,32 @@
-# fl_switch
+# Fl Switch
 
-A new Flutter package project.
+A library to draw fantastic Switches with nice animations in Flutter
 
-## Getting Started
+## Types
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+|Stretchy	|Curve		|
+|:------------:|:------------:|
+|	[![](https://github.com/imaNNeoFighT/fl_chart/raw/master/repo_files/images/line_chart/line_chart_sample_1_anim.gif)](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/line_chart.md#sample-1-source-code)   |	[![](https://github.com/imaNNeoFighT/fl_chart/raw/master/repo_files/images/line_chart/line_chart_sample_2_anim.gif)](https://github.com/imaNNeoFighT/fl_chart/blob/master/repo_files/documentations/line_chart.md#sample-2-source-code) |
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+
+
+
+
+# Let's get started
+
+### 1 - Depend on it
+
+##### Add it to your package's pubspec.yaml file
+
+```yml
+dependencies:
+  fl_switch: ^0.1.0
+```
+
+
+### 2 - Install it
+
+##### Install packages from the command line
+```sh
+flutter packages get
+```
