@@ -6,7 +6,7 @@ A library to draw fantastic Switches with nice animations in Flutter
 
 |Stretchy	|Curve		|
 |:------------:|:------------:|
-|	![](https://giphy.com/embed/jhuGAVVurNw0W5n3DF)   |	![](https://giphy.com/embed/dkHWBAeLp6o4E90yNJ) |
+|	![](https://media.giphy.com/media/jhuGAVVurNw0W5n3DF/giphy.gif)   |	![](https://media.giphy.com/media/dkHWBAeLp6o4E90yNJ/giphy.gif) |
 
 
 # Let's get started
