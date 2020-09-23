@@ -9,9 +9,6 @@ A library to draw fantastic Switches with nice animations in Flutter
 |	![](https://giphy.com/embed/jhuGAVVurNw0W5n3DF)   |	![](https://giphy.com/embed/dkHWBAeLp6o4E90yNJ) |
 
 
-
-
-
 # Let's get started
 
 ### 1 - Depend on it
