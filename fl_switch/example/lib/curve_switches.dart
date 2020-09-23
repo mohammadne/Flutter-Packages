@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class CurveSwitches extends StatelessWidget {
   final ValueNotifier<bool> _curve1ValueNotifier = ValueNotifier(false);
+  final ValueNotifier<bool> _curve2ValueNotifier = ValueNotifier(false);
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +17,16 @@ class CurveSwitches extends StatelessWidget {
               value: _curve1ValueNotifier.value,
               onTap: (val) => _curve1ValueNotifier.value = val,
             ).curve1(),
+          ],
+        ),
+        SizedBox(height: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            FlSwitch(
+              value: _curve2ValueNotifier.value,
+              onTap: (val) => _curve2ValueNotifier.value = val,
+            ).curve2(),
           ],
         ),
       ],

@@ -4,6 +4,7 @@ import 'package:fl_switch/src/type/stretchy/stretchy2.dart';
 import 'package:flutter/material.dart';
 
 import 'type/curve/curve1.dart';
+import 'type/curve/curve2.dart';
 import 'type/stretchy/stretchy3.dart';
 
 class FlSwitch {
@@ -35,7 +36,12 @@ class FlSwitch {
         onTap: onTap,
       );
 
-  Widget curve1() => Curve1New(
+  Widget curve1() => Curve1(
+        initValue: value,
+        onTap: onTap,
+      );
+
+  Widget curve2() => Curve2(
         initValue: value,
         onTap: onTap,
       );

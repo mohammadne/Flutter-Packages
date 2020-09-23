@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'curve_painter.dart';
 
-class Curve1 extends StatefulWidget {
-  const Curve1({
+class Curve2 extends StatefulWidget {
+  const Curve2({
     @required this.initValue,
     @required this.onTap,
     this.duration = const Duration(milliseconds: 400),
@@ -37,10 +37,10 @@ class Curve1 extends StatefulWidget {
   final double sweepAngle;
 
   @override
-  _Curve1State createState() => _Curve1State();
+  _Curve2State createState() => _Curve2State();
 }
 
-class _Curve1State extends State<Curve1> with SingleTickerProviderStateMixin {
+class _Curve2State extends State<Curve2> with SingleTickerProviderStateMixin {
   AnimationController animController;
   Animation animColor;
   Animation anim;
@@ -144,8 +144,8 @@ class _Curve1State extends State<Curve1> with SingleTickerProviderStateMixin {
   }
 }
 /*
-class Curve1 extends StatefulWidget {
-  const Curve1({
+class Curve2 extends StatefulWidget {
+  const Curve2({
     Key key,
     this.initValue,
     this.onTap,
@@ -169,10 +169,10 @@ class Curve1 extends StatefulWidget {
   final double size;
 
   @override
-  _Curve1State createState() => _Curve1State();
+  _Curve2State createState() => _Curve2State();
 }
 
-class _Curve1State extends State<Curve1> with SingleTickerProviderStateMixin {
+class _Curve2State extends State<Curve2> with SingleTickerProviderStateMixin {
   AnimationController _controller;
   int keyState = 0;
 
