@@ -35,7 +35,7 @@ class FlSwitch {
         onTap: onTap,
       );
 
-  Widget curve1() => Curve1(
+  Widget curve1() => Curve1New(
         initValue: value,
         onTap: onTap,
       );

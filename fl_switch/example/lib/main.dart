@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:fl_switch/fl_switch.dart';
 
-import 'stretchy.dart';
+import 'curve_switches.dart';
+import 'stretchy_switches.dart';
 import 'top_clipper.dart';
 
 void main() => runApp(MaterialApp(home: MyApp()));
@@ -32,7 +32,8 @@ class MyApp extends StatelessWidget {
           Expanded(
             child: PageView(
               children: [
-                Stretchy(),
+                StretchySwitches(),
+                CurveSwitches(),
               ],
             ),
           ),

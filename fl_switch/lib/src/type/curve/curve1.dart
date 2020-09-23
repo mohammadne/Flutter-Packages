@@ -1,8 +1,120 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
-import 'curve1_paint.dart';
+import 'curve_painter.dart';
 
+class Curve1New extends StatefulWidget {
+  const Curve1New({
+    @required this.initValue,
+    @required this.onTap,
+    this.duration = const Duration(milliseconds: 400),
+    this.curve = Curves.linear,
+    this.activeColor = Colors.green,
+    this.inActiveColor = Colors.grey,
+    this.backgroundColor = const Color(0xffFFFFFF),
+    this.thickness = 40,
+    this.size = 300,
+    this.sweepAngle = math.pi * 0.67,
+    this.space = 10,
+  });
+
+  final bool initValue;
+
+  final ValueChanged<bool> onTap;
+
+  final Duration duration;
+  final Curve curve;
+
+  final Color activeColor;
+  final Color inActiveColor;
+  final Color backgroundColor;
+
+  final double thickness;
+  final double size;
+
+  final double space;
+
+  final double sweepAngle;
+
+  @override
+  _Curve1NewState createState() => _Curve1NewState();
+}
+
+class _Curve1NewState extends State<Curve1New>
+    with SingleTickerProviderStateMixin {
+  AnimationController animController;
+  Animation anim;
+
+  double startAngle;
+  double endAngle;
+
+  @override
+  void initState() {
+    super.initState();
+
+    startAngle = 0.5 * (math.pi - widget.sweepAngle);
+    endAngle = 0.5 * (math.pi + widget.sweepAngle);
+
+    animController = AnimationController(
+      duration: widget.duration,
+      vsync: this,
+    );
+
+    anim = Tween<double>(
+      begin: startAngle,
+      end: endAngle,
+    ).animate(animController);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        alignment: Alignment.center,
+        width: widget.size,
+        height: widget.size / 2,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            CustomPaint(
+              painter: CurvePainterNew(
+                color: widget.backgroundColor,
+                sweepAngle: widget.sweepAngle,
+                thickness: widget.thickness,
+              ),
+              size: Size.infinite,
+            ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 0,
+              top: widget.space / 2,
+              child: AnimatedBuilder(
+                animation: anim,
+                builder: (_, ch) => Transform(
+                  transform: new Matrix4.rotationZ(0.274533), // rotate -10 deg
+                  alignment:
+                      FractionalOffset.bottomCenter, // set transform origin
+                  child: ch,
+                ),
+                child: CustomPaint(
+                  painter: CurvePainterNew(
+                    color: widget.activeColor,
+                    sweepAngle: widget.sweepAngle / 2,
+                    thickness: widget.thickness - widget.space,
+                  ),
+                  size: Size.infinite,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+/*
 class Curve1 extends StatefulWidget {
   const Curve1({
     Key key,
@@ -65,7 +177,7 @@ class _Curve1State extends State<Curve1> with SingleTickerProviderStateMixin {
               alignment: Alignment.center,
               children: <Widget>[
                 CustomPaint(
-                  painter: ArcPainter(
+                  painter: CurvePainter(
                     color: Color(0xFFECECEC),
                     halfCircleRatio: 0.67,
                     diameterFactor: 2.6 / 10,
@@ -81,7 +193,7 @@ class _Curve1State extends State<Curve1> with SingleTickerProviderStateMixin {
                     ),
                     alignment: FractionalOffset.bottomCenter,
                     child: CustomPaint(
-                      painter: ArcPainter(
+                      painter: CurvePainter(
                         color: Theme.of(context).colorScheme.primary,
                         halfCircleRatio: 0.25,
                         diameterFactor: 2 / 10,
@@ -113,7 +225,7 @@ class _Curve1State extends State<Curve1> with SingleTickerProviderStateMixin {
                       ),
                       alignment: FractionalOffset.bottomCenter,
                       child: CustomPaint(
-                        painter: ArcPainter(
+                        painter: CurvePainter(
                           color: Theme.of(context).colorScheme.primary,
                           halfCircleRatio: 0.25,
                           diameterFactor: 2 / 10,
@@ -146,7 +258,7 @@ class _Curve1State extends State<Curve1> with SingleTickerProviderStateMixin {
                       ),
                       alignment: FractionalOffset.bottomCenter,
                       child: CustomPaint(
-                        painter: ArcPainter(
+                        painter: CurvePainter(
                           color: Theme.of(context).colorScheme.primary,
                           halfCircleRatio: 0.25,
                           diameterFactor: 2 / 10,
@@ -336,3 +448,4 @@ class _Curve1State extends State<Curve1> with SingleTickerProviderStateMixin {
     );
   }
 }
+*/
