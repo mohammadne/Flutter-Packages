@@ -1,16 +1,12 @@
 import 'package:fl_localization/fl_localization.dart';
 import 'package:flutter/material.dart';
 
-FlLocalization flLocalization;
-
 void main() async {
-  flLocalization = FlLocalization(
+  await FlLocalization(
     supportedLocales: ['en_US', 'fa_IR'],
     initialLang: InitialLang.system(),
     assetPrefix: 'assets/lang',
-  );
-
-  await flLocalization.initialize();
+  ).initialize();
 
   runApp(App());
 }
@@ -19,7 +15,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlLocalizationWidget(
-      flLocalization: flLocalization,
+      flLocalization: FlLocalization.instance,
       builder: (delegates, locales, currentLocale) => MaterialApp(
         title: 'app.name'.tr(),
 
@@ -42,6 +38,8 @@ class UI extends StatefulWidget {
 class _UIState extends State<UI> {
   @override
   Widget build(BuildContext context) {
+    final flLocalization = FlLocalization.instance;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('ui.app_bar').tr(),

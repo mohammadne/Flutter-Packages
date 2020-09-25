@@ -40,21 +40,21 @@ class FlLocalization implements IFlLocalization {
     _langSubj.listen(_loadTranslation);
   }
 
-  static FlLocalization _instance;
+  static FlLocalization instance;
 
   factory FlLocalization({
     List<String> supportedLocales,
     InitialLang initialLang,
     String assetPrefix,
   }) {
-    if (_instance == null)
-      _instance = FlLocalization._(
+    if (instance == null)
+      instance = FlLocalization._(
         supportedLocales: supportedLocales,
         assetPrefix: assetPrefix,
         initialLang: initialLang,
       );
 
-    return _instance;
+    return instance;
   }
 
   final List<String> supportedLocales;
