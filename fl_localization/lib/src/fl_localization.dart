@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:fl_localization/fl_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:hive/hive.dart';
@@ -30,13 +31,30 @@ abstract class IFlLocalization {
 }
 
 class FlLocalization implements IFlLocalization {
-  FlLocalization({
+  FlLocalization._({
     @required this.supportedLocales,
     @required this.assetPrefix,
     this.initialLang,
   })  : assert(supportedLocales != null),
         assert(supportedLocales.isNotEmpty) {
     _langSubj.listen(_loadTranslation);
+  }
+
+  static FlLocalization _instance;
+
+  factory FlLocalization({
+    List<String> supportedLocales,
+    InitialLang initialLang,
+    String assetPrefix,
+  }) {
+    if (_instance == null)
+      _instance = FlLocalization._(
+        supportedLocales: supportedLocales,
+        assetPrefix: assetPrefix,
+        initialLang: initialLang,
+      );
+
+    return _instance;
   }
 
   final List<String> supportedLocales;
