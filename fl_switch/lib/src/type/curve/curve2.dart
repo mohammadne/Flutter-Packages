@@ -42,8 +42,8 @@ class Curve2 extends StatefulWidget {
 
 class _Curve2State extends State<Curve2> with SingleTickerProviderStateMixin {
   AnimationController animController;
-  Animation animColor;
-  Animation anim;
+  Animation<Color> animColor;
+  Animation<double> anim;
 
   bool value;
 
@@ -123,13 +123,13 @@ class _Curve2State extends State<Curve2> with SingleTickerProviderStateMixin {
               child: AnimatedBuilder(
                 animation: animController,
                 builder: (_, __) => Transform(
-                  transform: Matrix4.rotationZ(anim.value), // rotate -10 deg
-                  alignment:
-                      FractionalOffset.bottomCenter, // set transform origin
+                  transform: Matrix4.rotationZ(anim.value),
+                  alignment: FractionalOffset.bottomCenter,
                   child: CustomPaint(
                     painter: CurvePainterNew(
                       color: animColor.value,
-                      sweepAngle: widget.sweepAngle / 2,
+                      sweepAngle: widget.sweepAngle *
+                          (1 - 0.5 * anim.value.abs() * 1 / endAngle),
                       thickness: widget.thickness - widget.space,
                     ),
                     size: Size.infinite,

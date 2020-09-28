@@ -19,6 +19,16 @@ class CurveSwitches extends StatelessWidget {
             ).curve1(),
           ],
         ),
+        SizedBox(height: 30),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            FlSwitch(
+              value: _curve2ValueNotifier.value,
+              onTap: (val) => _curve2ValueNotifier.value = val,
+            ).curve2(),
+          ],
+        ),
       ],
     );
   }

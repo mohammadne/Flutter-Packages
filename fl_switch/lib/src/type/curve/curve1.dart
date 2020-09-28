@@ -123,9 +123,8 @@ class _Curve1State extends State<Curve1> with SingleTickerProviderStateMixin {
               child: AnimatedBuilder(
                 animation: animController,
                 builder: (_, __) => Transform(
-                  transform: Matrix4.rotationZ(anim.value), // rotate -10 deg
-                  alignment:
-                      FractionalOffset.bottomCenter, // set transform origin
+                  transform: Matrix4.rotationZ(anim.value),
+                  alignment: FractionalOffset.bottomCenter,
                   child: CustomPaint(
                     painter: CurvePainterNew(
                       color: animColor.value,
