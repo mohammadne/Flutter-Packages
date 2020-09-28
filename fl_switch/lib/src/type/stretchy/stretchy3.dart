@@ -1,5 +1,4 @@
 import 'package:fl_switch/src/type/common/circle_container.dart';
-import 'package:fl_switch/src/type/common/rounded_container.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 

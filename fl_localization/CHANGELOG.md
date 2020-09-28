@@ -19,3 +19,8 @@
 * redesign package 
 * remove dependency to bloc and hydratedbloc and hive
 * better performance
+
+## [0.1.1] - Friday, September 25, 2020
+
+* make FlLocalization to be a singleton
+* update example
