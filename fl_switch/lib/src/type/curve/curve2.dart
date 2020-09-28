@@ -95,9 +95,9 @@ class _Curve2State extends State<Curve2> with SingleTickerProviderStateMixin {
         widget.onTap(value);
 
         if (value) {
-          animController.reverse();
-        } else {
           animController.forward();
+        } else {
+          animController.reverse();
         }
       },
       child: Container(

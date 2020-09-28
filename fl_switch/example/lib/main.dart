@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
               color: Color(0xff262e59),
               child: Center(
                 child: Text(
-                  'FLSwitch -> Stretchy',
+                  'FLSwitch Library',
                   style: TextStyle(color: Colors.white),
                 ),
               ),
