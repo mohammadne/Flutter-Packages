@@ -6,8 +6,8 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "**/*.config.dart": true,
-        "**/*.freezed.dart": false,
-        "**/*.g.dart": false,
+        "**/*.freezed.dart": true,
+        "**/*.g.dart": true,
         "**/*.gr.dart": true
     },
     "explorerExclude.backup": null
