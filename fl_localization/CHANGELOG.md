@@ -24,3 +24,7 @@
 
 * make FlLocalization to be a singleton
 * update example
+
+## [0.1.2] - Tuesday, September 29, 2020
+
+* update dependencies

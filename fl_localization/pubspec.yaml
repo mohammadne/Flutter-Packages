@@ -1,6 +1,6 @@
 name: fl_localization
 description: A Rich Localiation Service In Flutter.
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/mohammadne/Flutter-Packages/tree/master/fl_localization
 issue_tracker: https://github.com/mohammadne/Flutter-Packages/issues/
 homepage: https://github.com/mohammadne/Flutter-Packages/
@@ -15,7 +15,7 @@ dependencies:
     sdk: flutter
 
   # Data Classes 
-  freezed_annotation: ^0.11.0+1
+  freezed_annotation: ^0.12.0
 
   rxdart: ^0.24.1
 
@@ -28,7 +28,7 @@ dependencies:
     sdk: flutter
 
 dev_dependencies:
-  json_serializable: ^3.4.1
+  json_serializable: ^3.5.0
   build_runner: ^1.10.1
   freezed: ^0.11.6
   flutter_test:
