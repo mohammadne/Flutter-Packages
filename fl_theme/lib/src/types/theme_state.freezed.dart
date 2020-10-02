@@ -9,44 +9,39 @@ part of 'theme_state.dart';
 
 T _$identity<T>(T value) => value;
 
-/// @nodoc
 class _$ThemeStateTearOff {
   const _$ThemeStateTearOff();
 
 // ignore: unused_element
   _ThemeState call(
-      {@required ThemeBrightness brightness, @required ThemePalette scheme}) {
+      {@required ThemeBrightness brightness, @required ThemePalette palette}) {
     return _ThemeState(
       brightness: brightness,
-      scheme: scheme,
+      palette: palette,
     );
   }
 }
 
-/// @nodoc
 // ignore: unused_element
 const $ThemeState = _$ThemeStateTearOff();
 
-/// @nodoc
 mixin _$ThemeState {
   ThemeBrightness get brightness;
-  ThemePalette get scheme;
+  ThemePalette get palette;
 
   $ThemeStateCopyWith<ThemeState> get copyWith;
 }
 
-/// @nodoc
 abstract class $ThemeStateCopyWith<$Res> {
   factory $ThemeStateCopyWith(
           ThemeState value, $Res Function(ThemeState) then) =
       _$ThemeStateCopyWithImpl<$Res>;
-  $Res call({ThemeBrightness brightness, ThemePalette scheme});
+  $Res call({ThemeBrightness brightness, ThemePalette palette});
 
   $ThemeBrightnessCopyWith<$Res> get brightness;
-  $ThemePaletteCopyWith<$Res> get scheme;
+  $ThemePaletteCopyWith<$Res> get palette;
 }
 
-/// @nodoc
 class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
   _$ThemeStateCopyWithImpl(this._value, this._then);
 
@@ -57,13 +52,13 @@ class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
   @override
   $Res call({
     Object brightness = freezed,
-    Object scheme = freezed,
+    Object palette = freezed,
   }) {
     return _then(_value.copyWith(
       brightness: brightness == freezed
           ? _value.brightness
           : brightness as ThemeBrightness,
-      scheme: scheme == freezed ? _value.scheme : scheme as ThemePalette,
+      palette: palette == freezed ? _value.palette : palette as ThemePalette,
     ));
   }
 
@@ -78,31 +73,29 @@ class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
   }
 
   @override
-  $ThemePaletteCopyWith<$Res> get scheme {
-    if (_value.scheme == null) {
+  $ThemePaletteCopyWith<$Res> get palette {
+    if (_value.palette == null) {
       return null;
     }
-    return $ThemePaletteCopyWith<$Res>(_value.scheme, (value) {
-      return _then(_value.copyWith(scheme: value));
+    return $ThemePaletteCopyWith<$Res>(_value.palette, (value) {
+      return _then(_value.copyWith(palette: value));
     });
   }
 }
 
-/// @nodoc
 abstract class _$ThemeStateCopyWith<$Res> implements $ThemeStateCopyWith<$Res> {
   factory _$ThemeStateCopyWith(
           _ThemeState value, $Res Function(_ThemeState) then) =
       __$ThemeStateCopyWithImpl<$Res>;
   @override
-  $Res call({ThemeBrightness brightness, ThemePalette scheme});
+  $Res call({ThemeBrightness brightness, ThemePalette palette});
 
   @override
   $ThemeBrightnessCopyWith<$Res> get brightness;
   @override
-  $ThemePaletteCopyWith<$Res> get scheme;
+  $ThemePaletteCopyWith<$Res> get palette;
 }
 
-/// @nodoc
 class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
     implements _$ThemeStateCopyWith<$Res> {
   __$ThemeStateCopyWithImpl(
@@ -115,31 +108,30 @@ class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object brightness = freezed,
-    Object scheme = freezed,
+    Object palette = freezed,
   }) {
     return _then(_ThemeState(
       brightness: brightness == freezed
           ? _value.brightness
           : brightness as ThemeBrightness,
-      scheme: scheme == freezed ? _value.scheme : scheme as ThemePalette,
+      palette: palette == freezed ? _value.palette : palette as ThemePalette,
     ));
   }
 }
 
-/// @nodoc
 class _$_ThemeState implements _ThemeState {
-  const _$_ThemeState({@required this.brightness, @required this.scheme})
+  const _$_ThemeState({@required this.brightness, @required this.palette})
       : assert(brightness != null),
-        assert(scheme != null);
+        assert(palette != null);
 
   @override
   final ThemeBrightness brightness;
   @override
-  final ThemePalette scheme;
+  final ThemePalette palette;
 
   @override
   String toString() {
-    return 'ThemeState(brightness: $brightness, scheme: $scheme)';
+    return 'ThemeState(brightness: $brightness, palette: $palette)';
   }
 
   @override
@@ -149,15 +141,15 @@ class _$_ThemeState implements _ThemeState {
             (identical(other.brightness, brightness) ||
                 const DeepCollectionEquality()
                     .equals(other.brightness, brightness)) &&
-            (identical(other.scheme, scheme) ||
-                const DeepCollectionEquality().equals(other.scheme, scheme)));
+            (identical(other.palette, palette) ||
+                const DeepCollectionEquality().equals(other.palette, palette)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(brightness) ^
-      const DeepCollectionEquality().hash(scheme);
+      const DeepCollectionEquality().hash(palette);
 
   @override
   _$ThemeStateCopyWith<_ThemeState> get copyWith =>
@@ -167,12 +159,12 @@ class _$_ThemeState implements _ThemeState {
 abstract class _ThemeState implements ThemeState {
   const factory _ThemeState(
       {@required ThemeBrightness brightness,
-      @required ThemePalette scheme}) = _$_ThemeState;
+      @required ThemePalette palette}) = _$_ThemeState;
 
   @override
   ThemeBrightness get brightness;
   @override
-  ThemePalette get scheme;
+  ThemePalette get palette;
   @override
   _$ThemeStateCopyWith<_ThemeState> get copyWith;
 }

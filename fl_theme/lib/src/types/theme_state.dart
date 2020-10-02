@@ -10,13 +10,13 @@ part 'theme_state.freezed.dart';
 abstract class ThemeState with _$ThemeState {
   const factory ThemeState({
     @required ThemeBrightness brightness,
-    @required ThemePalette scheme,
+    @required ThemePalette palette,
   }) = _ThemeState;
 }
 
 extension ThemeStateEx on ThemeState {
   ThemeStateDao toThemeStateDao() => ThemeStateDao(
         brightnessDao: brightness.toThemeBrightnessDao(),
-        schemeDao: scheme.toThemePaletteDao(),
+        paletteDao: palette.toThemePaletteDao(),
       );
 }

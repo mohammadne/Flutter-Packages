@@ -17,7 +17,7 @@ class ThemePaletteDaoAdapter extends TypeAdapter<ThemePaletteDao> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ThemePaletteDao(
-      scheme: (fields[0] as Map)?.cast<String, dynamic>(),
+      palette: (fields[0] as Map)?.cast<String, dynamic>(),
     );
   }
 
@@ -26,7 +26,7 @@ class ThemePaletteDaoAdapter extends TypeAdapter<ThemePaletteDao> {
     writer
       ..writeByte(1)
       ..writeByte(0)
-      ..write(obj.scheme);
+      ..write(obj.palette);
   }
 
   @override

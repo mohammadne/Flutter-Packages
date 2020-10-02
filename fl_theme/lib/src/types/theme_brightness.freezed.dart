@@ -20,7 +20,6 @@ ThemeBrightness _$ThemeBrightnessFromJson(Map<String, dynamic> json) {
   }
 }
 
-/// @nodoc
 class _$ThemeBrightnessTearOff {
   const _$ThemeBrightnessTearOff();
 
@@ -33,18 +32,11 @@ class _$ThemeBrightnessTearOff {
   Dark dark() {
     return const Dark();
   }
-
-// ignore: unused_element
-  ThemeBrightness fromJson(Map<String, Object> json) {
-    return ThemeBrightness.fromJson(json);
-  }
 }
 
-/// @nodoc
 // ignore: unused_element
 const $ThemeBrightness = _$ThemeBrightnessTearOff();
 
-/// @nodoc
 mixin _$ThemeBrightness {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -71,14 +63,12 @@ mixin _$ThemeBrightness {
   Map<String, dynamic> toJson();
 }
 
-/// @nodoc
 abstract class $ThemeBrightnessCopyWith<$Res> {
   factory $ThemeBrightnessCopyWith(
           ThemeBrightness value, $Res Function(ThemeBrightness) then) =
       _$ThemeBrightnessCopyWithImpl<$Res>;
 }
 
-/// @nodoc
 class _$ThemeBrightnessCopyWithImpl<$Res>
     implements $ThemeBrightnessCopyWith<$Res> {
   _$ThemeBrightnessCopyWithImpl(this._value, this._then);
@@ -88,13 +78,11 @@ class _$ThemeBrightnessCopyWithImpl<$Res>
   final $Res Function(ThemeBrightness) _then;
 }
 
-/// @nodoc
 abstract class $LightCopyWith<$Res> {
   factory $LightCopyWith(Light value, $Res Function(Light) then) =
       _$LightCopyWithImpl<$Res>;
 }
 
-/// @nodoc
 class _$LightCopyWithImpl<$Res> extends _$ThemeBrightnessCopyWithImpl<$Res>
     implements $LightCopyWith<$Res> {
   _$LightCopyWithImpl(Light _value, $Res Function(Light) _then)
@@ -105,8 +93,6 @@ class _$LightCopyWithImpl<$Res> extends _$ThemeBrightnessCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-
-/// @nodoc
 class _$Light implements Light {
   const _$Light();
 
@@ -188,13 +174,11 @@ abstract class Light implements ThemeBrightness {
   factory Light.fromJson(Map<String, dynamic> json) = _$Light.fromJson;
 }
 
-/// @nodoc
 abstract class $DarkCopyWith<$Res> {
   factory $DarkCopyWith(Dark value, $Res Function(Dark) then) =
       _$DarkCopyWithImpl<$Res>;
 }
 
-/// @nodoc
 class _$DarkCopyWithImpl<$Res> extends _$ThemeBrightnessCopyWithImpl<$Res>
     implements $DarkCopyWith<$Res> {
   _$DarkCopyWithImpl(Dark _value, $Res Function(Dark) _then)
@@ -205,8 +189,6 @@ class _$DarkCopyWithImpl<$Res> extends _$ThemeBrightnessCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
-
-/// @nodoc
 class _$Dark implements Dark {
   const _$Dark();
 

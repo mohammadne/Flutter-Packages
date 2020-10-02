@@ -16,5 +16,6 @@ abstract class ThemePalette with _$ThemePalette {
 }
 
 extension ThemePaletteEx on ThemePalette {
-  ThemePaletteDao toThemePaletteDao() => ThemePaletteDao(scheme: this.toJson());
+  ThemePaletteDao toThemePaletteDao() =>
+      ThemePaletteDao(palette: this.toJson());
 }

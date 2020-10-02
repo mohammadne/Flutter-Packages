@@ -1,5 +1,4 @@
-import 'package:meta/meta.dart';
-
+import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
 
 import '../types/theme_brightness.dart';
@@ -7,7 +6,7 @@ import '../types/theme_brightness.dart';
 part 'theme_brightness_dao.g.dart';
 
 @HiveType(typeId: 0)
-class ThemeBrightnessDao extends HiveType {
+class ThemeBrightnessDao {
   ThemeBrightnessDao({@required this.brightness});
 
   @HiveField(0)

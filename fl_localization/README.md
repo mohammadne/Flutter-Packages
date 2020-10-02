@@ -2,7 +2,7 @@
 
 Rich And Powerful Localiation Service In Flutter
 
-## Why easy_localization?
+## Why fl_localization?
 
 - 🚀 Easy translations for many languages and get all supported locales
 - 💾 React and persist to locale changes and easy to set your prefered locale

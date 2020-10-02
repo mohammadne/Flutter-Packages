@@ -10,11 +10,11 @@ class ThemeManager implements IThemeManager {
         ),
         colorScheme: palette.when(
           orange: () => ColorScheme.light(
-            primary: Color(0xffF2BB77),
-            primaryVariant: Color(0xffF25D50),
-            onPrimary: Color(0xffF2BB77).withOpacity(.15),
+            primary: Colors.orange.shade300,
           ),
-          blue: () => ColorScheme.light(),
+          blue: () => ColorScheme.light(
+            primary: Colors.blue.shade300,
+          ),
         ),
       ).copyWith(
         disabledColor: Color(0xff9C9C9C),
@@ -24,24 +24,27 @@ class ThemeManager implements IThemeManager {
   ThemeData darkThemeData(ThemePalette palette) => ThemeData.from(
         textTheme: _textTheme,
         colorScheme: palette.when(
-          orange: () => ColorScheme.dark(),
-          blue: () => ColorScheme.dark(),
+          orange: () => ColorScheme.dark(
+            primary: Colors.orange.shade700,
+          ),
+          blue: () => ColorScheme.dark(
+            primary: Colors.blue.shade700,
+          ),
         ),
       );
+
+  /// [bodyColor] => headline, title, subhead, button, body1, and body2
+  /// [displayColor] => display1 through display4, and caption
+  TextTheme _textTheme = TextTheme(
+    headline5: TextStyle(fontSize: 28),
+    subtitle1: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+    ),
+    subtitle2: TextStyle(fontSize: 14),
+    caption: TextStyle(fontSize: 12),
+  ).apply(fontFamily: 'Dana');
 }
-
-/// [bodyColor] => headline, title, subhead, button, body1, and body2
-/// [displayColor] => display1 through display4, and caption
-
-TextTheme _textTheme = TextTheme(
-  headline5: TextStyle(fontSize: 28),
-  subtitle1: TextStyle(
-    fontSize: 18,
-    fontWeight: FontWeight.w600,
-  ),
-  subtitle2: TextStyle(fontSize: 14),
-  caption: TextStyle(fontSize: 12),
-).apply(fontFamily: 'Dana');
 
 /*
 NAME         SIZE  WEIGHT  SPACING

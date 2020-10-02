@@ -18,7 +18,7 @@ class ThemeStateDaoAdapter extends TypeAdapter<ThemeStateDao> {
     };
     return ThemeStateDao(
       brightnessDao: fields[0] as ThemeBrightnessDao,
-      schemeDao: fields[1] as ThemePaletteDao,
+      paletteDao: fields[1] as ThemePaletteDao,
     );
   }
 
@@ -29,7 +29,7 @@ class ThemeStateDaoAdapter extends TypeAdapter<ThemeStateDao> {
       ..writeByte(0)
       ..write(obj.brightnessDao)
       ..writeByte(1)
-      ..write(obj.schemeDao);
+      ..write(obj.paletteDao);
   }
 
   @override

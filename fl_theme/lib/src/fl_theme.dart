@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:hive/hive.dart';
 
@@ -42,14 +43,16 @@ class FlTheme implements IFlTheme {
     Hive.registerAdapter(ThemePaletteDaoAdapter());
     Hive.registerAdapter(ThemeStateDaoAdapter());
 
-    Hive.openBox<ThemeStateDao>(_themeStateBoxKey)
-        .then((box) => _themeStateBox = box)
-        .then((_) => _themeStateSubj = BehaviorSubject.seeded(
-              _themeStateBox.isEmpty
-                  ? initialThemeState
-                  : _themeStateBox.getAt(_themeStateBoxIndex).toThemeState(),
-            ))
-        .then((_) => _initCompleter.complete());
+    Hive.initFlutter().then(
+      (value) => Hive.openBox<ThemeStateDao>(_themeStateBoxKey)
+          .then((box) => _themeStateBox = box)
+          .then((_) => _themeStateSubj = BehaviorSubject.seeded(
+                _themeStateBox.isEmpty
+                    ? initialThemeState
+                    : _themeStateBox.getAt(_themeStateBoxIndex).toThemeState(),
+              ))
+          .then((_) => _initCompleter.complete()),
+    );
 
     return _initCompleter.future;
   }
@@ -57,7 +60,7 @@ class FlTheme implements IFlTheme {
   @override
   ThemeState get initialThemeState => ThemeState(
         brightness: ThemeBrightness.light(),
-        scheme: ThemePalette.orange(),
+        palette: ThemePalette.orange(),
       );
 
   @override

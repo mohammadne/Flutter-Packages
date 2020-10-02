@@ -1,3 +1,4 @@
+import 'package:fl_theme/fl_theme.dart';
 import 'package:fl_theme/src/i_theme_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -22,16 +23,16 @@ class FlThemeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
+    return StreamBuilder<ThemeState>(
       initialData: flTheme.themeState,
       stream: flTheme.themeStateStream,
       builder: (_, flThemeSnap) {
         final flTheme = flThemeSnap.data;
         return builder(
-          themeManager.darkThemeData(flTheme.scheme),
+          themeManager.darkThemeData(flTheme.palette),
           flTheme.brightness.when(
-            light: () => themeManager.lightThemeData(flTheme.scheme),
-            dark: () => themeManager.darkThemeData(flTheme.scheme),
+            light: () => themeManager.lightThemeData(flTheme.palette),
+            dark: () => themeManager.darkThemeData(flTheme.palette),
           ),
         );
       },

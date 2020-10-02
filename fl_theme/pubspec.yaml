@@ -4,7 +4,7 @@ version: 0.0.1
 repository: https://github.com/mohammadne/Flutter-Packages/tree/master/fl_theme
 issue_tracker: https://github.com/mohammadne/Flutter-Packages/issues/
 homepage: https://github.com/mohammadne/Flutter-Packages/
-documentation:
+documentation: null
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -14,9 +14,10 @@ dependencies:
   flutter:
     sdk: flutter
 
-  # Data Classes 
+  # Annotations
   freezed_annotation: ^0.12.0
-
+  json_annotation: ^3.1.0
+  
   # Reactive programming
   rxdart: ^0.24.1
 
@@ -26,9 +27,11 @@ dependencies:
 
 dev_dependencies:
   json_serializable: ^3.5.0
+  hive_generator: ^0.7.2+1
   build_runner: ^1.10.1
   freezed: ^0.11.6
   flutter_test:
     sdk: flutter
 
-flutter:
+flutter: null
+

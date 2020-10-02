@@ -32,8 +32,89 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  FlTheme get theme => FlTheme();
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('FL THEME'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text('current Brightness :'),
+                    Text(theme.themeState.brightness.toString()),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text('current Palette :'),
+                    Text(theme.themeState.palette.toString()),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Divider(thickness: 3),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('change Brightness'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: () => theme.setTheme(theme.themeState.copyWith
+                          .call(brightness: ThemeBrightness.light())),
+                      child: Text('Light'),
+                    ),
+                    GestureDetector(
+                      onTap: () => theme.setTheme(theme.themeState.copyWith
+                          .call(brightness: ThemeBrightness.dark())),
+                      child: Text('dark'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+          Divider(thickness: 3),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('change Palette'),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    GestureDetector(
+                      onTap: () => theme.setTheme(theme.themeState.copyWith
+                          .call(palette: ThemePalette.orange())),
+                      child: Text('orange'),
+                    ),
+                    GestureDetector(
+                      onTap: () => theme.setTheme(theme.themeState.copyWith
+                          .call(palette: ThemePalette.blue())),
+                      child: Text('blue'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
