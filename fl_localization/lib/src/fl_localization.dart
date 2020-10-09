@@ -37,7 +37,10 @@ class FlLocalization implements IFlLocalization {
     this.initialLang,
   })  : assert(supportedLocales != null),
         assert(supportedLocales.isNotEmpty) {
-    _langSubj.listen(_loadTranslation);
+    _langSubj
+      ..listen(_loadTranslation)
+      ..listen((locale) =>
+          locale == null ? null : _langBox.put(_langBoxIndex, locale));
   }
 
   static FlLocalization instance;
@@ -75,6 +78,9 @@ class FlLocalization implements IFlLocalization {
   String get locale => _langSubj.value;
 
   @override
+  Stream<String> get localeStream => _langSubj.stream;
+
+  @override
   set locale(String locale) {
     if (locale == this.locale) return;
     _langSubj.add(locale);
@@ -83,9 +89,6 @@ class FlLocalization implements IFlLocalization {
   String languageCode(String locale) => locale.split('_').first;
 
   String countryCode(String locale) => locale.split('_').last;
-
-  @override
-  Stream<String> get localeStream => _langSubj.stream;
 
   @override
   Future<void> initialize() async {

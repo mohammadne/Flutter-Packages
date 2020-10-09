@@ -28,3 +28,11 @@
 ## [0.1.2] - Tuesday, September 29, 2020
 
 * update dependencies
+
+## [0.1.3] - Friday, October 9, 2020
+
+* fix persistance issue
+
+## [0.1.4] - Friday, October 9, 2020
+
+* fix initial put issue

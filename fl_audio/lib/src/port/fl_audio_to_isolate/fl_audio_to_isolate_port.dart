@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../fl_audio_models/order/fl_audio_order.dart';
+import '../../models/order/fl_audio_order.dart';
 
 part 'fl_audio_to_isolate_port.freezed.dart';
 part 'fl_audio_to_isolate_port.g.dart';
