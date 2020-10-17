@@ -1,3 +1,5 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - Saturday, October 17, 2020
 
-* TODO: Describe initial release.
+* wrappper around Dio package to facilitate its usage
+* support custom api headers
+* custom request option
