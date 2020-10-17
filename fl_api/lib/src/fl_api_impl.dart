@@ -6,9 +6,8 @@ import 'fl_api.dart';
 import 'fl_api_option.dart';
 
 class FlApiImpl implements FlApi {
-  FlApiImpl({@required String baseUrl, this.interceptors = const []})
-      : dio = Dio(BaseOptions(baseUrl: baseUrl))
-          ..interceptors.addAll(interceptors);
+  FlApiImpl([this.interceptors])
+      : dio = Dio()..interceptors.addAll(interceptors ?? []);
 
   final List<Interceptor> interceptors;
   final Dio dio;

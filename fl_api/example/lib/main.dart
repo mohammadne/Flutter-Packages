@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:fl_api/fl_api.dart';
 
 void main() {
-  FlApi api = FlApiImpl(baseUrl: 'base_url');
+  FlApi api = FlApiImpl();
   sendReq() => api.getMethod(
         'endpoint',
         option: FlApiOption(
