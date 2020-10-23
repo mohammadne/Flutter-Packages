@@ -1,18 +1,20 @@
 import 'package:fl_api/fl_api.dart';
 
-void main() {
+Future<void> main() async {
   FlApi api = FlApiImpl();
-  sendReq() => api.getMethod(
-        'endpoint',
-        option: FlApiOption(
-          header: FlApiHeader.basic(),
-        ),
+  sendReq() => api.postMethod(
+        'https://api.melodyo.org/v1/auth/oauth',
+        body: {
+          "provider": "google",
+          "token":
+              "ya29.a0AfH6SMDEfB2UjyomtGwWq4gJ1L9m1x0OQDy_G0YDwUCGfCwkUfFhTS-jpwpTxr3EOKaO2BhHYOR3j6q5imF43udrjLETZrGJpiJCkcxM_tblRoL9KUPNQpS_q19vSMQOfRqFlsPIBgvhHdVtZUUUSNCktgwo0c7hXdU"
+        },
       );
 
-  sendReq().then(
-    (res) => res.fold(
-      (error) => null,
-      (res) => null,
-    ),
-  );
+  try {
+    final res = await sendReq();
+    print(res);
+  } catch (e) {
+    print(e);
+  }
 }

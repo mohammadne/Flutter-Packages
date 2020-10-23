@@ -16,3 +16,8 @@
 ## [0.0.4] - Friday, October 23, 2020
 
 * fix null flApiOption issue
+
+## [0.0.5] - Friday, October 23, 2020
+
+* add documentation for flApi
+* fix type error

@@ -19,8 +19,8 @@ class FlApiImpl implements FlApi {
   }) {
     return dio
         .get<T>(endpoint, options: option.requestOptions)
-        .then((response) => right(response))
-        .catchError((DioError error) => left(error));
+        .then((response) => right<DioError, Response<T>>(response))
+        .catchError((error) => left<DioError, Response<T>>(error as DioError));
   }
 
   @override
@@ -31,8 +31,8 @@ class FlApiImpl implements FlApi {
   }) {
     return dio
         .post<T>(endpoint, data: body, options: option.requestOptions)
-        .then((response) => right(response))
-        .catchError((DioError error) => left(error));
+        .then((response) => right<DioError, Response<T>>(response))
+        .catchError((error) => left<DioError, Response<T>>(error as DioError));
   }
 
   @override
@@ -43,7 +43,7 @@ class FlApiImpl implements FlApi {
   }) {
     return dio
         .put<T>(endpoint, data: body, options: option.requestOptions)
-        .then((response) => right(response))
-        .catchError((DioError error) => left(error));
+        .then((response) => right<DioError, Response<T>>(response))
+        .catchError((error) => left<DioError, Response<T>>(error as DioError));
   }
 }

@@ -6,10 +6,10 @@ typedef OnPercentage = void Function(int, int);
 
 class FlApiOption {
   const FlApiOption({
-    this.header,
     this.query,
     this.onSendPercentage,
     this.onRecievePercentage,
+    this.header = const FlApiHeader.basic(),
   });
 
   final FlApiHeader header;
@@ -20,9 +20,9 @@ class FlApiOption {
 
 extension FlApiOptionEx on FlApiOption {
   RequestOptions get requestOptions => RequestOptions(
-        onReceiveProgress: onRecievePercentage ?? (_, __) {},
-        onSendProgress: onSendPercentage ?? (_, __) {},
-        queryParameters: query ?? {},
-        headers: header.toMap ?? {},
+        onReceiveProgress: onRecievePercentage,
+        onSendProgress: onSendPercentage,
+        queryParameters: query,
+        headers: header.toMap,
       );
 }
