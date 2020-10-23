@@ -3,3 +3,16 @@
 * wrappper around Dio package to facilitate its usage
 * support custom api headers
 * custom request option
+
+
+## [0.0.2] - Saturday, October 17, 2020
+
+* fix constructor baseUrl
+
+## [0.0.3] - Friday, October 23, 2020
+
+* fix default parameters
+
+## [0.0.4] - Friday, October 23, 2020
+
+* fix null flApiOption issue

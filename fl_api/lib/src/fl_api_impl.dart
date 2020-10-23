@@ -15,7 +15,7 @@ class FlApiImpl implements FlApi {
   @override
   Future<Either<DioError, Response<T>>> getMethod<T>(
     String endpoint, {
-    FlApiOption option,
+    FlApiOption option = const FlApiOption(),
   }) {
     return dio
         .get<T>(endpoint, options: option.requestOptions)
@@ -27,7 +27,7 @@ class FlApiImpl implements FlApi {
   Future<Either<DioError, Response<T>>> postMethod<T>(
     String endpoint, {
     @required dynamic body,
-    FlApiOption option,
+    FlApiOption option = const FlApiOption(),
   }) {
     return dio
         .post<T>(endpoint, data: body, options: option.requestOptions)
@@ -39,7 +39,7 @@ class FlApiImpl implements FlApi {
   Future<Either<DioError, Response<T>>> putMethod<T>(
     String endpoint, {
     @required dynamic body,
-    FlApiOption option,
+    FlApiOption option = const FlApiOption(),
   }) {
     return dio
         .put<T>(endpoint, data: body, options: option.requestOptions)

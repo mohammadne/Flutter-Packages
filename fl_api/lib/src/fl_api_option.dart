@@ -20,9 +20,9 @@ class FlApiOption {
 
 extension FlApiOptionEx on FlApiOption {
   RequestOptions get requestOptions => RequestOptions(
-        onReceiveProgress: onRecievePercentage,
-        onSendProgress: onSendPercentage,
-        queryParameters: query,
-        headers: header.toMap,
+        onReceiveProgress: onRecievePercentage ?? (_, __) {},
+        onSendProgress: onSendPercentage ?? (_, __) {},
+        queryParameters: query ?? {},
+        headers: header.toMap ?? {},
       );
 }
