@@ -8,3 +8,7 @@
 
 * Update description
 * Update readme
+
+## [0.0.3] - Monday, October 26, 2020
+
+* Update interfaces and implementations
