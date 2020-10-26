@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:hive/hive.dart';
 
 abstract class RootFlHive<T, A extends TypeAdapter<T>> {
@@ -5,14 +7,16 @@ abstract class RootFlHive<T, A extends TypeAdapter<T>> {
     if (adaptor != null) Hive.registerAdapter(adaptor);
   }
 
-  A get adaptor;
+  A get adaptor => null;
   String get boxName;
 
   Box<T> box;
 
-  put(dynamic key, T value);
-  get(dynamic key, {T defaultValue});
-  getAll();
+  FutureOr<void> put(dynamic key, T value);
 
-  valuesStream();
+  FutureOr<T> get(dynamic key, {T defaultValue});
+  FutureOr<Iterable<T>> getAll();
+
+  FutureOr<Stream<T>> valueStream(dynamic key);
+  FutureOr<Stream<Iterable<T>>> valuesStream();
 }

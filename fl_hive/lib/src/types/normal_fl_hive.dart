@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:fl_hive/src/root_fl_hive.dart';
 import 'package:hive/hive.dart';
 
+/// in this type Database, you should call [initialize] before any task
+/// and operation
 abstract class NormalFlHive<T, A extends TypeAdapter<T>>
     extends RootFlHive<T, A> {
   Completer<void> _initCompleter;
@@ -27,6 +29,10 @@ abstract class NormalFlHive<T, A extends TypeAdapter<T>>
 
   @override
   Iterable<T> getAll() => box.values;
+
+  @override
+  Stream<T> valueStream(dynamic key) => Stream.castFrom<dynamic, T>(
+      box.watch(key: key).map((event) => event.value));
 
   @override
   Stream<Iterable<T>> valuesStream() => Stream.castFrom<dynamic, Iterable<T>>(

@@ -8,9 +8,25 @@ abstract class TimerFlHive<T, A extends TypeAdapter<T>>
     extends RootFlHive<T, A> {
   CancelableOperation _cancelableOperation;
 
-  // await Hive.openBox<T>(boxName).then((box) => this.box = box);
+  Future get _closeBox =>
+      Future.delayed(Duration(seconds: 10), () => box.close());
+
+  CancelableOperation get cancelPlan =>
+      CancelableOperation.fromFuture(_closeBox);
+
+  Future openBox() => Hive.openBox<T>(boxName).then((box) => this.box = box);
+
+  bool get _isBoxOpen => box != null && box.isOpen;
 
   Future<void> put(dynamic key, T value) async {
+    if (_isBoxOpen) {
+      //
+      await _cancelableOperation.cancel();
+      _cancelableOperation = cancelPlan;
+      return box.put(boxName, value);
+    } else {}
+
+    box.isOpen;
     box.put(boxName, value);
   }
 
@@ -22,6 +38,12 @@ abstract class TimerFlHive<T, A extends TypeAdapter<T>>
   @override
   Future<Iterable<T>> getAll() async {
     return box.values;
+  }
+
+  @override
+  Future<Stream<T>> valueStream(dynamic key) async {
+    return Stream.castFrom<dynamic, T>(
+        box.watch(key: key).map((event) => event.value));
   }
 
   @override
