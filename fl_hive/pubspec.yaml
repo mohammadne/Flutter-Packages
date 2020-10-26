@@ -1,6 +1,6 @@
 name: fl_hive
 description: Make Hive package super easy to use, with auto close box ability to improve performance
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/mohammadne/Flutter-Packages/tree/master/fl_hive
 issue_tracker: https://github.com/mohammadne/Flutter-Packages/issues/
 homepage: https://github.com/mohammadne/Flutter-Packages/

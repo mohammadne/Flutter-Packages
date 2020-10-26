@@ -7,21 +7,18 @@ import '../types/normal_fl_hive.dart';
 ///
 /// ```dart
 /// abstract class LocalDataSourceInterface<T, A extends TypeAdapter<T>> {
-///   A get adaptor;
-///
-///   String get boxName;
-///
 ///   Future<void> initialize();
-///
-///   void save(dynamic key, T value);
 ///
 ///   T get value;
 ///
-///   Stream<T> valueStream();
+///   void save(T value);
+///
+///   Stream<T> get streamValue;
 /// }
 /// ```
 abstract class SingleNormalFlHive<T, A extends TypeAdapter<T>>
     extends NormalFlHive<T, A> with SingleFlHive<T, A> {
   void save(T value) => put(boxKey, value);
   T get value => get(boxKey);
+  Stream<T> get streamValue => valueStream(boxKey);
 }

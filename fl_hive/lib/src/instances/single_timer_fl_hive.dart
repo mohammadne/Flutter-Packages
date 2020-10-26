@@ -7,19 +7,16 @@ import '../types/timer_fl_hive.dart';
 ///
 /// ```dart
 /// abstract class LocalDataSourceInterface<T, A extends TypeAdapter<T>> {
-///   A get adaptor;
-///
-///   String get boxName;
-///
-///   Future<void> save(dynamic key, T value);
-///
 ///   Future<T> get value;
 ///
-///   Future<Stream<T>> valueStream();
+///   Future<void> save(T value);
+///
+///   Future<Stream<T>> get streamValue;
 /// }
 /// ```
 abstract class SingleTimerFlHive<T, A extends TypeAdapter<T>>
     extends TimerFlHive<T, A> with SingleFlHive<T, A> {
   Future<void> save(T value) => put(boxKey, value);
   Future<T> get value => get(boxKey);
+  Future<Stream<T>> get streamValue => valueStream(boxKey);
 }

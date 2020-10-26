@@ -3,3 +3,8 @@
 * Add 4 instance hive helper classes
 * normal support
 * timer support
+
+## [0.0.2] - Monday, October 26, 2020
+
+* Update description
+* Update readme
