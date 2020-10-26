@@ -1,3 +1,5 @@
-## [0.0.1] - TODO: Add release date.
+## [0.0.1] - Monday, October 26, 2020
 
-* TODO: Describe initial release.
+* Add 4 instance hive helper classes
+* normal support
+* timer support
