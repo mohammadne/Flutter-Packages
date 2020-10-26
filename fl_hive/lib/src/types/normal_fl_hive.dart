@@ -39,7 +39,7 @@ abstract class NormalFlHive<T, A extends TypeAdapter<T>>
       box.watch().map((event) => event.value));
 
   @override
-  Future<void> dispose() {
-    box?.close();
+  Future<void> dispose() async {
+    await box?.close();
   }
 }
