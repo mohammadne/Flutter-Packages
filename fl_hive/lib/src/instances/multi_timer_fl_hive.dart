@@ -1,7 +1,9 @@
 import 'package:hive/hive.dart';
 
-import '../type/multi_fl_hive.dart';
-import '../mixins/timer_fl_hive.dart';
+import '../types/timer_fl_hive.dart';
 
 abstract class MultiTimerFlHive<T, A extends TypeAdapter<T>>
-    extends MultiFlHive<T, A> with TimerFlHive<T, A> {}
+    extends TimerFlHive<T, A> {
+  Future<void> save(dynamic key, T value) => put(key, value);
+  Future<Iterable<T>> get values => getAll();
+}

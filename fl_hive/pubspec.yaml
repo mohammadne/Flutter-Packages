@@ -13,6 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  async: ^2.4.2
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
 
