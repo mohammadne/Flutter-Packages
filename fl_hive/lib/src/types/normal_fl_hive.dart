@@ -37,4 +37,9 @@ abstract class NormalFlHive<T, A extends TypeAdapter<T>>
   @override
   Stream<Iterable<T>> valuesStream() => Stream.castFrom<dynamic, Iterable<T>>(
       box.watch().map((event) => event.value));
+
+  @override
+  Future<void> dispose() {
+    box?.close();
+  }
 }

@@ -19,4 +19,6 @@ abstract class RootFlHive<T, A extends TypeAdapter<T>> {
 
   FutureOr<Stream<T>> valueStream(dynamic key);
   FutureOr<Stream<Iterable<T>>> valuesStream();
+
+  Future<void> dispose();
 }
