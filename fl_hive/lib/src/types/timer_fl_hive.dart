@@ -29,11 +29,11 @@ abstract class TimerFlHive<T, A extends TypeAdapter<T>>
 
   @override
   Future<void> put(dynamic key, T value) =>
-      _common().then((_) => box.put(boxName, value));
+      _common().then((_) => box.put(key, value));
 
   @override
   Future<T> get(dynamic key, {T defaultValue}) =>
-      _common().then((_) => box.get(boxName, defaultValue: defaultValue));
+      _common().then((_) => box.get(key, defaultValue: defaultValue));
 
   @override
   Future<Iterable<T>> getAll() => _common().then((_) => box.values);

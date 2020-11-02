@@ -21,11 +21,11 @@ abstract class NormalFlHive<T, A extends TypeAdapter<T>>
   }
 
   @override
-  void put(dynamic key, T value) => box.put(boxName, value);
+  void put(dynamic key, T value) => box.put(key, value);
 
   @override
   T get(dynamic key, {T defaultValue}) =>
-      box.get(boxName, defaultValue: defaultValue);
+      box.get(key, defaultValue: defaultValue);
 
   @override
   Iterable<T> getAll() => box.values;
