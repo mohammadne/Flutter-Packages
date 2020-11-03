@@ -32,3 +32,7 @@
 * add response type
 * add failure type
 * remove dependency from dio in project to be independent
+
+## [0.1.1] - Friday, November 3, 2020
+
+* unknown missing param
