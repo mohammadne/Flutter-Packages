@@ -17,10 +17,7 @@ class FlApiImpl implements FlApi {
     String endpoint, {
     FlApiOption option = const FlApiOption(),
   }) {
-    return dio
-        .get<T>(endpoint, options: option.requestOptions)
-        .then((response) => right<DioError, Response<T>>(response))
-        .catchError((error) => left<DioError, Response<T>>(error as DioError));
+    return dio.get<T>(endpoint, options: option.requestOptions).toRes;
   }
 
   @override
@@ -31,8 +28,7 @@ class FlApiImpl implements FlApi {
   }) {
     return dio
         .post<T>(endpoint, data: body, options: option.requestOptions)
-        .then((response) => right<DioError, Response<T>>(response))
-        .catchError((error) => left<DioError, Response<T>>(error as DioError));
+        .toRes;
   }
 
   @override
@@ -43,7 +39,24 @@ class FlApiImpl implements FlApi {
   }) {
     return dio
         .put<T>(endpoint, data: body, options: option.requestOptions)
-        .then((response) => right<DioError, Response<T>>(response))
-        .catchError((error) => left<DioError, Response<T>>(error as DioError));
+        .toRes;
   }
+
+  @override
+  Future<Either<DioError, Response<T>>> patchMethod<T>(
+    String endpoint, {
+    @required dynamic body,
+    FlApiOption option = const FlApiOption(),
+  }) {
+    return dio
+        .patch<T>(endpoint, data: body, options: option.requestOptions)
+        .toRes;
+  }
+}
+
+extension _HttpMethod<T> on Future<Response<T>> {
+  Future<Either<DioError, Response<T>>> get toRes => Task(() => this)
+      .attempt()
+      .map((either) => either.leftMap((obj) => obj as DioError))
+      .run();
 }

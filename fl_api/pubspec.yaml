@@ -1,6 +1,6 @@
 name: fl_api
 description: A new Flutter package project.
-version: 0.0.5
+version: 0.0.6
 repository: https://github.com/mohammadne/Flutter-Packages/tree/master/fl_api
 issue_tracker: https://github.com/mohammadne/Flutter-Packages/issues/
 homepage: https://github.com/mohammadne/Flutter-Packages/
@@ -18,8 +18,8 @@ dependencies:
   dio: ^3.0.10
 
 dev_dependencies:
-  build_runner: ^1.10.1
-  freezed: ^0.12.1
+  build_runner: ^1.10.4
+  freezed: ^0.12.2
   flutter_test:
     sdk: flutter
 

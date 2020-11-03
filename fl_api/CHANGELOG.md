@@ -21,3 +21,8 @@
 
 * add documentation for flApi
 * fix type error
+
+## [0.0.6] - Friday, November 3, 2020
+
+* add proper functional programming types
+* update dev dependencies

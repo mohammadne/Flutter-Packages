@@ -24,4 +24,11 @@ abstract class FlApi {
     @required dynamic body,
     FlApiOption option,
   });
+
+  /// perform a http patch request
+  Future<Either<DioError, Response<T>>> patchMethod<T>(
+    String endpoint, {
+    @required dynamic body,
+    FlApiOption option,
+  });
 }
