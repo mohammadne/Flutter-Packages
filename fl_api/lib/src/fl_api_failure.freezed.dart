@@ -38,8 +38,10 @@ class _$FlApiFailureTearOff {
   }
 
 // ignore: unused_element
-  _UnknownFailure unknown() {
-    return const _UnknownFailure();
+  _UnknownFailure unknown(dynamic error) {
+    return _UnknownFailure(
+      error,
+    );
   }
 }
 
@@ -55,7 +57,7 @@ mixin _$FlApiFailure {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
@@ -63,7 +65,7 @@ mixin _$FlApiFailure {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -176,7 +178,7 @@ class _$_Exception implements _Exception {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   }) {
     assert(exception != null);
     assert(response != null);
@@ -193,7 +195,7 @@ class _$_Exception implements _Exception {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -321,7 +323,7 @@ class _$_Response implements _Response {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   }) {
     assert(exception != null);
     assert(response != null);
@@ -338,7 +340,7 @@ class _$_Response implements _Response {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -430,7 +432,7 @@ class _$_Timeout implements _Timeout {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   }) {
     assert(exception != null);
     assert(response != null);
@@ -447,7 +449,7 @@ class _$_Timeout implements _Timeout {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -536,7 +538,7 @@ class _$_Cancel implements _Cancel {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   }) {
     assert(exception != null);
     assert(response != null);
@@ -553,7 +555,7 @@ class _$_Cancel implements _Cancel {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -607,6 +609,7 @@ abstract class _$UnknownFailureCopyWith<$Res> {
   factory _$UnknownFailureCopyWith(
           _UnknownFailure value, $Res Function(_UnknownFailure) then) =
       __$UnknownFailureCopyWithImpl<$Res>;
+  $Res call({dynamic error});
 }
 
 /// @nodoc
@@ -619,24 +622,44 @@ class __$UnknownFailureCopyWithImpl<$Res>
 
   @override
   _UnknownFailure get _value => super._value as _UnknownFailure;
+
+  @override
+  $Res call({
+    Object error = freezed,
+  }) {
+    return _then(_UnknownFailure(
+      error == freezed ? _value.error : error as dynamic,
+    ));
+  }
 }
 
 /// @nodoc
 class _$_UnknownFailure implements _UnknownFailure {
-  const _$_UnknownFailure();
+  const _$_UnknownFailure(this.error) : assert(error != null);
+
+  @override
+  final dynamic error;
 
   @override
   String toString() {
-    return 'FlApiFailure.unknown()';
+    return 'FlApiFailure.unknown(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _UnknownFailure);
+    return identical(this, other) ||
+        (other is _UnknownFailure &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+
+  @override
+  _$UnknownFailureCopyWith<_UnknownFailure> get copyWith =>
+      __$UnknownFailureCopyWithImpl<_UnknownFailure>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -645,14 +668,14 @@ class _$_UnknownFailure implements _UnknownFailure {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   }) {
     assert(exception != null);
     assert(response != null);
     assert(timeout != null);
     assert(cancel != null);
     assert(unknown != null);
-    return unknown();
+    return unknown(error);
   }
 
   @override
@@ -662,12 +685,12 @@ class _$_UnknownFailure implements _UnknownFailure {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (unknown != null) {
-      return unknown();
+      return unknown(error);
     }
     return orElse();
   }
@@ -708,7 +731,10 @@ class _$_UnknownFailure implements _UnknownFailure {
 }
 
 abstract class _UnknownFailure implements FlApiFailure {
-  const factory _UnknownFailure() = _$_UnknownFailure;
+  const factory _UnknownFailure(dynamic error) = _$_UnknownFailure;
+
+  dynamic get error;
+  _$UnknownFailureCopyWith<_UnknownFailure> get copyWith;
 }
 
 /// @nodoc
@@ -731,8 +757,10 @@ class _$FlApiExceptionTearOff {
   }
 
 // ignore: unused_element
-  _UnknownException unknown() {
-    return const _UnknownException();
+  _UnknownException unknown(dynamic error) {
+    return _UnknownException(
+      error,
+    );
   }
 }
 
@@ -747,14 +775,14 @@ mixin _$FlApiException {
     @required Result socket(),
     @required Result format(),
     @required Result rangeError(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
     Result socket(),
     Result format(),
     Result rangeError(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -830,7 +858,7 @@ class _$_Socket implements _Socket {
     @required Result socket(),
     @required Result format(),
     @required Result rangeError(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   }) {
     assert(socket != null);
     assert(format != null);
@@ -845,7 +873,7 @@ class _$_Socket implements _Socket {
     Result socket(),
     Result format(),
     Result rangeError(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -930,7 +958,7 @@ class _$_Format implements _Format {
     @required Result socket(),
     @required Result format(),
     @required Result rangeError(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   }) {
     assert(socket != null);
     assert(format != null);
@@ -945,7 +973,7 @@ class _$_Format implements _Format {
     Result socket(),
     Result format(),
     Result rangeError(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1032,7 +1060,7 @@ class _$_RangeError implements _RangeError {
     @required Result socket(),
     @required Result format(),
     @required Result rangeError(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   }) {
     assert(socket != null);
     assert(format != null);
@@ -1047,7 +1075,7 @@ class _$_RangeError implements _RangeError {
     Result socket(),
     Result format(),
     Result rangeError(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -1098,6 +1126,7 @@ abstract class _$UnknownExceptionCopyWith<$Res> {
   factory _$UnknownExceptionCopyWith(
           _UnknownException value, $Res Function(_UnknownException) then) =
       __$UnknownExceptionCopyWithImpl<$Res>;
+  $Res call({dynamic error});
 }
 
 /// @nodoc
@@ -1110,24 +1139,44 @@ class __$UnknownExceptionCopyWithImpl<$Res>
 
   @override
   _UnknownException get _value => super._value as _UnknownException;
+
+  @override
+  $Res call({
+    Object error = freezed,
+  }) {
+    return _then(_UnknownException(
+      error == freezed ? _value.error : error as dynamic,
+    ));
+  }
 }
 
 /// @nodoc
 class _$_UnknownException implements _UnknownException {
-  const _$_UnknownException();
+  const _$_UnknownException(this.error) : assert(error != null);
+
+  @override
+  final dynamic error;
 
   @override
   String toString() {
-    return 'FlApiException.unknown()';
+    return 'FlApiException.unknown(error: $error)';
   }
 
   @override
   bool operator ==(dynamic other) {
-    return identical(this, other) || (other is _UnknownException);
+    return identical(this, other) ||
+        (other is _UnknownException &&
+            (identical(other.error, error) ||
+                const DeepCollectionEquality().equals(other.error, error)));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode =>
+      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
+
+  @override
+  _$UnknownExceptionCopyWith<_UnknownException> get copyWith =>
+      __$UnknownExceptionCopyWithImpl<_UnknownException>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1135,13 +1184,13 @@ class _$_UnknownException implements _UnknownException {
     @required Result socket(),
     @required Result format(),
     @required Result rangeError(),
-    @required Result unknown(),
+    @required Result unknown(dynamic error),
   }) {
     assert(socket != null);
     assert(format != null);
     assert(rangeError != null);
     assert(unknown != null);
-    return unknown();
+    return unknown(error);
   }
 
   @override
@@ -1150,12 +1199,12 @@ class _$_UnknownException implements _UnknownException {
     Result socket(),
     Result format(),
     Result rangeError(),
-    Result unknown(),
+    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
     if (unknown != null) {
-      return unknown();
+      return unknown(error);
     }
     return orElse();
   }
@@ -1193,5 +1242,8 @@ class _$_UnknownException implements _UnknownException {
 }
 
 abstract class _UnknownException implements FlApiException {
-  const factory _UnknownException() = _$_UnknownException;
+  const factory _UnknownException(dynamic error) = _$_UnknownException;
+
+  dynamic get error;
+  _$UnknownExceptionCopyWith<_UnknownException> get copyWith;
 }

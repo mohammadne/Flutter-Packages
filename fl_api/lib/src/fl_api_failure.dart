@@ -10,7 +10,7 @@ abstract class FlApiFailure with _$FlApiFailure {
   const factory FlApiFailure.response(FlApiResponse response) = _Response;
   const factory FlApiFailure.timeout() = _Timeout;
   const factory FlApiFailure.cancel() = _Cancel;
-  const factory FlApiFailure.unknown() = _UnknownFailure;
+  const factory FlApiFailure.unknown(dynamic error) = _UnknownFailure;
 }
 
 @freezed
@@ -18,5 +18,5 @@ abstract class FlApiException with _$FlApiException {
   const factory FlApiException.socket() = _Socket;
   const factory FlApiException.format() = _Format;
   const factory FlApiException.rangeError() = _RangeError;
-  const factory FlApiException.unknown() = _UnknownException;
+  const factory FlApiException.unknown(dynamic error) = _UnknownException;
 }

@@ -80,12 +80,12 @@ extension _DioRes<T> on Future<Either<DioError, Response<T>>> {
 
 extension DioErrorEx on DioError {
   FlApiFailure get toFlApi {
-    ///
+    /// DioErrorType.RESPONSE
     if (this.type == DioErrorType.RESPONSE) {
       return FlApiFailure.response(this.response.toFlApi);
     }
 
-    ///
+    /// DioErrorType.DEFAULT
     else if (this.type == DioErrorType.DEFAULT) {
       if (this.error is SocketException)
         return FlApiFailure.exception(FlApiException.socket());
@@ -96,22 +96,13 @@ extension DioErrorEx on DioError {
         return FlApiFailure.exception(FlApiException.format());
       else if (this.error is RangeError)
         return FlApiFailure.exception(FlApiException.rangeError());
-      return FlApiFailure.exception(FlApiException.unknown());
+      return FlApiFailure.exception(FlApiException.unknown(this.error));
     }
 
-    ///
-    else if (this.type == DioErrorType.CANCEL) {
-      return FlApiFailure.cancel();
-    }
+    /// DioErrorType.CANCEL
+    else if (this.type == DioErrorType.CANCEL) return FlApiFailure.cancel();
 
-    ///
-    else if (this.type == DioErrorType.SEND_TIMEOUT ||
-        this.type == DioErrorType.RECEIVE_TIMEOUT ||
-        this.type == DioErrorType.CONNECT_TIMEOUT) {
-      return FlApiFailure.timeout();
-    }
-
-    ///
-    return FlApiFailure.unknown();
+    ///   CONNECT_TIMEOUT, SEND_TIMEOUT, RECEIVE_TIMEOUT
+    return FlApiFailure.timeout();
   }
 }
