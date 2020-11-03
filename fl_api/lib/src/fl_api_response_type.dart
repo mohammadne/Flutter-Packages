@@ -19,3 +19,18 @@ extension FlApiResponseTypeEx on FlApiResponseType {
         bytes: () => ResponseType.bytes,
       );
 }
+
+extension ResponseTypeEx on ResponseType {
+  FlApiResponseType get toFlApi {
+    switch (this) {
+      case ResponseType.stream:
+        return FlApiResponseType.stream();
+      case ResponseType.plain:
+        return FlApiResponseType.plain();
+      case ResponseType.bytes:
+        return FlApiResponseType.bytes();
+      default:
+        return FlApiResponseType.json();
+    }
+  }
+}

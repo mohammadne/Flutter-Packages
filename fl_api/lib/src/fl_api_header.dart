@@ -2,6 +2,8 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'fl_api_header.freezed.dart';
 
+//! ENHANCE FlApiHeader
+
 @freezed
 abstract class FlApiHeader with _$FlApiHeader {
   const factory FlApiHeader.formData() = _FormData;

@@ -26,3 +26,9 @@
 
 * add proper functional programming types
 * update dev dependencies
+
+## [0.1.0] - Friday, November 3, 2020
+
+* add response type
+* add failure type
+* remove dependency from dio in project to be independent

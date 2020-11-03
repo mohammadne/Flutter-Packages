@@ -14,6 +14,15 @@ class FlApiOption {
     this.header = const FlApiHeader.basic(),
   });
 
+  factory FlApiOption.fromDio(RequestOptions options) => FlApiOption(
+        //! HARD CODED
+        header: FlApiHeader.basic(),
+        query: options.queryParameters,
+        responseType: options.responseType.toFlApi,
+        onSendPercentage: options.onSendProgress,
+        onRecievePercentage: options.onReceiveProgress,
+      );
+
   final FlApiHeader header;
   final Map<String, dynamic> query;
   final OnPercentage onSendPercentage;
