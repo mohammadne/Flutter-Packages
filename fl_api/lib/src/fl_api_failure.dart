@@ -10,7 +10,6 @@ abstract class FlApiFailure with _$FlApiFailure {
   const factory FlApiFailure.response(FlApiResponse response) = _Response;
   const factory FlApiFailure.timeout() = _Timeout;
   const factory FlApiFailure.cancel() = _Cancel;
-  const factory FlApiFailure.unknown(dynamic error) = _UnknownFailure;
 }
 
 @freezed

@@ -36,13 +36,6 @@ class _$FlApiFailureTearOff {
   _Cancel cancel() {
     return const _Cancel();
   }
-
-// ignore: unused_element
-  _UnknownFailure unknown(dynamic error) {
-    return _UnknownFailure(
-      error,
-    );
-  }
 }
 
 /// @nodoc
@@ -57,7 +50,6 @@ mixin _$FlApiFailure {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(dynamic error),
   });
   @optionalTypeArgs
   Result maybeWhen<Result extends Object>({
@@ -65,7 +57,6 @@ mixin _$FlApiFailure {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(dynamic error),
     @required Result orElse(),
   });
   @optionalTypeArgs
@@ -74,7 +65,6 @@ mixin _$FlApiFailure {
     @required Result response(_Response value),
     @required Result timeout(_Timeout value),
     @required Result cancel(_Cancel value),
-    @required Result unknown(_UnknownFailure value),
   });
   @optionalTypeArgs
   Result maybeMap<Result extends Object>({
@@ -82,7 +72,6 @@ mixin _$FlApiFailure {
     Result response(_Response value),
     Result timeout(_Timeout value),
     Result cancel(_Cancel value),
-    Result unknown(_UnknownFailure value),
     @required Result orElse(),
   });
 }
@@ -178,13 +167,11 @@ class _$_Exception implements _Exception {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(dynamic error),
   }) {
     assert(exception != null);
     assert(response != null);
     assert(timeout != null);
     assert(cancel != null);
-    assert(unknown != null);
     return exception(this.exception);
   }
 
@@ -195,7 +182,6 @@ class _$_Exception implements _Exception {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -212,13 +198,11 @@ class _$_Exception implements _Exception {
     @required Result response(_Response value),
     @required Result timeout(_Timeout value),
     @required Result cancel(_Cancel value),
-    @required Result unknown(_UnknownFailure value),
   }) {
     assert(exception != null);
     assert(response != null);
     assert(timeout != null);
     assert(cancel != null);
-    assert(unknown != null);
     return exception(this);
   }
 
@@ -229,7 +213,6 @@ class _$_Exception implements _Exception {
     Result response(_Response value),
     Result timeout(_Timeout value),
     Result cancel(_Cancel value),
-    Result unknown(_UnknownFailure value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -323,13 +306,11 @@ class _$_Response implements _Response {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(dynamic error),
   }) {
     assert(exception != null);
     assert(response != null);
     assert(timeout != null);
     assert(cancel != null);
-    assert(unknown != null);
     return response(this.response);
   }
 
@@ -340,7 +321,6 @@ class _$_Response implements _Response {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -357,13 +337,11 @@ class _$_Response implements _Response {
     @required Result response(_Response value),
     @required Result timeout(_Timeout value),
     @required Result cancel(_Cancel value),
-    @required Result unknown(_UnknownFailure value),
   }) {
     assert(exception != null);
     assert(response != null);
     assert(timeout != null);
     assert(cancel != null);
-    assert(unknown != null);
     return response(this);
   }
 
@@ -374,7 +352,6 @@ class _$_Response implements _Response {
     Result response(_Response value),
     Result timeout(_Timeout value),
     Result cancel(_Cancel value),
-    Result unknown(_UnknownFailure value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -432,13 +409,11 @@ class _$_Timeout implements _Timeout {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(dynamic error),
   }) {
     assert(exception != null);
     assert(response != null);
     assert(timeout != null);
     assert(cancel != null);
-    assert(unknown != null);
     return timeout();
   }
 
@@ -449,7 +424,6 @@ class _$_Timeout implements _Timeout {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -466,13 +440,11 @@ class _$_Timeout implements _Timeout {
     @required Result response(_Response value),
     @required Result timeout(_Timeout value),
     @required Result cancel(_Cancel value),
-    @required Result unknown(_UnknownFailure value),
   }) {
     assert(exception != null);
     assert(response != null);
     assert(timeout != null);
     assert(cancel != null);
-    assert(unknown != null);
     return timeout(this);
   }
 
@@ -483,7 +455,6 @@ class _$_Timeout implements _Timeout {
     Result response(_Response value),
     Result timeout(_Timeout value),
     Result cancel(_Cancel value),
-    Result unknown(_UnknownFailure value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -538,13 +509,11 @@ class _$_Cancel implements _Cancel {
     @required Result response(FlApiResponse<dynamic> response),
     @required Result timeout(),
     @required Result cancel(),
-    @required Result unknown(dynamic error),
   }) {
     assert(exception != null);
     assert(response != null);
     assert(timeout != null);
     assert(cancel != null);
-    assert(unknown != null);
     return cancel();
   }
 
@@ -555,7 +524,6 @@ class _$_Cancel implements _Cancel {
     Result response(FlApiResponse<dynamic> response),
     Result timeout(),
     Result cancel(),
-    Result unknown(dynamic error),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -572,13 +540,11 @@ class _$_Cancel implements _Cancel {
     @required Result response(_Response value),
     @required Result timeout(_Timeout value),
     @required Result cancel(_Cancel value),
-    @required Result unknown(_UnknownFailure value),
   }) {
     assert(exception != null);
     assert(response != null);
     assert(timeout != null);
     assert(cancel != null);
-    assert(unknown != null);
     return cancel(this);
   }
 
@@ -589,7 +555,6 @@ class _$_Cancel implements _Cancel {
     Result response(_Response value),
     Result timeout(_Timeout value),
     Result cancel(_Cancel value),
-    Result unknown(_UnknownFailure value),
     @required Result orElse(),
   }) {
     assert(orElse != null);
@@ -602,139 +567,6 @@ class _$_Cancel implements _Cancel {
 
 abstract class _Cancel implements FlApiFailure {
   const factory _Cancel() = _$_Cancel;
-}
-
-/// @nodoc
-abstract class _$UnknownFailureCopyWith<$Res> {
-  factory _$UnknownFailureCopyWith(
-          _UnknownFailure value, $Res Function(_UnknownFailure) then) =
-      __$UnknownFailureCopyWithImpl<$Res>;
-  $Res call({dynamic error});
-}
-
-/// @nodoc
-class __$UnknownFailureCopyWithImpl<$Res>
-    extends _$FlApiFailureCopyWithImpl<$Res>
-    implements _$UnknownFailureCopyWith<$Res> {
-  __$UnknownFailureCopyWithImpl(
-      _UnknownFailure _value, $Res Function(_UnknownFailure) _then)
-      : super(_value, (v) => _then(v as _UnknownFailure));
-
-  @override
-  _UnknownFailure get _value => super._value as _UnknownFailure;
-
-  @override
-  $Res call({
-    Object error = freezed,
-  }) {
-    return _then(_UnknownFailure(
-      error == freezed ? _value.error : error as dynamic,
-    ));
-  }
-}
-
-/// @nodoc
-class _$_UnknownFailure implements _UnknownFailure {
-  const _$_UnknownFailure(this.error) : assert(error != null);
-
-  @override
-  final dynamic error;
-
-  @override
-  String toString() {
-    return 'FlApiFailure.unknown(error: $error)';
-  }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other is _UnknownFailure &&
-            (identical(other.error, error) ||
-                const DeepCollectionEquality().equals(other.error, error)));
-  }
-
-  @override
-  int get hashCode =>
-      runtimeType.hashCode ^ const DeepCollectionEquality().hash(error);
-
-  @override
-  _$UnknownFailureCopyWith<_UnknownFailure> get copyWith =>
-      __$UnknownFailureCopyWithImpl<_UnknownFailure>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  Result when<Result extends Object>({
-    @required Result exception(FlApiException exception),
-    @required Result response(FlApiResponse<dynamic> response),
-    @required Result timeout(),
-    @required Result cancel(),
-    @required Result unknown(dynamic error),
-  }) {
-    assert(exception != null);
-    assert(response != null);
-    assert(timeout != null);
-    assert(cancel != null);
-    assert(unknown != null);
-    return unknown(error);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeWhen<Result extends Object>({
-    Result exception(FlApiException exception),
-    Result response(FlApiResponse<dynamic> response),
-    Result timeout(),
-    Result cancel(),
-    Result unknown(dynamic error),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (unknown != null) {
-      return unknown(error);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  Result map<Result extends Object>({
-    @required Result exception(_Exception value),
-    @required Result response(_Response value),
-    @required Result timeout(_Timeout value),
-    @required Result cancel(_Cancel value),
-    @required Result unknown(_UnknownFailure value),
-  }) {
-    assert(exception != null);
-    assert(response != null);
-    assert(timeout != null);
-    assert(cancel != null);
-    assert(unknown != null);
-    return unknown(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  Result maybeMap<Result extends Object>({
-    Result exception(_Exception value),
-    Result response(_Response value),
-    Result timeout(_Timeout value),
-    Result cancel(_Cancel value),
-    Result unknown(_UnknownFailure value),
-    @required Result orElse(),
-  }) {
-    assert(orElse != null);
-    if (unknown != null) {
-      return unknown(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _UnknownFailure implements FlApiFailure {
-  const factory _UnknownFailure(dynamic error) = _$_UnknownFailure;
-
-  dynamic get error;
-  _$UnknownFailureCopyWith<_UnknownFailure> get copyWith;
 }
 
 /// @nodoc

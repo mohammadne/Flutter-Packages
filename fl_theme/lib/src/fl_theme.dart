@@ -21,6 +21,7 @@ abstract class IFlTheme {
   Future<void> setTheme(ThemeState themeState);
 }
 
+/// singleton class
 class FlTheme implements IFlTheme {
   FlTheme._();
   factory FlTheme() => instance;

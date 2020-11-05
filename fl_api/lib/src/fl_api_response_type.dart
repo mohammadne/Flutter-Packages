@@ -12,12 +12,14 @@ abstract class FlApiResponseType with _$FlApiResponseType {
 }
 
 extension FlApiResponseTypeEx on FlApiResponseType {
-  ResponseType get toDio => this.when(
+  ResponseType get toDio =>
+      this?.when(
         json: () => ResponseType.json,
         stream: () => ResponseType.stream,
         plain: () => ResponseType.plain,
         bytes: () => ResponseType.bytes,
-      );
+      ) ??
+      ResponseType.json;
 }
 
 extension ResponseTypeEx on ResponseType {

@@ -81,17 +81,13 @@ extension _DioRes<T> on Future<Either<DioError, Response<T>>> {
 extension DioErrorEx on DioError {
   FlApiFailure get toFlApi {
     /// DioErrorType.RESPONSE
-    if (this.type == DioErrorType.RESPONSE) {
+    if (this.type == DioErrorType.RESPONSE)
       return FlApiFailure.response(this.response.toFlApi);
-    }
 
     /// DioErrorType.DEFAULT
     else if (this.type == DioErrorType.DEFAULT) {
       if (this.error is SocketException)
         return FlApiFailure.exception(FlApiException.socket());
-      else if (this.error is TimeoutException)
-        //! correct it
-        return (FlApiFailure.exception(FlApiException.socket()));
       else if (this.error is FormatException)
         return FlApiFailure.exception(FlApiException.format());
       else if (this.error is RangeError)

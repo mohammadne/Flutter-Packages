@@ -36,3 +36,7 @@
 ## [0.1.1] - Friday, November 3, 2020
 
 * unknown missing param
+
+## [0.1.2] - Friday, November 3, 2020
+
+* fix extra unknown param

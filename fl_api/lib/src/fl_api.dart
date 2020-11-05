@@ -2,7 +2,6 @@ import 'package:fl_api/src/fl_api_failure.dart';
 import 'package:fl_api/src/fl_api_response.dart';
 import 'package:flutter/foundation.dart';
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
 import 'fl_api_option.dart';
 
