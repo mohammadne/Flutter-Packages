@@ -22,21 +22,25 @@
 * add documentation for flApi
 * fix type error
 
-## [0.0.6] - Friday, November 3, 2020
+## [0.0.6] - Tuesday, November 3, 2020
 
 * add proper functional programming types
 * update dev dependencies
 
-## [0.1.0] - Friday, November 3, 2020
+## [0.1.0] - Tuesday, November 3, 2020
 
 * add response type
 * add failure type
 * remove dependency from dio in project to be independent
 
-## [0.1.1] - Friday, November 3, 2020
+## [0.1.1] - Tuesday, November 3, 2020
 
 * unknown missing param
 
-## [0.1.2] - Friday, November 3, 2020
+## [0.1.2] - Tuesday, November 3, 2020
 
 * fix extra unknown param
+
+## [0.1.3] - Thursday, November 5, 2020
+
+* fix null param of response type

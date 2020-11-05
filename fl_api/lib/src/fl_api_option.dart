@@ -8,10 +8,10 @@ typedef OnPercentage = void Function(int, int);
 class FlApiOption {
   const FlApiOption({
     this.query,
-    this.responseType,
     this.onSendPercentage,
     this.onRecievePercentage,
     this.header = const FlApiHeader.basic(),
+    this.responseType = const FlApiResponseType.json(),
   });
 
   factory FlApiOption.fromDio(RequestOptions options) => FlApiOption(
