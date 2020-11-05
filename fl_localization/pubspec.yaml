@@ -20,7 +20,7 @@ dependencies:
 
   # DB and Persistant
   hive_flutter: ^0.3.1
-  hive: ^1.4.4
+  hive: ^1.4.4+1
 
   # Localization
   flutter_localizations:
@@ -28,8 +28,8 @@ dependencies:
 
 dev_dependencies:
   json_serializable: ^3.5.0
-  build_runner: ^1.10.1
-  freezed: ^0.11.6
+  build_runner: ^1.10.4
+  freezed: ^0.12.2
   flutter_test:
     sdk: flutter
 

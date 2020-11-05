@@ -6,7 +6,7 @@ import '../types/theme_palette.dart';
 
 part 'theme_palette_dao.g.dart';
 
-@HiveType(typeId: 1)
+@HiveType(typeId: 101)
 class ThemePaletteDao {
   ThemePaletteDao({@required this.palette});
 

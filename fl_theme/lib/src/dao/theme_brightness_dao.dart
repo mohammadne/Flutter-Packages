@@ -5,7 +5,7 @@ import '../types/theme_brightness.dart';
 
 part 'theme_brightness_dao.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 100)
 class ThemeBrightnessDao {
   ThemeBrightnessDao({@required this.brightness});
 

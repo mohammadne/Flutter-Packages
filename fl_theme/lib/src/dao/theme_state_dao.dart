@@ -7,7 +7,7 @@ import 'theme_palette_dao.dart';
 
 part 'theme_state_dao.g.dart';
 
-@HiveType(typeId: 2)
+@HiveType(typeId: 102)
 class ThemeStateDao {
   ThemeStateDao({
     @required this.brightnessDao,
