@@ -20,6 +20,7 @@ ThemePalette _$ThemePaletteFromJson(Map<String, dynamic> json) {
   }
 }
 
+/// @nodoc
 class _$ThemePaletteTearOff {
   const _$ThemePaletteTearOff();
 
@@ -32,11 +33,18 @@ class _$ThemePaletteTearOff {
   Blue blue() {
     return const Blue();
   }
+
+// ignore: unused_element
+  ThemePalette fromJson(Map<String, Object> json) {
+    return ThemePalette.fromJson(json);
+  }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ThemePalette = _$ThemePaletteTearOff();
 
+/// @nodoc
 mixin _$ThemePalette {
   @optionalTypeArgs
   Result when<Result extends Object>({
@@ -63,12 +71,14 @@ mixin _$ThemePalette {
   Map<String, dynamic> toJson();
 }
 
+/// @nodoc
 abstract class $ThemePaletteCopyWith<$Res> {
   factory $ThemePaletteCopyWith(
           ThemePalette value, $Res Function(ThemePalette) then) =
       _$ThemePaletteCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$ThemePaletteCopyWithImpl<$Res> implements $ThemePaletteCopyWith<$Res> {
   _$ThemePaletteCopyWithImpl(this._value, this._then);
 
@@ -77,11 +87,13 @@ class _$ThemePaletteCopyWithImpl<$Res> implements $ThemePaletteCopyWith<$Res> {
   final $Res Function(ThemePalette) _then;
 }
 
+/// @nodoc
 abstract class $OrangeCopyWith<$Res> {
   factory $OrangeCopyWith(Orange value, $Res Function(Orange) then) =
       _$OrangeCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$OrangeCopyWithImpl<$Res> extends _$ThemePaletteCopyWithImpl<$Res>
     implements $OrangeCopyWith<$Res> {
   _$OrangeCopyWithImpl(Orange _value, $Res Function(Orange) _then)
@@ -92,6 +104,8 @@ class _$OrangeCopyWithImpl<$Res> extends _$ThemePaletteCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$Orange implements Orange {
   const _$Orange();
 
@@ -173,11 +187,13 @@ abstract class Orange implements ThemePalette {
   factory Orange.fromJson(Map<String, dynamic> json) = _$Orange.fromJson;
 }
 
+/// @nodoc
 abstract class $BlueCopyWith<$Res> {
   factory $BlueCopyWith(Blue value, $Res Function(Blue) then) =
       _$BlueCopyWithImpl<$Res>;
 }
 
+/// @nodoc
 class _$BlueCopyWithImpl<$Res> extends _$ThemePaletteCopyWithImpl<$Res>
     implements $BlueCopyWith<$Res> {
   _$BlueCopyWithImpl(Blue _value, $Res Function(Blue) _then)
@@ -188,6 +204,8 @@ class _$BlueCopyWithImpl<$Res> extends _$ThemePaletteCopyWithImpl<$Res>
 }
 
 @JsonSerializable()
+
+/// @nodoc
 class _$Blue implements Blue {
   const _$Blue();
 

@@ -8,7 +8,7 @@ part of 'theme_palette_dao.dart';
 
 class ThemePaletteDaoAdapter extends TypeAdapter<ThemePaletteDao> {
   @override
-  final int typeId = 1;
+  final int typeId = 101;
 
   @override
   ThemePaletteDao read(BinaryReader reader) {

@@ -9,6 +9,7 @@ part of 'theme_state.dart';
 
 T _$identity<T>(T value) => value;
 
+/// @nodoc
 class _$ThemeStateTearOff {
   const _$ThemeStateTearOff();
 
@@ -22,9 +23,11 @@ class _$ThemeStateTearOff {
   }
 }
 
+/// @nodoc
 // ignore: unused_element
 const $ThemeState = _$ThemeStateTearOff();
 
+/// @nodoc
 mixin _$ThemeState {
   ThemeBrightness get brightness;
   ThemePalette get palette;
@@ -32,6 +35,7 @@ mixin _$ThemeState {
   $ThemeStateCopyWith<ThemeState> get copyWith;
 }
 
+/// @nodoc
 abstract class $ThemeStateCopyWith<$Res> {
   factory $ThemeStateCopyWith(
           ThemeState value, $Res Function(ThemeState) then) =
@@ -42,6 +46,7 @@ abstract class $ThemeStateCopyWith<$Res> {
   $ThemePaletteCopyWith<$Res> get palette;
 }
 
+/// @nodoc
 class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
   _$ThemeStateCopyWithImpl(this._value, this._then);
 
@@ -83,6 +88,7 @@ class _$ThemeStateCopyWithImpl<$Res> implements $ThemeStateCopyWith<$Res> {
   }
 }
 
+/// @nodoc
 abstract class _$ThemeStateCopyWith<$Res> implements $ThemeStateCopyWith<$Res> {
   factory _$ThemeStateCopyWith(
           _ThemeState value, $Res Function(_ThemeState) then) =
@@ -96,6 +102,7 @@ abstract class _$ThemeStateCopyWith<$Res> implements $ThemeStateCopyWith<$Res> {
   $ThemePaletteCopyWith<$Res> get palette;
 }
 
+/// @nodoc
 class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
     implements _$ThemeStateCopyWith<$Res> {
   __$ThemeStateCopyWithImpl(
@@ -119,6 +126,7 @@ class __$ThemeStateCopyWithImpl<$Res> extends _$ThemeStateCopyWithImpl<$Res>
   }
 }
 
+/// @nodoc
 class _$_ThemeState implements _ThemeState {
   const _$_ThemeState({@required this.brightness, @required this.palette})
       : assert(brightness != null),

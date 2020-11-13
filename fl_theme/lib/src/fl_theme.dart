@@ -29,7 +29,7 @@ class FlTheme implements IFlTheme {
 
   Completer<void> _initCompleter;
 
-  static const String _themeStateBoxKey = 'theme_state_key';
+  static const String _themeStateBoxKey = 'fl_theme_state_key';
   static const int _themeStateBoxIndex = 0;
   Box<ThemeStateDao> _themeStateBox;
 
@@ -50,7 +50,7 @@ class FlTheme implements IFlTheme {
           .then((_) => _themeStateSubj = BehaviorSubject.seeded(
                 _themeStateBox.isEmpty
                     ? initialThemeState
-                    : _themeStateBox.getAt(_themeStateBoxIndex).toThemeState(),
+                    : _themeStateBox.get(_themeStateBoxIndex).toThemeState(),
               ))
           .then((_) => _initCompleter.complete()),
     );
@@ -73,7 +73,7 @@ class FlTheme implements IFlTheme {
   @override
   Future<void> setTheme(ThemeState themeState) async {
     _themeStateSubj.add(themeState);
-    _themeStateBox.putAt(_themeStateBoxIndex, themeState.toThemeStateDao());
+    _themeStateBox.put(_themeStateBoxIndex, themeState.toThemeStateDao());
   }
 
   close() {

@@ -8,7 +8,7 @@ part of 'theme_state_dao.dart';
 
 class ThemeStateDaoAdapter extends TypeAdapter<ThemeStateDao> {
   @override
-  final int typeId = 2;
+  final int typeId = 102;
 
   @override
   ThemeStateDao read(BinaryReader reader) {

@@ -8,7 +8,7 @@ part of 'theme_brightness_dao.dart';
 
 class ThemeBrightnessDaoAdapter extends TypeAdapter<ThemeBrightnessDao> {
   @override
-  final int typeId = 0;
+  final int typeId = 100;
 
   @override
   ThemeBrightnessDao read(BinaryReader reader) {
