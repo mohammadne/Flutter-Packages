@@ -1,10 +1,9 @@
 name: fl_audio
-description: A concrete implementation of audio_service package 
+description: A concrete implementation of audio_service package
 version: 0.0.2
 repository: https://github.com/mohammadne/Flutter-Packages/tree/master/fl_audio
 issue_tracker: https://github.com/mohammadne/Flutter-Packages/issues/
 homepage: https://github.com/mohammadne/Flutter-Packages/
-documentation:
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -26,8 +25,8 @@ dependencies:
   path_provider: ^1.6.18
 
   # Audio Player
-  audio_service: ^0.15.0
-  just_audio: ^0.5.0
+  audio_service: 0.15.0
+  just_audio: 0.5.0
 
 dev_dependencies:
   json_serializable: ^3.5.0

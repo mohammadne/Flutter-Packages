@@ -12,16 +12,12 @@ import 'package:rxdart/rxdart.dart';
 import 'initial_lang.dart';
 
 //! String locales should be in form of
-//! LANGUAGECODE_COUNTRYCODE
 
 abstract class IFlLocalization {
   Future<void> initialize();
 
   String get locale;
   set locale(String locale);
-
-  String languageCode(String locale);
-  String countryCode(String locale);
 
   Stream<String> get localeStream;
 
@@ -86,10 +82,6 @@ class FlLocalization implements IFlLocalization {
     _langSubj.add(locale);
   }
 
-  String languageCode(String locale) => locale.split('_').first;
-
-  String countryCode(String locale) => locale.split('_').last;
-
   @override
   Future<void> initialize() async {
     if (_initCompleter != null) return _initCompleter.future;
@@ -123,11 +115,8 @@ class FlLocalization implements IFlLocalization {
   Future<void> _loadTranslation(String locale) async {
     if (locale == null) return;
 
-    final lCode = languageCode(locale);
-    final cCode = countryCode(locale);
-
     String jsonString = await rootBundle.loadString(
-      '$assetPrefix/$lCode-$cCode.json',
+      '$assetPrefix/$locale.json',
     );
 
     Map<String, dynamic> jsonMap = json.decode(jsonString);

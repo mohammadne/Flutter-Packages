@@ -9,3 +9,7 @@
 ## [0.0.3] - Thursday, November 5. 2020
 
 * fix typo errors
+
+## [0.0.4] - Friday, November 13. 2020
+
+* fix persistance issue
