@@ -36,3 +36,7 @@
 ## [0.1.4] - Friday, October 9, 2020
 
 * fix initial put issue
+
+## [0.1.5] - Thursday, December 3, 2020
+
+* remove dependency to country code
