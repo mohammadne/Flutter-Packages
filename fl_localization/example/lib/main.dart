@@ -1,12 +1,14 @@
 import 'package:fl_localization/fl_localization.dart';
 import 'package:flutter/material.dart';
 
+FlLocalization instance;
+
 void main() async {
-  await FlLocalization(
-    supportedLocales: ['en_US', 'fa_IR'],
+  instance = await FlLocalization.create(
+    supportedLocales: ['en', 'fa'],
     initialLang: InitialLang.system(),
     assetPrefix: 'assets/lang',
-  ).initialize();
+  );
 
   runApp(App());
 }
@@ -15,7 +17,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlLocalizationWidget(
-      flLocalization: FlLocalization.instance,
+      flLocalization: instance,
       builder: (delegates, locales, currentLocale) => MaterialApp(
         title: 'app.name'.tr(),
 
@@ -38,8 +40,6 @@ class UI extends StatefulWidget {
 class _UIState extends State<UI> {
   @override
   Widget build(BuildContext context) {
-    final flLocalization = FlLocalization.instance;
-
     return Scaffold(
       appBar: AppBar(
         title: Text('ui.app_bar').tr(),
@@ -55,7 +55,7 @@ class _UIState extends State<UI> {
                 children: [
                   Text(translate('ui.current_lang')),
                   Text(' : '),
-                  Text(flLocalization.locale),
+                  Text(instance.locale),
                 ],
               ),
             ),
@@ -66,14 +66,13 @@ class _UIState extends State<UI> {
             ).tr(),
             ListView.builder(
               shrinkWrap: true,
-              itemCount: flLocalization.supportedLocales.length,
+              itemCount: instance.supportedLocales.length,
               itemBuilder: (_, index) => ListTile(
                 title: Text(
-                  '${index + 1} : ' + flLocalization.supportedLocales[index],
+                  '${index + 1} : ' + instance.supportedLocales[index],
                 ),
                 onTap: () {
-                  flLocalization.locale =
-                      flLocalization.supportedLocales[index];
+                  instance.setLocale(instance.supportedLocales[index]);
                 },
               ),
             ),

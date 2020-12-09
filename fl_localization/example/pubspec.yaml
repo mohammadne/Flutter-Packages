@@ -27,5 +27,5 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/lang/en-US.json
-    - assets/lang/fa-IR.json
+    - assets/lang/en.json
+    - assets/lang/fa.json

@@ -14,10 +14,8 @@ import 'initial_lang.dart';
 //! String locales should be in form of
 
 abstract class IFlLocalization {
-  Future<void> initialize();
-
   String get locale;
-  set locale(String locale);
+  Future<void> setLocale(String locale);
 
   Stream<String> get localeStream;
 
@@ -27,63 +25,32 @@ abstract class IFlLocalization {
 }
 
 class FlLocalization implements IFlLocalization {
+  static Future<FlLocalization> create({
+    @required List<String> supportedLocales,
+    @required InitialLang initialLang,
+    @required String assetPrefix,
+  }) async {
+    final instance = FlLocalization._(
+      supportedLocales: supportedLocales,
+      assetPrefix: assetPrefix,
+      initialLang: initialLang,
+    );
+
+    await instance._initialize();
+    await instance._loadTranslation(_langSubj.value);
+    return instance;
+  }
+
   FlLocalization._({
     @required this.supportedLocales,
     @required this.assetPrefix,
     this.initialLang,
   })  : assert(supportedLocales != null),
         assert(supportedLocales.isNotEmpty) {
-    _langSubj
-      ..listen(_loadTranslation)
-      ..listen((locale) =>
-          locale == null ? null : _langBox.put(_langBoxIndex, locale));
+    _langSubj.listen((locale) => locale == null ? null : _langBox.put(_langBoxIndex, locale));
   }
 
-  static FlLocalization instance;
-
-  factory FlLocalization({
-    List<String> supportedLocales,
-    InitialLang initialLang,
-    String assetPrefix,
-  }) {
-    if (instance == null)
-      instance = FlLocalization._(
-        supportedLocales: supportedLocales,
-        assetPrefix: assetPrefix,
-        initialLang: initialLang,
-      );
-
-    return instance;
-  }
-
-  final List<String> supportedLocales;
-  final InitialLang initialLang;
-  final String assetPrefix;
-
-  Completer<void> _initCompleter;
-
-  static const String _langBoxKey = 'lange_locale_key';
-  static const int _langBoxIndex = 0;
-  Box<String> _langBox;
-
-  BehaviorSubject<String> _langSubj = BehaviorSubject.seeded(null);
-
-  Map<String, dynamic> translations;
-
-  @override
-  String get locale => _langSubj.value;
-
-  @override
-  Stream<String> get localeStream => _langSubj.stream;
-
-  @override
-  set locale(String locale) {
-    if (locale == this.locale) return;
-    _langSubj.add(locale);
-  }
-
-  @override
-  Future<void> initialize() async {
+  Future<void> _initialize() async {
     if (_initCompleter != null) return _initCompleter.future;
     _initCompleter = Completer();
 
@@ -99,8 +66,7 @@ class FlLocalization implements IFlLocalization {
               preferedLocale: (pref) => pref,
               system: () {
                 final _deviceLocale = Platform.localeName;
-                if (supportedLocales.contains(_deviceLocale))
-                  return _deviceLocale;
+                if (supportedLocales.contains(_deviceLocale)) return _deviceLocale;
                 return supportedLocales.first;
               },
             );
@@ -110,6 +76,33 @@ class FlLocalization implements IFlLocalization {
     );
 
     return _initCompleter.future;
+  }
+
+  final List<String> supportedLocales;
+  final InitialLang initialLang;
+  final String assetPrefix;
+
+  Completer<void> _initCompleter;
+
+  static const String _langBoxKey = 'lange_locale_key';
+  static const int _langBoxIndex = 0;
+  Box<String> _langBox;
+
+  static BehaviorSubject<String> _langSubj = BehaviorSubject.seeded(null);
+
+  Map<String, dynamic> translations;
+
+  @override
+  String get locale => _langSubj.value;
+
+  @override
+  Stream<String> get localeStream => _langSubj.stream;
+
+  @override
+  Future<void> setLocale(String locale) async {
+    if (locale == this.locale) return;
+    await _loadTranslation(locale);
+    _langSubj.add(locale);
   }
 
   Future<void> _loadTranslation(String locale) async {

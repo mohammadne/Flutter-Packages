@@ -37,6 +37,15 @@
 
 * fix initial put issue
 
-## [0.1.5] - Thursday, December 3, 2020
+## [0.1.6] - Thursday, December 3, 2020
 
 * remove dependency to country code
+
+## [0.2.0] - Thursday, December 9, 2020
+
+* redesign constructor initialization
+* making set locale to async function
+
+## [0.2.1] - Thursday, December 9, 2020
+
+* fix initial load translation
